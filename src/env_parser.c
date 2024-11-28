@@ -6,37 +6,41 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/28 21:49:16 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:17:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "../inc/libft/inc/libft.h"
 
-char **ft_env_parser(char **envp)
+char	**ft_env_parser(char **envp)
 {
-	int i;
-	char **env;
+	int		i;
+	char	**env;
 
 	i = 0;
 	while (envp[i])
 		i++;
-	env = 
+	env = (char **)malloc((i + 1) * sizeof(char *));
+	if (!env)
+		return (NULL);
+	env[i] = NULL;
+	i = 0;
+	while (envp[i])
+	{
+		env[i] = ft_strdup(envp[i]);
+		printf("%s\n", env[i]);
+		i++;
+	}
+	return (env);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	i;
-	char**envpms;
+	int		i;
+	char	**envpms;
 
 	envpms = ft_env_parser(envp);
-	i = 0;
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
-	envpms = (char **)malloc(( i + 1) * sizeof(char *));
-	if 
-
+	return (0);
 }
