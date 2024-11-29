@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/29 13:57:48 by rhernand         ###   ########.fr       */
+/*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
+/*   Updated: 2024/11/29 13:56:13 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include "libft/inc/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include "../inc/libft/inc/libft.h"
+#include "../inc/parser.h"
 
-char	**ft_env_parser(char **envp);
-char	*ft_find_var(char **envp, char *var);
+int	main(int argc, char **argv, char **envp)
+{
+	char	*input;
 
-#endif
+	while (1)
+	{
+		input = readline(ft_find_var(envp, "USER="));
+		printf("input = %s\n", input);
+		if (input == NULL)
+			break ;
+	}
+	return (0);
+}
