@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/29 13:57:48 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:25:52 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@
 
 char	**ft_env_parser(char **envp);
 char	*ft_find_var(char **envp, char *var);
+char	*ft_expand_vars(char **envp, char *str);
+char	*ft_subst_dolar(char **envp, char *str, int i, int j);
 
 #endif

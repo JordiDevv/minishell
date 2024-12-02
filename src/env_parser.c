@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/29 13:56:16 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:43:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*ft_find_var(char **envp, char *var)
 	int		i;
 
 	name = NULL;
+	var = ft_strjoin(var, "=");
 	i = 0;
 	while (envp[i])
 	{
@@ -33,6 +34,7 @@ char	*ft_find_var(char **envp, char *var)
 		}
 		i++;
 	}
+	free (var);
 	if (!name)
 		return (NULL);
 	value = ft_strchr(name, '=') + 1;
@@ -62,6 +64,55 @@ char	**ft_env_parser(char **envp)
 	return (env);
 }
 
+/*Receives str with markers pointing to environment var start (i) and end (j). 
+Finds var in envp and returns new string copying var value in the right place*/
+char	*ft_subst_dolar(char **envp, char *str, int i, int j)
+{
+	char	*var;
+	char	*env;
+	char	*tmp;
+	int		length;
+
+	var = ft_substr(str, i, j);
+	env = ft_find_var(envp, var);
+	if (!env)
+		return (NULL);
+	length = ft_strlen(str) + ft_strlen(env) - (j - i) - 2;
+	tmp = malloc (length * sizeof(char));
+	if (!tmp)
+		return (NULL);
+	if (!ft_strlcpy(tmp, str, i - 1) || !ft_strlcat(tmp, env, length) \
+			|| !ft_strlcat(tmp, (str + (i + j + 1)), length))
+		return (NULL);
+	tmp[length] = '\0';
+	free(var);
+	return (tmp);
+}
+
+/*Identifies $ signs in str, expands with correct env var.
+returns string with all vars expanded. */
+char	*ft_expand_vars(char **envp, char *str)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$' && str[i + 1] == '(')
+		{
+			i++;
+			j = 0;
+			while (str[i + j] != ')' && str[i + j])
+				j++;
+			if (str[i + j])
+				str = ft_subst_dolar(envp, str, i + 1, j - 1);
+		}
+		i++;
+	}
+	return (str);
+ }
+
 /*for testing purposes*/
 /*int	main(int argc, char **argv, char **envp)
 {
@@ -70,6 +121,7 @@ char	**ft_env_parser(char **envp)
 	char	*str;
 
 	envpms = ft_env_parser(envp);
-	str = ft_find_var(envpms, "PATH=");
+	str = ft_expand_vars(envpms, "this is path = $(PATH)");
+	printf("%s\n", str);
 	return (0);
 }*/
