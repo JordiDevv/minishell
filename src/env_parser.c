@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/02 22:43:05 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/12/05 11:01:27 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,14 @@ char	*ft_subst_dolar(char **envp, char *str, int i, int j)
 	int		length;
 
 	var = ft_substr(str, i, j);
+	if (!var)
+		return (NULL);
 	env = ft_find_var(envp, var);
 	if (!env)
-		return (NULL);
+	{
+		free(var);
+		return (str);
+	}
 	length = ft_strlen(str) + ft_strlen(env) - (j - i) - 2;
 	tmp = malloc (length * sizeof(char));
 	if (!tmp)
@@ -111,7 +116,7 @@ char	*ft_expand_vars(char **envp, char *str)
 		i++;
 	}
 	return (str);
- }
+}
 
 /*for testing purposes*/
 /*int	main(int argc, char **argv, char **envp)
