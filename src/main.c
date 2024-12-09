@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/02 22:41:28 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:12:28 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	char	*str;
+	char	**env;
 
+	env = ft_env_parser(envp);
 	while (1)
 	{
-		input = readline(ft_find_var(envp, "USER"));
+		input = readline(ft_find_var(env, "USER"));
 		printf("input = %s\n", input);
-		str = ft_expand_vars(envp, input);
+		str = ft_expand_vars(env, input);
 		printf("expanded str = %s\n", str);
+		ft_proc_str(str, envp);
 		free(str);
 		if (input == NULL)
 			break ;
 	}
-	/*str = ft_expand_vars(envp, "user = $(USER) path = $(PATH)");
-	printf("expanded str = %s\n", str);*/
+	ft_free_env(env);
 	return (0);
 }

@@ -6,13 +6,30 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/05 11:01:27 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:12:24 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "../inc/libft/inc/libft.h"
+
+/*frees environment*/
+int	free_env(char **env)
+{
+	int	i;
+
+	if (!env)
+		return ;
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free (env);
+	return ;
+}
 
 /*Function receives environment variables and variable to find
 if found, it returns a pointer to its value. if not found, returns NULL*/
