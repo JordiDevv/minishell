@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/09 19:53:33 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/12/17 21:10:15 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ typedef struct s_command
 	char		**envp;
 	char		*cmd;
 	char		**flags;
-	char		*infile;
 	char		*input;
-	char		*outfile;
+	int			pipe;
 	char		*output;
 	t_command	*next;
 }		t_command;

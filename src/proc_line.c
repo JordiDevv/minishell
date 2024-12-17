@@ -6,11 +6,76 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/09 20:25:10 by rhernand         ###   ########.fr       */
+/*   Updated: 2024/12/17 22:12:29 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
+
+int	ft_add_content(char *str, t_command *new, char **env)
+{
+	int	i;
+	
+	i = 0;
+	new->envp = env;
+	new->next = NULL;
+	if (str[0] == '|')
+		return (1);
+	if (ft_strchr(str, '|'))
+		new->pipe = 1;
+	else
+		new->pipe = 0;
+	return (0);
+}
+
+char	*ft_input(char **str)
+{
+	char	*tmp;
+	int		i;
+
+	tmp = NULL;
+	if (*(str[0]) == '<')
+	{
+		if (*(str[1]) == '<')
+		{
+			tmp = ft_strdup("delimiter");
+			*str = ft_strchr(*str, ' ');
+		}
+		else
+		{
+			while (*(str[i]) != ' ')
+				i++;
+			tmp = ft_substr(str, 2, (i - 2));
+			*str += i;
+		}
+	}
+	return (tmp);
+}
+
+void	ft_new_node(char *str, t_command *first, char **env)
+{
+	t_command	*new;
+
+	if (!first->cmd)
+	{
+		new = first;
+		if (str[0] == '|')
+			return (perror("PIPE in wrong place"));
+		new->input = ft_input(&str);
+	}
+	else
+	{
+		new = malloc(sizeof(t_command));
+		if (!new)
+			return (perror("malloc error"));
+		new->input = NULL;
+	}
+	if (ft_add_content(str, new, env) == 0)
+		ft_lstadd_back(&first, new);
+	else if (first->cmd)
+		free (new);
+	return ;
+}
 
 t_command	*ft_proc_str(char *str, char **env)
 {
@@ -26,7 +91,7 @@ t_command	*ft_proc_str(char *str, char **env)
 		if (str[j] == '|')
 		{
 			line = ft_substr(str, i, (j - i + 1));
-			ft_create_node(line, &node, env);
+			ft_new_node(line, &node, env);
 			free(line);
 			i = j + 1;
 		}
@@ -35,7 +100,7 @@ t_command	*ft_proc_str(char *str, char **env)
 	if (i < j)
 	{
 		line = ft_substr(str, i, (j - i + 1));
-		ft_create_node(line, &node, env);
+		ft_new_node(line, &node, env);
 		free(line);
 	}
 	return (&node);
