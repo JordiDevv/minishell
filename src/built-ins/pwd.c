@@ -6,14 +6,17 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/29 00:24:56 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:00:06 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-void	ex_pwd(char *pwd_value)
+void	ex_pwd(char **env)
 {
+	char	pwd;
+
+	pwd = ft_find_var()
 	if (!pwd_value)
 	{
 		printf(Y "Error: pwd is corrupted" RE);
