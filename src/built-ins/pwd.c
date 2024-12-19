@@ -6,11 +6,12 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/12/18 13:13:07 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:12:15 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
+#include "../../inc/parser.h"
 
 void	ex_pwd(char **envp)
 {
