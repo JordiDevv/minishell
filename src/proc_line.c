@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/17 22:38:58 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/08 22:00:50 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,22 @@ int	ft_add_content(char *str, t_command *new, char **env)
 	return (0);
 }
 
-char	*ft_input(char **str)
+char	*ft_input(t_command *new, char *str)
 {
 	char	*tmp;
 	int		i;
 
-	tmp = NULL;
-	if (*(str[0]) == '<')
+	tmp = str;
+	if (str[i] == '<')
 	{
-		if (*(str[1]) == '<')
+		while (str[i])
 		{
-			tmp = ft_strdup("delimiter");
-			*str = ft_strchr(*str, ' ');
-		}
-		else
-		{
-			while (*(str[i]) != ' ')
-				i++;
-			tmp = ft_substr(str, 2, (i - 2));
-			*str += i;
+			if (str[i] == '"')
+			{
+				while (str[i] != '"')
+					i++;
+				str += i + 1;
+			}
 		}
 	}
 	return (tmp);
@@ -64,7 +61,7 @@ void	ft_new_node(char *str, t_command *first, char **env)
 		new = first;
 		if (str[0] == '|')
 			return (perror("PIPE in wrong place"));
-		new->input = ft_input(&str);
+		str = ft_input(new, str);
 	}
 	else
 	{
@@ -85,7 +82,6 @@ creates first node and sends the chopped strs to functions to fill
 and place the rest of the nodes within the linked list*/
 t_command	*ft_proc_str(char *str, char **env)
 {
-	int			i;
 	int			j;
 	char		*line;
 	t_command	node;
@@ -96,18 +92,16 @@ t_command	*ft_proc_str(char *str, char **env)
 	{
 		if (str[j] == '|')
 		{
-			line = ft_substr(str, i, (j - i + 1));
+			line = str;
+			line[j - 1] = '\0';
+			str += (j + 1);
 			ft_new_node(line, &node, env);
 			free(line);
-			i = j + 1;
+			j = -1;
 		}
 		j++;
 	}
-	if (i < j)
-	{
-		line = ft_substr(str, i, (j - i + 1));
-		ft_new_node(line, &node, env);
-		free(line);
-	}
+	if (str[0])
+		ft_new_node(str, &node, env);
 	return (&node);
 }
