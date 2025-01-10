@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/08 22:00:50 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/10 21:35:07 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_command	*ft_proc_str(char *str, char **env)
 	char		*line;
 	t_command	node;
 
-	i = 0;
 	j = 0;
 	while (str[j])
 	{
