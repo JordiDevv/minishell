@@ -6,16 +6,16 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/10 21:35:07 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/11 11:15:29 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-int	ft_add_content(char *str, t_command *new, char **env)
+int	ft_add_content(char *str, t_cmd *new, char **env)
 {
 	int	i;
-	
+
 	i = 0;
 	new->envp = env;
 	new->next = NULL;
@@ -28,7 +28,7 @@ int	ft_add_content(char *str, t_command *new, char **env)
 	return (0);
 }
 
-char	*ft_input(t_command *new, char *str)
+char	*ft_input(t_cmd *new, char *str)
 {
 	char	*tmp;
 	int		i;
@@ -52,9 +52,9 @@ char	*ft_input(t_command *new, char *str)
 /*Funcion recieves first node and substring "str", 
 if first node does not exist, finds input and fills first node.
 Otherwise, creates a new node, fills it and adds it to the end of the list*/
-void	ft_new_node(char *str, t_command *first, char **env)
+void	ft_new_node(char *str, t_cmd *first, char **env)
 {
-	t_command	*new;
+	t_cmd	*new;
 
 	if (!first->cmd)
 	{
@@ -65,13 +65,13 @@ void	ft_new_node(char *str, t_command *first, char **env)
 	}
 	else
 	{
-		new = malloc(sizeof(t_command));
+		new = malloc(sizeof(t_cmd));
 		if (!new)
 			return (perror("malloc error"));
 		new->input = NULL;
 	}
 	if (ft_add_content(str, new, env) == 0)
-		ft_lstadd_back(&first, new);
+		ft_lstadd_back((void *)&(*first), (void *)new);
 	else if (first->cmd)
 		free (new);
 	return ;
@@ -80,11 +80,11 @@ void	ft_new_node(char *str, t_command *first, char **env)
 /*function finds pipes "|" in str, chops them,
 creates first node and sends the chopped strs to functions to fill
 and place the rest of the nodes within the linked list*/
-t_command	*ft_proc_str(char *str, char **env)
+t_cmd	ft_proc_str(char *str, char **env)
 {
 	int			j;
 	char		*line;
-	t_command	node;
+	t_cmd		node;
 
 	j = 0;
 	while (str[j])
@@ -102,5 +102,5 @@ t_command	*ft_proc_str(char *str, char **env)
 	}
 	if (str[0])
 		ft_new_node(str, &node, env);
-	return (&node);
+	return (node);
 }

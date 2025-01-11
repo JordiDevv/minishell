@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/11 10:53:55 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/11 11:03:12 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "../inc/libft/inc/libft.h"
 
 /*frees environment*/
-int	free_env(char **env)
+int	ft_free_env(char **env)
 {
 	int	i;
 
 	if (!env)
-		return ;
+		return (-1);
 	i = 0;
 	while (env[i])
 	{
@@ -28,7 +28,7 @@ int	free_env(char **env)
 		i++;
 	}
 	free (env);
-	return ;
+	return (0);
 }
 
 /*Function receives environment variables and variable to find
