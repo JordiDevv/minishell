@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/09 19:12:24 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/11 10:53:55 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,18 @@ char	*ft_expand_vars(char **envp, char *str)
 {
 	int		i;
 	int		j;
+	int		m[2];
 
 	i = 0;
-	while (str[i])
+	m[0] = 0;
+	m[1] = 0;
+	while (str[i + 1])
 	{
-		if (str[i] == '$' && str[i + 1] == '(')
+		if (str[i] == '\"')
+			m[0] = (m[0] + 1) % 2;
+		if (str[i] == '\'')
+			m[1] = (m[1] + 1) % 2;
+		if (str[i] == '$' && str[i + 1] == '(' && !m[0] && !m[1])
 		{
 			i++;
 			j = 0;
