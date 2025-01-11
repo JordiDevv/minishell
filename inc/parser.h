@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/11 11:15:38 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/11 11:41:54 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ char		*ft_expand_vars(char **envp, char *str);
 char		*ft_subst_dolar(char **envp, char *str, int i, int j);
 int			ft_free_env(char **env);
 t_cmd		ft_proc_str(char *str, char **env);
+char		*ft_expand_home(char **env, char *str);
+char		*ft_subst_home(char **envp, char *str, int i);
 
 #endif
