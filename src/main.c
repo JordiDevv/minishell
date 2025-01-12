@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/11 11:32:57 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:32:26 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv, char **envp)
 		str = ft_expand_vars(env, input);
 		printf("expanded str = %s\n", str);
 		str = ft_expand_home(env, str);
+		printf("expanded home = %s\n", str);
 		//ft_proc_str(str, envp);
 		free(str);
 		if (input == NULL)
