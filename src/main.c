@@ -6,12 +6,16 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/12 12:46:11 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/12 12:50:17 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft/inc/libft.h"
 #include "../inc/parser.h"
+
+/*ft_prompt recieves environment, finds PWD, HOME and USER,
+finds if the current dir contains HOME dir and creates
+a str that simulates bash prompt*/
 
 char	*ft_prompt(char **env)
 {
