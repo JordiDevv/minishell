@@ -6,12 +6,35 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/12 12:50:17 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:35:36 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft/inc/libft.h"
 #include "../inc/parser.h"
+
+void	ft_draw(void)
+{
+	const char	*ascii = \
+	"         _nnnn_\n" \
+	"        dGGGGMMb     ,\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\".\n" \
+	"       @p~qp~~qMb    |     MINISHELL     |\n" \
+	"       M|@||@) M|    | jsanz-bo rhernand |\n" \
+	"       @,----.JM| -'_;...................'\n" \
+	"      JS^\\__/  qKL\n" \
+	"     dZP        qKRb\n" \
+	"    dZP          qKKb\n" \
+	"   fZP            SMMb\n" \
+	"   HZM            MMMM\n" \
+	"   FqM            MMMM\n" \
+	" __| \".        |\\dS\"qML\n" \
+	" |    `.       | `' \\Zq\n" \
+	"_)      \\.___.|     .'\n" \
+	"\\____   )MMMMMM|   .'\n" \
+	"     `-'       `--'\n";
+
+	printf("%s\n", ascii);
+}
 
 /*ft_prompt recieves environment, finds PWD, HOME and USER,
 finds if the current dir contains HOME dir and creates
@@ -53,6 +76,7 @@ int	main(int argc, char **argv, char **envp)
 	char	**env;
 	char	*prompt;
 
+	ft_draw();
 	env = ft_env_parser(envp);
 	while (1)
 	{
