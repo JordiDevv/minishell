@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:35:14 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/12 11:37:55 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:41:55 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_subst_home(char **envp, char *str, int i)
 	if (!home)
 		return (str);
 	length = ft_strlen(str) + ft_strlen(home);
-	tmp = malloc (length * sizeof(char));
+	tmp = malloc ((length + 1) * sizeof(char));
 	if (!tmp)
 		return (NULL);
 	if (!ft_strlcpy(tmp, str, i + 1) || !ft_strlcat(tmp, home, length) \
