@@ -6,12 +6,14 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/12 13:35:36 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/13 10:32:28 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft/inc/libft.h"
 #include "../inc/parser.h"
+
+/*Just an ASCII artpiece to know we entered MINISHELL*/
 
 void	ft_draw(void)
 {
@@ -73,25 +75,25 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	char	*str;
-	char	**env;
 	char	*prompt;
+	t_msh	msh;
 
 	ft_draw();
-	env = ft_env_parser(envp);
+	msh.env = ft_env_parser(envp);
 	while (1)
 	{
-		prompt = ft_prompt(env);
+		prompt = ft_prompt(msh.env);
 		input = readline(prompt);
 		printf("input = %s\n", input);
-		str = ft_expand_vars(env, input);
+		str = ft_expand_vars(msh.env, input);
 		printf("expanded str = %s\n", str);
-		str = ft_expand_home(env, str);
+		str = ft_expand_home(msh.env, str);
 		printf("expanded home = %s\n", str);
-		//ft_proc_str(str, envp);
+		ft_proc_str(str, &msh);
 		free(str);
 		if (input == NULL)
 			break ;
 	}
-	ft_free_env(env);
+	ft_free_env(msh.env);
 	return (0);
 }
