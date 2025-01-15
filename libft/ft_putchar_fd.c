@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/15 11:15:45 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2024/04/29 10:12:20 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/04/29 10:13:03 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTORS_H
-# define EXECUTORS_H
+#include "libft.h"
 
-# define G "\033[32m"
-# define R "\033[31m"
-# define Y "\033[33m"
-# define RE "\033[0m"
-
-void	ex_pwd(char **envp);
-
-#endif
+void	ft_putchar_fd(char c, int fd)
+{
+	write (fd, &c, 1);
+}

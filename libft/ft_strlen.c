@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/15 11:15:45 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2024/04/09 12:38:53 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/04/29 10:27:42 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTORS_H
-# define EXECUTORS_H
+#include "libft.h"
 
-# define G "\033[32m"
-# define R "\033[31m"
-# define Y "\033[33m"
-# define RE "\033[0m"
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-void	ex_pwd(char **envp);
-
-#endif
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}

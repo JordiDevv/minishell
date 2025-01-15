@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/15 11:15:45 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2024/04/23 16:11:37 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/04/24 10:31:24 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTORS_H
-# define EXECUTORS_H
+#include "libft.h"
 
-# define G "\033[32m"
-# define R "\033[31m"
-# define Y "\033[33m"
-# define RE "\033[0m"
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+	size_t	t_size;
 
-void	ex_pwd(char **envp);
-
-#endif
+	t_size = count * size;
+	ptr = malloc(t_size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_bzero(ptr, t_size);
+	return (ptr);
+}

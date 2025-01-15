@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/13 10:28:41 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:50:45 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-# include "libft/inc/libft.h"
+
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
 
 typedef struct s_cmd
 {
 	char		*cmd;
 	char		**flags;
-	int			*input;
-	int			*output;
+	int			input;
+	int			output;
 	void		*next;
 }		t_cmd;
 
@@ -38,7 +40,7 @@ char		*ft_find_var(char **envp, char *var);
 char		*ft_expand_vars(char **envp, char *str);
 char		*ft_subst_dolar(char **envp, char *str, int i, int j);
 int			ft_free_env(char **env);
-t_cmd		ft_proc_str(char *str, char **env);
+t_cmd		ft_proc_str(char *str, t_msh *env);
 char		*ft_expand_home(char **env, char *str);
 char		*ft_subst_home(char **envp, char *str, int i);
 char		*ft_prompt(char **env);

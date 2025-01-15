@@ -1,4 +1,4 @@
 debug:
-	gcc src/*.c inc/libft/libft.a -g -lreadline
+	gcc src/*.c src/*/*.c -g -lreadline libft/libft.a
 
 PHONY: debug

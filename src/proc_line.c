@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proc_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/13 12:10:31 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:57:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_redir_in(char *str, int i, t_cmd *new)
 	return (line);
 }
 
-char	*ft_redir(char *str, t_cmd *new)
+/*char	*ft_redir(char *str, t_cmd *new)
 {
 	int		i;
 	int		m[2];
@@ -68,7 +68,7 @@ char	*ft_redir(char *str, t_cmd *new)
 		i++;
 	}
 	return (str);
-}
+}*/
 
 /*Funcion recieves first node and substring "str", 
 if first node does not exist, finds input and fills first node.
@@ -84,8 +84,8 @@ void	ft_new_node(char *str, t_cmd *first, t_msh *msh)
 	new.input = 0;
 	new.output = 1;
 	new.cmd = NULL;
-	if (ft_strchr(str, '<') || ft_strchr(str, '>'))
-		str = ft_redir(str, &new);
+	/*if (ft_strchr(str, '<') || ft_strchr(str, '>'))
+		str = ft_redir(str, &new);*/
 	new.cmd = "/bin/wc";
 	new.flags = ft_split(str, ' ');
 	ft_lstadd_back((void *)&(*first), (void *)&new);

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/15 12:13:36 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2024/05/13 10:41:35 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2024/05/14 17:07:02 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/executor.h"
-#include "../../inc/parser.h"
+#include "libft.h"
 
-void	ex_pwd(char **envp)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	char	*pwd_value;
+	t_list	*node;
+	t_list	*next;
 
-	pwd_value = ft_find_var(envp, "PWD");
-	if (!pwd_value)
-	{
-		printf(Y "Error: pwd is corrupted" RE);
+	if (!lst || !del)
 		return ;
+	node = *lst;
+	while (node)
+	{
+		next = node->next;
+		ft_lstdelone(node, del);
+		node = next;
 	}
-	printf("%s\n", pwd_value);
+	*lst = NULL;
 }
