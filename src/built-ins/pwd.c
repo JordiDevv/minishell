@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/12/19 13:26:20 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/15 12:42:09 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ex_pwd(char **envp)
 {
-	char	pwd_value;
+	char	*pwd_value;
 
 	pwd_value = ft_find_var(envp, "PWD");
 	if (!pwd_value)
@@ -23,5 +23,5 @@ void	ex_pwd(char **envp)
 		printf(Y "Error: pwd is corrupted" RE);
 		return ;
 	}
-	printf("%s", pwd_value);
+	printf("%s\n", pwd_value);
 }
