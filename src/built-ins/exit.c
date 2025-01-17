@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/17 12:34:15 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/01/17 12:36:50 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/01/17 13:49:11 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-void	ex_echo(char *txt)
+int    ex_exit(int n)
 {
-	if (!txt)
-	{
-		printf(Y "Error: problem ejecuting echo" RE);
-		return ;
-	}
-	printf("%s\n", txt);
+    if (n > 255)
+        n %= 256;
+    return (n);
 }
