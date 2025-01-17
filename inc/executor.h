@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/15 11:15:45 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:07:21 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # define RE "\033[0m"
 
 void	ex_pwd(char **envp);
+void	ex_echo(char *txt);
 
 #endif
