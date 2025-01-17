@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/17 12:34:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:04:55 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 
 void	ex_pwd(char **envp);
 void	ex_echo(char *txt);
+int     ex_exit(int n);
 
 #endif
