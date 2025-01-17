@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/17 12:34:46 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/01/17 12:34:15 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTORS_H
-# define EXECUTORS_H
+#include "../../inc/executor.h"
+#include "../../inc/parser.h"
 
-# define G "\033[32m"
-# define R "\033[31m"
-# define Y "\033[33m"
-# define RE "\033[0m"
-
-void	ex_pwd(char **envp);
-void	ex_echo(char *txt);
-
-#endif
+void	ex_echo(char *txt)
+{
+	if (!txt)
+	{
+		printf(Y "Error: problem ejecuting echo" RE);
+		return ;
+	}
+	printf("%s\n", txt);
+}
