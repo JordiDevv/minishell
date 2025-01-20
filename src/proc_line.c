@@ -6,11 +6,14 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/13 12:10:31 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:11:45 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
+
+/*Function finds input, creates input file, opens it, assigns
+file descriptor to node->input and returns line without input*/
 
 char	*ft_redir_in(char *str, int i, t_cmd *new)
 {
