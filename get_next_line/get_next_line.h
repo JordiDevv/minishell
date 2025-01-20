@@ -20,10 +20,9 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "../../pipex.h"
+# include "../libft/libft.h"
 
 char	*get_next_line(int fd);
 char	*ft_free(char **str);
-char	*ft_strjoin(char *s1, char *s2);
 
 #endif
