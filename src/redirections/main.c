@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:20:47 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2024/11/24 20:57:37 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:50:46 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	create_pipes(t_data *program_data, int n, int i)
 	}
 }
 
-static void	open_files(char **args, t_data *program_data)
+/*static void	open_files(char **args, t_data *program_data)
 {
 	if (access(args[1], F_OK))
 		ft_printf(Y "-bash: %s: %s\n" RE, args[1], strerror(errno));
@@ -90,7 +90,7 @@ static void	open_files(char **args, t_data *program_data)
 		free_exit(program_data);
 		exit (EXIT_FAILURE);
 	}
-}
+}*/
 
 static void	ex_flow(t_data *program_data, char **argv)
 {
