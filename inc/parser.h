@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/20 12:47:29 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:05:17 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,16 @@
 
 typedef struct s_cmd
 {
-	char		*cmd;
-	char		**flags;
-	int			*input;
-	int			*output;
-	void		*next;
+	char		*abs;
+	char		**full;
+	int			input;
+	int			output;
 }		t_cmd;
 
 typedef struct s_msh
 {
 	char	**env;
-	t_cmd	*cmd;
+	t_list	*lst;
 }		t_msh;
 
 char		**ft_env_parser(char **envp);
@@ -38,7 +37,7 @@ char		*ft_find_var(char **envp, char *var);
 char		*ft_expand_vars(char **envp, char *str);
 char		*ft_subst_dolar(char **envp, char *str, int i, int j);
 int			ft_free_env(char **env);
-t_cmd		ft_proc_str(char *str, t_msh *msh);
+t_list		ft_proc_str(char *str, t_msh *msh);
 char		*ft_expand_home(char **env, char *str);
 char		*ft_subst_home(char **envp, char *str, int i);
 char		*ft_prompt(char **env);
