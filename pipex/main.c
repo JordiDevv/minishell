@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 15:20:47 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/20 12:50:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:55:37 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static void	get_path(t_data *program_data, int i)
+/*static void	get_path(t_data *program_data, int i)
 {
 	char	*path;
 
@@ -38,35 +38,35 @@ static void	get_path(t_data *program_data, int i)
 	}
 	program_data->path_mat = ft_split(path, ':');
 	free(path);
-}
+}*/
 
-static void	create_pipes(t_data *program_data, int n, int i)
-{
-	program_data->pipe = malloc(sizeof(int *) * (n + 1));
-	if (!program_data->pipe)
-	{
-		perror(R "Error allocating the pipe\n" RE);
-		free_exit(program_data);
-	}
-	program_data->pipe[n] = NULL;
-	while (i--)
-	{
-		program_data->pipe[i] = malloc(sizeof(int) * 2);
-		if (!program_data->pipe[i])
-		{
-			perror(R "Error allocating the pipe\n" RE);
-			free_exit(program_data);
-		}
-	}
-	while (++i < n)
-	{
-		if (pipe(program_data->pipe[i]) < 0)
-		{
-			perror(R "Error creating the pipe\n" RE);
-			free_exit(program_data);
-		}
-	}
-}
+// static void	create_pipes(t_data *program_data, int n, int i)
+// {
+// 	program_data->pipe = malloc(sizeof(int *) * (n + 1));
+// 	if (!program_data->pipe)
+// 	{
+// 		perror(R "Error allocating the pipe\n" RE);
+// 		free_exit(program_data);
+// 	}
+// 	program_data->pipe[n] = NULL;
+// 	while (i--)
+// 	{
+// 		program_data->pipe[i] = malloc(sizeof(int) * 2);
+// 		if (!program_data->pipe[i])
+// 		{
+// 			perror(R "Error allocating the pipe\n" RE);
+// 			free_exit(program_data);
+// 		}
+// 	}
+// 	while (++i < n)
+// 	{
+// 		if (pipe(program_data->pipe[i]) < 0)
+// 		{
+// 			perror(R "Error creating the pipe\n" RE);
+// 			free_exit(program_data);
+// 		}
+// 	}
+// }
 
 /*static void	open_files(char **args, t_data *program_data)
 {
