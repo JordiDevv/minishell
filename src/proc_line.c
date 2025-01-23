@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/23 09:18:17 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:47:54 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,62 +15,72 @@
 /*Function finds input, creates input file, opens it, assigns
 file descriptor to node->input and returns line without input*/
 
-char	*ft_redir_in(char *str, int i, t_cmd *new)
+int	ft_full(char **str, t_cmd *cmd, int i, int *m)
 {
-	char	*tmp;
-	char	*line;
-	char	*next;
-	int		size;
-	int		j;
+	char	*aux;
 
-	j = 0;
-	if (str[i + 1] != '<')
-	{
-		tmp = str + i;
-		while (str[i] && str[i] != ' ')
-			j++;
-		tmp[j] = '\0';
-		next = tmp + j + 1;
-		new->input = open(tmp, O_RDONLY);
-		if (new->input == -1)
-			return (NULL);
-	}
-	size = ft_strlen(str) - ft_strlen(tmp) + ft_strlen(next);
-	line = malloc((size + 1) * sizeof(char));
-	if (!line)
-		return (NULL);
-	if (!ft_strlcpy(line, str, size) || !ft_strlcpy(line, next, size))
-		return (NULL);
-	return (line);
+	aux = (*str) + i;
+	if (ft_strnstr(*str, "echo", 4) && cmd->built == NULL)
+		cmd->built = ft_strdup("echo");
+	while (aux[i] != '<' && aux[i] != '>' && aux[i])
+		i++;
+	if (aux[i])
+		aux[i - 1] = '\0';
+	cmd->full = ft_split(aux, ' ');
 }
 
-char	*ft_redir(char *str, t_cmd *new)
+int	*ft_redir_in(char **str, t_cmd *cmd, int i)
 {
-	int		i;
-	int		m[2];
-
-	m[0] = 0;
-	m[1] = 0;
-	i = 0;
-	while (str[i])
+	cmd->input = (*str) + i;
+	while (*(str[i]) && *(str[i]) != ' ')
 	{
-		if (str[i] == '\"')
-			m[0] = (m[0] + 1) % 2;
-		if (str[i] == '\'')
-			m[1] = (m[1] + 1) % 2;
-		if (str[i] == '<' && !m[0] && !m[1])
+		if (*(str[i]) == '\"')
 		{
-			str = ft_redir_in(str, i, new);
-			i = -1;
+			*(str[i]) = ' ';
+			while (*(str[i]) && *(str[i]) != '\"')
+				i++;
+			if (*(str[i]))
+				*(str[i]) = ' ';
 		}
-		else if (str[i] == '>' && !m[0] && !m[1])
+		else if (*(str[i]) == '\'')
 		{
-			//str = ft_redir_out(str, i, new);
-			i = -1;
+			*(str[i]) = ' ';
+			while (*(str[i]) && *(str[i]) != '\'')
+				i++;
+			if (*(str[i]))
+				*(str[i]) = ' ';
 		}
 		i++;
 	}
-	return (str);
+	*(str[i]) = '\0';
+	return (i);
+}
+
+int	ft_redir_out(char **str, t_cmd *cmd, int i)
+{
+	cmd->output = (*str) + i;
+	while (*(str[i]) && *(str[i]) != ' ')
+	{
+		if (*(str[i]) == '\"')
+		{
+			*(str[i]) = ' ';
+			while (*(str[i]) && *(str[i]) != '\"')
+				i++;
+			if (*(str[i]))
+				*(str[i]) = ' ';
+		}
+		else if (*(str[i]) == '\'')
+		{
+			*(str[i]) = ' ';
+			while (*(str[i]) && *(str[i]) != '\'')
+				i++;
+			if (*(str[i]))
+				*(str[i]) = ' ';
+		}
+		i++;
+	}
+	*(str[i] = '\0');
+	return (i);
 }
 
 void	ft_cmd_fill(char *str, t_cmd *cmd)
@@ -87,13 +97,15 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 			m[0] = (m[0] + 1) % 2;
 		if (str[j] == '\'')
 			m[1] = (m[1] + 1) % 2;
-		if (str[i] == '>' && !m[0] && !m[1])
-			cmd->input = str + i;
-		
+		if (str[i] == '<' && !m[0] && !m[1] && cmd->input == NULL)
+			i = ft_redir_in(&str, cmd, i);
+		else if (str[i] == '>' && !m[0] && !m[1] && cmd->output == NULL)
+			i = ft_redir_out(&str, cmd, i);
+		else if (cmd->full == NULL)
+			i = ft_full(&str, cmd, i, m);
 		i++;
 	}
 }
-
 
 /*Funcion recieves first node and substring "str", 
 if first node does not exist, finds input and fills first node.
