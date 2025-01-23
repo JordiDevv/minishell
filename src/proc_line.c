@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/22 21:16:57 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/23 09:18:17 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,28 @@ char	*ft_redir(char *str, t_cmd *new)
 	return (str);
 }
 
+void	ft_cmd_fill(char *str, t_cmd *cmd)
+{
+	int		i;
+	int		m[2];
+
+	m[0] = 0;
+	m[1] = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[j] == '\"')
+			m[0] = (m[0] + 1) % 2;
+		if (str[j] == '\'')
+			m[1] = (m[1] + 1) % 2;
+		if (str[i] == '>' && !m[0] && !m[1])
+			cmd->input = str + i;
+		
+		i++;
+	}
+}
+
+
 /*Funcion recieves first node and substring "str", 
 if first node does not exist, finds input and fills first node.
 Otherwise, creates a new node, fills it and adds it to the end of the list*/
@@ -81,10 +103,7 @@ t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
 {
 	t_cmd	*cmd;
 	t_list	*node;
-	int		m[2];
 
-	m[0] = 0;
-	m[1] = 0;
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
@@ -94,10 +113,8 @@ t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
 	cmd->input = 0;
 	cmd->output = 1;
 	cmd->abs = NULL;
-	if (ft_strchr(str, '<') || ft_strchr(str, '>'))
-		str = ft_redir(str, cmd);
-	cmd->abs = ft_strdup("/bin/wc");
-	cmd->full = ft_split(str, ' ');
+	cmd->full = NULL;
+	ft_cmd_fill(str, node);
 	node->content = (void *) cmd;
 	node->next = NULL;
 	ft_lstadd_back(&first, node);

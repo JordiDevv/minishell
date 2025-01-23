@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/22 20:05:17 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/23 09:17:08 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct s_cmd
 {
 	char		*abs;
 	char		**full;
-	int			input;
-	int			output;
+	char		*input;
+	char		*output;
 }		t_cmd;
 
 typedef struct s_msh
