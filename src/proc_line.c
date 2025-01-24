@@ -6,45 +6,67 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/23 18:47:54 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:37:44 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-/*Function finds input, creates input file, opens it, assigns
-file descriptor to node->input and returns line without input*/
+void	ft_ptend(char **str)
+{
+	int	i;
+
+	i = 0;
+	while ((*str)[i])
+	{
+		if ((*str)[i] == '\"')
+		{
+			i++;
+			while ((*str)[i] && (*str)[i] != '\"')
+				i++;
+			if ((*str)[i])
+				i++;
+		}
+		else if ((*str)[i] == '\'')
+		{
+			i++;
+			while ((*str)[i] && (*str)[i - 1] != '\'')
+				i++;
+			if ((*str)[i])
+				i++;
+		}
+		if ((*str)[i] == '<' || (*str)[i] == '>')
+			(*str)[i] = '\0';
+		i++;
+	}
+}
 
 int	ft_full(char **str, t_cmd *cmd, int i, int *m)
 {
-	char	*aux;
-
-	aux = (*str) + i;
+	cmd->full = (*str) + i;
 	if (ft_strnstr(*str, "echo", 4) && cmd->built == NULL)
 		cmd->built = ft_strdup("echo");
-	while (aux[i] != '<' && aux[i] != '>' && aux[i])
+	while ((*str)[i] != '<' && (*str)[i] != '>' && (*str)[i])
 		i++;
-	if (aux[i])
-		aux[i - 1] = '\0';
-	cmd->full = ft_split(aux, ' ');
+	return (i - 1);
 }
 
-int	*ft_redir_in(char **str, t_cmd *cmd, int i)
+int	ft_redir_in(char **str, t_cmd *cmd, int i)
 {
-	cmd->input = (*str) + i;
-	while (*(str[i]) && *(str[i]) != ' ')
+	cmd->input = (*str) + i + 1;
+	while ((*str)[i] && (*str)[i] != ' ' && (*str)[i] != '>')
 	{
-		if (*(str[i]) == '\"')
+		if ((*str)[i] == '\"')
 		{
-			*(str[i]) = ' ';
-			while (*(str[i]) && *(str[i]) != '\"')
+			(*str)[i] = ' ';
+			while ((*str)[i] && (*str)[i] != '\"')
 				i++;
-			if (*(str[i]))
-				*(str[i]) = ' ';
+			if ((*str)[i])
+				(*str)[i] = ' ';
 		}
-		else if (*(str[i]) == '\'')
+		else if ((*str)[i] == '\'')
 		{
-			*(str[i]) = ' ';
+			(*str)[i] = ' ';
 			while (*(str[i]) && *(str[i]) != '\'')
 				i++;
 			if (*(str[i]))
@@ -52,35 +74,37 @@ int	*ft_redir_in(char **str, t_cmd *cmd, int i)
 		}
 		i++;
 	}
-	*(str[i]) = '\0';
-	return (i);
+	if ((*str)[i] && (*str)[i] != '>')
+		(*str)[i] = '<';
+	return (i - 1);
 }
 
 int	ft_redir_out(char **str, t_cmd *cmd, int i)
 {
-	cmd->output = (*str) + i;
-	while (*(str[i]) && *(str[i]) != ' ')
+	cmd->output = (*str) + i + 1;
+	while ((*str)[i] && (*str)[i] != ' ' && (*str)[i] != '<')
 	{
-		if (*(str[i]) == '\"')
+		if ((*str)[i] == '\"')
 		{
-			*(str[i]) = ' ';
-			while (*(str[i]) && *(str[i]) != '\"')
+			i++;
+			while ((*str)[i] && (*str)[i] != '\"')
 				i++;
-			if (*(str[i]))
-				*(str[i]) = ' ';
+			if ((*str)[i])
+				i++;
 		}
-		else if (*(str[i]) == '\'')
+		else if ((*str)[i] == '\'')
 		{
-			*(str[i]) = ' ';
+			i++;
 			while (*(str[i]) && *(str[i]) != '\'')
 				i++;
 			if (*(str[i]))
-				*(str[i]) = ' ';
+				i++;
 		}
 		i++;
 	}
-	*(str[i] = '\0');
-	return (i);
+	if ((*str)[i] && (*str)[i] != '<')
+		(*str)[i] = '>';
+	return (i - 1);
 }
 
 void	ft_cmd_fill(char *str, t_cmd *cmd)
@@ -93,18 +117,20 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 	i = 0;
 	while (str[i])
 	{
-		if (str[j] == '\"')
+		if (str[i] == '\"')
 			m[0] = (m[0] + 1) % 2;
-		if (str[j] == '\'')
+		if (str[i] == '\'')
 			m[1] = (m[1] + 1) % 2;
 		if (str[i] == '<' && !m[0] && !m[1] && cmd->input == NULL)
 			i = ft_redir_in(&str, cmd, i);
 		else if (str[i] == '>' && !m[0] && !m[1] && cmd->output == NULL)
 			i = ft_redir_out(&str, cmd, i);
-		else if (cmd->full == NULL)
+		else if (cmd->full == NULL && str[i] != ' ' && str[i] != '<' \
+				&& str[i] != '>')
 			i = ft_full(&str, cmd, i, m);
 		i++;
 	}
+	ft_ptend(&str);
 }
 
 /*Funcion recieves first node and substring "str", 
@@ -122,11 +148,12 @@ t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
 	node = malloc(sizeof(t_list));
 	if (!node)
 		return (NULL);
-	cmd->input = 0;
-	cmd->output = 1;
-	cmd->abs = NULL;
+	cmd->input = NULL;
+	cmd->output = NULL;
+	cmd->built = NULL;
 	cmd->full = NULL;
-	ft_cmd_fill(str, node);
+	cmd->split = NULL;
+	ft_cmd_fill(str, cmd);
 	node->content = (void *) cmd;
 	node->next = NULL;
 	ft_lstadd_back(&first, node);
