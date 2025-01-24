@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/22 11:50:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:45:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int     ex_exit(int n);
 
 int     open_file(char *file, char redirection);
 int     *create_pipe();
+int     redirect(int input, int output, int *fds);
 
 #endif
