@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/24 14:37:44 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:47:03 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 		i++;
 	}
 	ft_ptend(&str);
+	cmd->split = ft_split(cmd->full, ' ');
 }
 
 /*Funcion recieves first node and substring "str", 
