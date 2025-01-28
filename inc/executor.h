@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/24 11:45:52 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:27:11 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdarg.h>
 
 void	ex_pwd(char **envp);
 void	ex_echo(char *txt);

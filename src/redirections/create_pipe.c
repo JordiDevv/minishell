@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/22 11:55:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:22:46 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int *create_pipe()
 	if (!pipe)
 	{
 		perror(R "Error allocating the pipe\n" RE);
-		return (-1);
+		return (NULL);
 	}
     
     if (pipe(pipe_fds) < 0)
     {
         perror(R "Error creating the pipe\n" RE);
-        return (-1);
+        return (NULL);
     }
     return (pipe_fds);
 }
