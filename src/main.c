@@ -6,12 +6,39 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/13 10:32:28 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/30 00:00:45 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft/inc/libft.h"
 #include "../inc/parser.h"
+
+void	ft_print_list(t_msh *msh)
+{
+	t_list	*aux;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 1;
+	aux = msh->lst;
+	while (aux)
+	{
+		printf("\ncommand number %d\n", j);
+		printf("cmd built =  %s\n", ((t_cmd *) aux->content)->built);
+		printf("cmd full =  %s\n", ((t_cmd *) aux->content)->full);
+		printf("cmd input =  %s\n", ((t_cmd *) aux->content)->input);
+		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
+		while (((t_cmd *)aux->content)->split[i])
+		{
+			printf("split %d = %s\n", i, ((t_cmd *) aux->content)->split[i]);
+			i++;
+		}
+		i = 0;
+		j++;
+		aux = aux->next;
+	}
+}
 
 /*Just an ASCII artpiece to know we entered MINISHELL*/
 
@@ -89,7 +116,8 @@ int	main(int argc, char **argv, char **envp)
 		printf("expanded str = %s\n", str);
 		str = ft_expand_home(msh.env, str);
 		printf("expanded home = %s\n", str);
-		ft_proc_str(str, &msh);
+		msh.lst = ft_proc_str(str, &msh);
+		ft_print_list(&msh);
 		free(str);
 		if (input == NULL)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/26 16:47:03 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:44:29 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
 creates first node and sends the chopped strs to function to fill
 and place the rest of the nodes within the linked list*/
 
-t_list	ft_proc_str(char *str, t_msh *msh)
+t_list	*ft_proc_str(char *str, t_msh *msh)
 {
 	int			j;
 	t_list		*first;
@@ -191,5 +191,5 @@ t_list	ft_proc_str(char *str, t_msh *msh)
 	}
 	if (str[0])
 		first = ft_new_node(str, first, msh);
-	return (*first);
+	return (first);
 }
