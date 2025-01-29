@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ex_built.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/29 11:01:34 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/01/29 10:54:47 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
-#include "../../inc/parser.h"
 
-void	ex_echo(char *txt)
+void ex_built()
 {
-	if (!txt)
-	{
-		printf(Y "Error: problem executing echo" RE);
-		return ;
-	}
-	printf("%s\n", txt);
+    printf("built");
 }

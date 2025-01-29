@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/28 18:38:20 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:07:37 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,11 @@ int	main(int argc, char **argv, char **envp)
 		str = ft_expand_home(msh.env, str);
 		printf("expanded home = %s\n", str);
 		ft_proc_str(str, &msh);
-		
+		t_cmd *cmd = msh.lst->content;
+		if (cmd->built)
+			ex_built();
+		else
+			ex_native();
 		free(str);
 		if (input == NULL)
 			break ;
