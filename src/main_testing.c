@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/29 21:26:05 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:45:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,30 @@ int	main(int argc, char **argv, char **envp)
 	char	*str;
 	char	*prompt;
 	t_msh	msh;
+	int		n_cmd;
 
 	ft_draw();
 	msh.env = ft_env_parser(envp);
+	n_cmd = 1;
 	while (1)
 	{
 		prompt = ft_prompt(msh.env);
 		input = readline(prompt);
-		printf("input = %s\n", input);
 		str = ft_expand_vars(msh.env, input);
-		printf("expanded str = %s\n", str);
 		str = ft_expand_home(msh.env, str);
-		printf("expanded home = %s\n", str);
-		ft_proc_str(str, &msh);
-		void *lst = msh.lst->content;
-        write(1, "Llega\n", 6);
-		// if (cmd->built)
-		// 	ex_built();
-		// else
-		// 	ex_native();
+		msh.lst = ft_proc_str(str, &msh);
+		while (msh.lst->next)
+		{
+			if (((t_cmd *) msh.lst->content)->built)
+				ex_built();
+			else
+				ex_native(msh, n_cmd);
+			msh.lst = msh.lst->next;
+		}
+		if (((t_cmd *) msh.lst->content)->built)
+			ex_built();
+		else
+			ex_native(msh, n_cmd);
 		free(str);
 		if (input == NULL)
 			break ;

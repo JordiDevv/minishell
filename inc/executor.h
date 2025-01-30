@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/29 12:02:19 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:40:50 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdarg.h>
+# include <stdbool.h>
+# include "parser.h"
 
 void	ex_pwd(char **envp);
 void	ex_echo(char *txt);
@@ -38,6 +40,6 @@ int     *create_pipe();
 int     redirect(int input, int output, int *fds);
 
 void    ex_built();
-void    ex_native();
+void    ex_native(t_msh msh, int n_cmd);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:15:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/28 18:29:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:52:31 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-static int	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ static void	ft_strcat(char *dst, const char *src)
 char	*strmcat(int n, int i, ...)
 {
 	va_list	args;
-	int		len;
+	size_t	len;
 	char	*str;
 	char	*str_aux;
 

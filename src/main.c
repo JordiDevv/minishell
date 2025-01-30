@@ -1,44 +1,44 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/30 11:28:08 by jsanz-bo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   main.c                                             :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
+// /*   Updated: 2025/01/30 11:30:01 by jsanz-bo         ###   ########.fr       */
+// /*                                                                            */
+// /* ************************************************************************** */
 
-#include "../inc/libft/inc/libft.h"
-#include "../inc/parser.h"
+// #include "../libft/libft.h"
+// #include "../inc/parser.h"
 
-void	ft_print_list(t_msh *msh)
-{
-	t_list	*aux;
-	int		i;
-	int		j;
+// void	ft_print_list(t_msh *msh)
+// {
+// 	t_list	*aux;
+// 	int		i;
+// 	int		j;
 
-	i = 0;
-	j = 1;
-	aux = msh->lst;
-	while (aux)
-	{
-		printf("\ncommand number %d\n", j);
-		printf("cmd built =  %s\n", ((t_cmd *) aux->content)->built);
-		printf("cmd full =  %s\n", ((t_cmd *) aux->content)->full);
-		printf("cmd input =  %s\n", ((t_cmd *) aux->content)->input);
-		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
-		while (((t_cmd *)aux->content)->split[i])
-		{
-			printf("split %d = %s\n", i, ((t_cmd *) aux->content)->split[i]);
-			i++;
-		}
-		i = 0;
-		j++;
-		aux = aux->next;
-	}
-}
+// 	i = 0;
+// 	j = 1;
+// 	aux = msh->lst;
+// 	while (aux)
+// 	{
+// 		printf("\ncommand number %d\n", j);
+// 		printf("cmd built =  %s\n", ((t_cmd *) aux->content)->built);
+// 		printf("cmd full =  %s\n", ((t_cmd *) aux->content)->full);
+// 		printf("cmd input =  %s\n", ((t_cmd *) aux->content)->input);
+// 		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
+// 		while (((t_cmd *)aux->content)->split[i])
+// 		{
+// 			printf("split %d = %s\n", i, ((t_cmd *) aux->content)->split[i]);
+// 			i++;
+// 		}
+// 		i = 0;
+// 		j++;
+// 		aux = aux->next;
+// 	}
+// }
 
 // /*Just an ASCII artpiece to know we entered MINISHELL*/
 
@@ -105,23 +105,23 @@ void	ft_print_list(t_msh *msh)
 // 	char	*prompt;
 // 	t_msh	msh;
 
-	ft_draw();
-	msh.env = ft_env_parser(envp);
-	while (1)
-	{
-		prompt = ft_prompt(msh.env);
-		input = readline(prompt);
-		printf("input = %s\n", input);
-		str = ft_expand_vars(msh.env, input);
-		printf("expanded str = %s\n", str);
-		str = ft_expand_home(msh.env, str);
-		printf("expanded home = %s\n", str);
-		msh.lst = ft_proc_str(str, &msh);
-		ft_print_list(&msh);
-		free(str);
-		if (input == NULL)
-			break ;
-	}
-	ft_free_env(msh.env);
-	return (0);
-}
+// 	ft_draw();
+// 	msh.env = ft_env_parser(envp);
+// 	while (1)
+// 	{
+// 		prompt = ft_prompt(msh.env);
+// 		input = readline(prompt);
+// 		printf("input = %s\n", input);
+// 		str = ft_expand_vars(msh.env, input);
+// 		printf("expanded str = %s\n", str);
+// 		str = ft_expand_home(msh.env, str);
+// 		printf("expanded home = %s\n", str);
+// 		msh.lst = ft_proc_str(str, &msh);
+// 		ft_print_list(&msh);
+// 		free(str);
+// 		if (input == NULL)
+// 			break ;
+// 	}
+// 	ft_free_env(msh.env);
+// 	return (0);
+// }
