@@ -6,106 +6,16 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/29 23:44:29 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:44:30 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-void	ft_ptend(char **str)
-{
-	int	i;
-
-	i = 0;
-	while ((*str)[i])
-	{
-		if ((*str)[i] == '\"')
-		{
-			i++;
-			while ((*str)[i] && (*str)[i] != '\"')
-				i++;
-			if ((*str)[i])
-				i++;
-		}
-		else if ((*str)[i] == '\'')
-		{
-			i++;
-			while ((*str)[i] && (*str)[i - 1] != '\'')
-				i++;
-			if ((*str)[i])
-				i++;
-		}
-		if ((*str)[i] == '<' || (*str)[i] == '>')
-			(*str)[i] = '\0';
-		i++;
-	}
-}
-
-int	ft_full(char **str, t_cmd *cmd, int i, int *m)
-{
-	cmd->full = (*str) + i;
-	if (ft_strnstr(*str, "echo", 4) && cmd->built == NULL)
-		cmd->built = ft_strdup("echo");
-	while ((*str)[i] != '<' && (*str)[i] != '>' && (*str)[i])
-		i++;
-	return (i - 1);
-}
-
-int	ft_redir_in(char **str, t_cmd *cmd, int i)
-{
-	cmd->input = (*str) + i + 1;
-	while ((*str)[i] && (*str)[i] != ' ' && (*str)[i] != '>')
-	{
-		if ((*str)[i] == '\"')
-		{
-			(*str)[i] = ' ';
-			while ((*str)[i] && (*str)[i] != '\"')
-				i++;
-			if ((*str)[i])
-				(*str)[i] = ' ';
-		}
-		else if ((*str)[i] == '\'')
-		{
-			(*str)[i] = ' ';
-			while (*(str[i]) && *(str[i]) != '\'')
-				i++;
-			if (*(str[i]))
-				*(str[i]) = ' ';
-		}
-		i++;
-	}
-	if ((*str)[i] && (*str)[i] != '>')
-		(*str)[i] = '<';
-	return (i - 1);
-}
-
-int	ft_redir_out(char **str, t_cmd *cmd, int i)
-{
-	cmd->output = (*str) + i + 1;
-	while ((*str)[i] && (*str)[i] != ' ' && (*str)[i] != '<')
-	{
-		if ((*str)[i] == '\"')
-		{
-			i++;
-			while ((*str)[i] && (*str)[i] != '\"')
-				i++;
-			if ((*str)[i])
-				i++;
-		}
-		else if ((*str)[i] == '\'')
-		{
-			i++;
-			while (*(str[i]) && *(str[i]) != '\'')
-				i++;
-			if (*(str[i]))
-				i++;
-		}
-		i++;
-	}
-	if ((*str)[i] && (*str)[i] != '<')
-		(*str)[i] = '>';
-	return (i - 1);
-}
+/*Receives str and pointer to cmd. Iterates over str 
+looking for key chars outside "" or ''.
+Calls functions located in fill_cmd.c to fill the cmd struct. 
+Calls ft_ptend() to end pointers. */
 
 void	ft_cmd_fill(char *str, t_cmd *cmd)
 {
@@ -136,7 +46,8 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 
 /*Funcion recieves first node and substring "str", 
 if first node does not exist, finds input and fills first node.
-Otherwise, creates a new node, fills it and adds it to the end of the list*/
+Otherwise, creates a new node, calls ft_cmd_fill to fill node->content
+Adds node to the end of the list with ft_lstadd_back()*/
 
 t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
 {
@@ -154,6 +65,7 @@ t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
 	cmd->built = NULL;
 	cmd->full = NULL;
 	cmd->split = NULL;
+	cmd->del = NULL;
 	ft_cmd_fill(str, cmd);
 	node->content = (void *) cmd;
 	node->next = NULL;

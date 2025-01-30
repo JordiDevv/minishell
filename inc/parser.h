@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/29 23:44:50 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:44:59 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ typedef struct s_cmd
 	char		*full;
 	char		**split;
 	char		*input;
+	char		*del;
 	char		*output;
+	char		*trunc;
 }		t_cmd;
 
 typedef struct s_msh
@@ -43,6 +45,11 @@ char		*ft_expand_home(char **env, char *str);
 char		*ft_subst_home(char **envp, char *str, int i);
 char		*ft_prompt(char **env);
 void		ft_draw(void);
-
+void		ft_cmd_fill(char *str, t_cmd *cmd);
+t_list		*ft_new_node(char *str, t_list *first, t_msh *msh);
+void		ft_ptend(char **str);
+int			ft_full(char **str, t_cmd *cmd, int i, int *m);
+int			ft_redir_in(char **str, t_cmd *cmd, int i);
+int			ft_redir_out(char **str, t_cmd *cmd, int i);
 
 #endif
