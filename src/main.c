@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/30 13:47:17 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:28:35 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_print_list(t_msh *msh)
 		printf("cmd input =  %s\n", ((t_cmd *) aux->content)->input);
 		printf("cmd del =  %s\n", ((t_cmd *) aux->content)->del);
 		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
-		printf("cmd trunc =  %s\n", ((t_cmd *) aux->content)->trunc);
+		printf("cmd append =  %s\n", ((t_cmd *) aux->content)->append);
 		while (((t_cmd *)aux->content)->split \
 			&& ((t_cmd *)aux->content)->split[i])
 		{

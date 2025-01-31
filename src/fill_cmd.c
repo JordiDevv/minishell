@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:09:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/30 13:44:38 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:32:49 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ iterates untill if finds key char*/
 int	ft_full(char **str, t_cmd *cmd, int i, int *m)
 {
 	cmd->full = (*str) + i;
-	if (ft_strnstr(*str, "echo", 4) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "echo", 4) && cmd->built == NULL)
 		cmd->built = ft_strdup("echo");
 	while ((*str)[i] != '<' && (*str)[i] != '>' && (*str)[i])
 	{
@@ -106,6 +106,6 @@ int	ft_redir_out(char **str, t_cmd *cmd, int i)
 	if ((*str)[i] && (*str)[i] != '<')
 		(*str)[i] = '>';
 	if (cmd->output && cmd->output[0] == '>')
-		cmd->trunc = &((cmd->output)[1]);
+		cmd->append = &((cmd->output)[1]);
 	return (i - 1);
 }
