@@ -1,3 +1,0 @@
-[submodule "inc/libft"]
-	path = inc/libft
-	url = git@github.com:elsoriano/libft.git
