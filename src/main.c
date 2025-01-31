@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/31 13:55:50 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:30:15 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,29 @@
 // 	int		i;
 // 	int		j;
 
-	i = 0;
-	j = 1;
-	aux = msh->lst;
-	while (aux)
-	{
-		printf("\ncommand number %d\n", j);
-		printf("cmd built =  %s\n", ((t_cmd *) aux->content)->built);
-		printf("cmd full =  %s\n", ((t_cmd *) aux->content)->full);
-		printf("cmd input =  %s\n", ((t_cmd *) aux->content)->input);
-		printf("cmd del =  %s\n", ((t_cmd *) aux->content)->del);
-		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
-		printf("cmd append =  %s\n", ((t_cmd *) aux->content)->append);
-		while (((t_cmd *)aux->content)->split \
-			&& ((t_cmd *)aux->content)->split[i])
-		{
-			printf("split %d = %s\n", i, ((t_cmd *) aux->content)->split[i]);
-			i++;
-		}
-		i = 0;
-		j++;
-		aux = aux->next;
-	}
-}
+// 	i = 0;
+// 	j = 1;
+// 	aux = msh->lst;
+// 	while (aux)
+// 	{
+// 		printf("\ncommand number %d\n", j);
+// 		printf("cmd built =  %s\n", ((t_cmd *) aux->content)->built);
+// 		printf("cmd full =  %s\n", ((t_cmd *) aux->content)->full);
+// 		printf("cmd input =  %s\n", ((t_cmd *) aux->content)->input);
+// 		printf("cmd del =  %s\n", ((t_cmd *) aux->content)->del);
+// 		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
+// 		printf("cmd append =  %s\n", ((t_cmd *) aux->content)->append);
+// 		while (((t_cmd *)aux->content)->split \
+// 			&& ((t_cmd *)aux->content)->split[i])
+// 		{
+// 			printf("split %d = %s\n", i, ((t_cmd *) aux->content)->split[i]);
+// 			i++;
+// 		}
+// 		i = 0;
+// 		j++;
+// 		aux = aux->next;
+// 	}
+// }
 
 // /*Just an ASCII artpiece to know we entered MINISHELL*/
 

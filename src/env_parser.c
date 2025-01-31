@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/15 11:21:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:30:32 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../libft/libft.h"
+#include "../inc/parser.h"
 
 /*frees environment*/
 int	ft_free_env(char **env)
