@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/30 12:45:54 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:41:16 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,13 @@ int	main(int argc, char **argv, char **envp)
 	char	*str;
 	char	*prompt;
 	t_msh	msh;
+	t_cmd	*cmd;
+	t_list	*aux_lst;
 	int		n_cmd;
 
 	ft_draw();
 	msh.env = ft_env_parser(envp);
+	get_path(&msh);
 	n_cmd = 1;
 	while (1)
 	{
@@ -89,18 +92,16 @@ int	main(int argc, char **argv, char **envp)
 		str = ft_expand_vars(msh.env, input);
 		str = ft_expand_home(msh.env, str);
 		msh.lst = ft_proc_str(str, &msh);
-		while (msh.lst->next)
+		aux_lst = msh.lst;
+		while (aux_lst)
 		{
-			if (((t_cmd *) msh.lst->content)->built)
+			cmd = ((t_cmd *) aux_lst->content);
+			if (cmd->built)
 				ex_built();
 			else
-				ex_native(msh, n_cmd);
-			msh.lst = msh.lst->next;
+				ex_native(msh, cmd, n_cmd);
+			aux_lst = aux_lst->next;
 		}
-		if (((t_cmd *) msh.lst->content)->built)
-			ex_built();
-		else
-			ex_native(msh, n_cmd);
 		free(str);
 		if (input == NULL)
 			break ;

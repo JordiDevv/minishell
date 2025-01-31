@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/31 15:31:36 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:40:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_msh
 {
 	char	**env;
 	t_list	*lst;
+	char	**split_path;
 }		t_msh;
 
 char		**ft_env_parser(char **envp);

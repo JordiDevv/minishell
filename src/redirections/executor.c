@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/30 11:52:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:24:07 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int    execute_cmd(int *pipe_fds, char *path, char **cmd, char **envp)
+int    execute_cmd(int *pipe_fds, char *rute, char **split_cmd, char **envp)
 {
     pid_t   pid;
 
@@ -26,7 +26,7 @@ int    execute_cmd(int *pipe_fds, char *path, char **cmd, char **envp)
     {
         if (pipe_fds)
             redirect(1, 1, pipe_fds);
-        if (execve(path, cmd, envp) == -1)
+        if (execve(rute, split_cmd, envp) == -1)
             return (-1);
     }
     else
