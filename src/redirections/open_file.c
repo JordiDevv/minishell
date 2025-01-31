@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/31 18:17:59 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/01/20 12:50:50 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/01/22 12:36:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
-#include "../../inc/parser.h"
 
-void	ex_pwd(char **envp)
+int	open_file(char *file, char redirection)
 {
-	char	*pwd_value;
+	int	fd;
 
-	pwd_value = ft_find_var(envp, "PWD");
-	if (!pwd_value)
+	fd = -1;
+	if (access(file, F_OK))
 	{
-		printf(Y "Error: pwd is corrupted" RE);
-		return ;
+		printf(Y "-bash: %s: %s\n" RE, file, strerror(errno));
+		return (-1);
 	}
-	printf("%s\n", pwd_value);
+	else
+	{
+		if (redirection == '>')
+			fd = open(file, O_RDONLY);
+		else if (redirection == '<')
+			fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	}
+	if (fd < 0)
+	{
+		perror(R "Error opening, or creating, one redirection file\n" RE);
+		return (-1);
+	}
+	return (fd);
 }

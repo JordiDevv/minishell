@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/31 18:17:59 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/01/30 12:17:35 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
-#include "../../inc/parser.h"
 
-void	ex_pwd(char **envp)
+int    redirect(int input, int output, int *fds)
 {
-	char	*pwd_value;
-
-	pwd_value = ft_find_var(envp, "PWD");
-	if (!pwd_value)
-	{
-		printf(Y "Error: pwd is corrupted" RE);
-		return ;
-	}
-	printf("%s\n", pwd_value);
+    if (!fds)
+    {
+        printf(R "No pipe was received in a redirection.\n" RE);
+        return (-1);
+    }
+    if (input)
+        dup2(fds[0], STDIN_FILENO);
+    else
+        close(fds[0]);
+    if (output)
+        dup2(fds[1], STDOUT_FILENO);
+    else
+        close(fds[1]);
+    return (0);
 }

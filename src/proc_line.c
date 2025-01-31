@@ -6,108 +6,102 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2024/12/17 22:38:58 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:55:13 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 
-int	ft_add_content(char *str, t_command *new, char **env)
-{
-	int	i;
-	
-	i = 0;
-	new->envp = env;
-	new->next = NULL;
-	if (str[0] == '|')
-		return (1);
-	if (ft_strchr(str, '|'))
-		new->pipe = 1;
-	else
-		new->pipe = 0;
-	return (0);
-}
+/*Receives str and pointer to cmd. Iterates over str 
+looking for key chars outside "" or ''.
+Calls functions located in fill_cmd.c to fill the cmd struct. 
+Calls ft_ptend() to end pointers. */
 
-char	*ft_input(char **str)
+void	ft_cmd_fill(char *str, t_cmd *cmd)
 {
-	char	*tmp;
 	int		i;
+	int		m[2];
 
-	tmp = NULL;
-	if (*(str[0]) == '<')
+	m[0] = 0;
+	m[1] = 0;
+	i = 0;
+	while (str[i])
 	{
-		if (*(str[1]) == '<')
-		{
-			tmp = ft_strdup("delimiter");
-			*str = ft_strchr(*str, ' ');
-		}
-		else
-		{
-			while (*(str[i]) != ' ')
-				i++;
-			tmp = ft_substr(str, 2, (i - 2));
-			*str += i;
-		}
+		if (str[i] == '\"')
+			m[0] = (m[0] + 1) % 2;
+		if (str[i] == '\'')
+			m[1] = (m[1] + 1) % 2;
+		if (str[i] == '<' && !m[0] && !m[1] && cmd->input == NULL)
+			i = ft_redir_in(&str, cmd, i);
+		else if (str[i] == '>' && !m[0] && !m[1] && cmd->output == NULL)
+			i = ft_redir_out(&str, cmd, i);
+		else if (cmd->full == NULL && str[i] != ' ' && str[i] != '<' \
+				&& str[i] != '>')
+			i = ft_full(&str, cmd, i, m);
+		i++;
 	}
-	return (tmp);
+	ft_ptend(&str);
+	cmd->split = ft_split(cmd->full, ' ');
 }
 
 /*Funcion recieves first node and substring "str", 
 if first node does not exist, finds input and fills first node.
-Otherwise, creates a new node, fills it and adds it to the end of the list*/
-void	ft_new_node(char *str, t_command *first, char **env)
-{
-	t_command	*new;
+Otherwise, creates a new node, calls ft_cmd_fill to fill node->content
+Adds node to the end of the list with ft_lstadd_back()*/
 
-	if (!first->cmd)
-	{
-		new = first;
-		if (str[0] == '|')
-			return (perror("PIPE in wrong place"));
-		new->input = ft_input(&str);
-	}
-	else
-	{
-		new = malloc(sizeof(t_command));
-		if (!new)
-			return (perror("malloc error"));
-		new->input = NULL;
-	}
-	if (ft_add_content(str, new, env) == 0)
-		ft_lstadd_back(&first, new);
-	else if (first->cmd)
-		free (new);
-	return ;
+t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
+{
+	t_cmd	*cmd;
+	t_list	*node;
+
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	cmd->input = NULL;
+	cmd->output = NULL;
+	cmd->built = NULL;
+	cmd->full = NULL;
+	cmd->split = NULL;
+	cmd->del = NULL;
+	ft_cmd_fill(str, cmd);
+	node->content = (void *) cmd;
+	node->next = NULL;
+	ft_lstadd_back(&first, node);
+	return (first);
 }
 
 /*function finds pipes "|" in str, chops them,
-creates first node and sends the chopped strs to functions to fill
+creates first node and sends the chopped strs to function to fill
 and place the rest of the nodes within the linked list*/
-t_command	*ft_proc_str(char *str, char **env)
-{
-	int			i;
-	int			j;
-	char		*line;
-	t_command	node;
 
-	i = 0;
+t_list	*ft_proc_str(char *str, t_msh *msh)
+{
+	int			j;
+	t_list		*first;
+	int			m[2];
+
 	j = 0;
+	m[0] = 0;
+	m[1] = 0;
+	first = NULL;
 	while (str[j])
 	{
-		if (str[j] == '|')
+		if (str[j] == '\"')
+			m[0] = (m[0] + 1) % 2;
+		if (str[j] == '\'')
+			m[1] = (m[1] + 1) % 2;
+		if (str[j] == '|' && !m[0] && !m[1])
 		{
-			line = ft_substr(str, i, (j - i + 1));
-			ft_new_node(line, &node, env);
-			free(line);
-			i = j + 1;
+			str[j] = '\0';
+			first = ft_new_node(str, first, msh);
+			str += (j-- + 1);
 		}
 		j++;
 	}
-	if (i < j)
-	{
-		line = ft_substr(str, i, (j - i + 1));
-		ft_new_node(line, &node, env);
-		free(line);
-	}
-	return (&node);
+	if (str[0])
+		first = ft_new_node(str, first, msh);
+	return (first);
 }

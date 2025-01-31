@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   create_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/31 18:17:59 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/01/30 12:15:34 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
-#include "../../inc/parser.h"
 
-void	ex_pwd(char **envp)
+int *create_pipe()
 {
-	char	*pwd_value;
+	int *pipe_fds;
 
-	pwd_value = ft_find_var(envp, "PWD");
-	if (!pwd_value)
+    pipe_fds = malloc(sizeof(int *));
+	if (!pipe)
 	{
-		printf(Y "Error: pwd is corrupted" RE);
-		return ;
+		perror(R "Error allocating the pipe\n" RE);
+		return (NULL);
 	}
-	printf("%s\n", pwd_value);
+    if (pipe(pipe_fds) < 0)
+    {
+        perror(R "Error creating the pipe\n" RE);
+        return (NULL);
+    }
+    return (pipe_fds);
 }
