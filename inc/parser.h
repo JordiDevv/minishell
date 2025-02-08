@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/31 16:40:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:19:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <fcntl.h>
+# include <stdbool.h>
+
+typedef struct  s_doors
+{
+    bool    input_door;
+    bool    output_door;
+}           t_doors;
 
 typedef struct s_cmd
 {
@@ -36,6 +43,7 @@ typedef struct s_msh
 	char	**env;
 	t_list	*lst;
 	char	**split_path;
+	t_doors	*doors;
 }		t_msh;
 
 char		**ft_env_parser(char **envp);

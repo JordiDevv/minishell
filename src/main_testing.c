@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/31 17:41:16 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:26:04 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,23 @@ int	main(int argc, char **argv, char **envp)
 		str = ft_expand_vars(msh.env, input);
 		str = ft_expand_home(msh.env, str);
 		msh.lst = ft_proc_str(str, &msh);
+		msh.doors->input_door = 0;
+		msh.doors->output_door = 0;
 		aux_lst = msh.lst;
+		write(1, "E\n", 2);
 		while (aux_lst)
 		{
+			if (aux_lst->next)
+				msh.doors->output_door = 1;
+			else
+				msh.doors->output_door = 0;
 			cmd = ((t_cmd *) aux_lst->content);
 			if (cmd->built)
 				ex_built();
 			else
 				ex_native(msh, cmd, n_cmd);
+			if (!msh.doors->input_door)
+				msh.doors->input_door = 1;
 			aux_lst = aux_lst->next;
 		}
 		free(str);

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/31 17:52:05 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:07:49 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ void ex_native(t_msh msh, t_cmd *cmd, int n_cmd)
 
     pipe_fds = NULL;
     if (!only_one_cmd(msh, n_cmd))
+	{
+		write(1, "Llega\n", 6);
         pipe_fds = create_pipe();
+	}
     full_rute = valid_cmd(cmd, &msh);
-    execute_cmd(pipe_fds, full_rute, cmd->split, msh.env);
+    execute_cmd(pipe_fds, full_rute, cmd->split, msh);
     wait(NULL);
 }
