@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/08 17:18:35 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:49:49 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,12 @@ int     ex_exit(int n);
 int     open_file(char *file, char redirection);
 int     *create_pipe();
 int     redirect(int input, int output, int *fds);
-int     execute_cmd(int *pipe_fds, char *rute, char **split_cmd, t_msh msh);
+int     execute_cmd(int *pipe_fds, char *rute, char **split_cmd, t_data *data);
 
 void    ex_built();
-void    ex_native(t_msh msh, t_cmd *cmd, int n_cmd);
-char    *valid_cmd(t_cmd *cmd, t_msh *msh);
+void    ex_native(t_data *program_data, t_cmd *cmd, int n_cmd);
 
-void	get_path(t_msh *msh);
+void	get_path(t_data *msh);
 char	*strmcat(int n, int i, ...);
 
 #endif

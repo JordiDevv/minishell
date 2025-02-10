@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/08 17:19:10 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:39:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,15 @@ typedef struct s_msh
 {
 	char	**env;
 	t_list	*lst;
+}		t_msh;
+
+typedef	struct	s_data
+{
+	t_msh	*msh;
 	char	**split_path;
 	t_doors	*doors;
-}		t_msh;
+}	t_data;
+
 
 char		**ft_env_parser(char **envp);
 char		*ft_find_var(char **envp, char *var);

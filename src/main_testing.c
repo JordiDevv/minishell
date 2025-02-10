@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/08 17:26:04 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:11:33 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,36 +79,39 @@ int	main(int argc, char **argv, char **envp)
 	t_msh	msh;
 	t_cmd	*cmd;
 	t_list	*aux_lst;
+	t_data	*data;
 	int		n_cmd;
 
 	ft_draw();
 	msh.env = ft_env_parser(envp);
-	get_path(&msh);
+	data = malloc(sizeof(t_data));
+	data->msh = &msh;
+	get_path(data);
+	data->doors = malloc(sizeof(t_doors));
 	n_cmd = 1;
 	while (1)
 	{
-		prompt = ft_prompt(msh.env);
+		prompt = ft_prompt(data->msh->env);
 		input = readline(prompt);
-		str = ft_expand_vars(msh.env, input);
-		str = ft_expand_home(msh.env, str);
-		msh.lst = ft_proc_str(str, &msh);
-		msh.doors->input_door = 0;
-		msh.doors->output_door = 0;
-		aux_lst = msh.lst;
-		write(1, "E\n", 2);
+		str = ft_expand_vars(data->msh->env, input);
+		str = ft_expand_home(data->msh->env, str);
+		data->msh->lst = ft_proc_str(str, data->msh);
+		data->doors->input_door = 0;
+		data->doors->output_door = 0;
+		aux_lst = data->msh->lst;
 		while (aux_lst)
 		{
 			if (aux_lst->next)
-				msh.doors->output_door = 1;
+				data->doors->output_door = 1;
 			else
-				msh.doors->output_door = 0;
+				data->doors->output_door = 0;
 			cmd = ((t_cmd *) aux_lst->content);
 			if (cmd->built)
 				ex_built();
 			else
-				ex_native(msh, cmd, n_cmd);
-			if (!msh.doors->input_door)
-				msh.doors->input_door = 1;
+				ex_native(data, cmd, n_cmd);
+			if (!data->doors->input_door)
+				data->doors->input_door = 1;
 			aux_lst = aux_lst->next;
 		}
 		free(str);
@@ -118,3 +121,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_free_env(msh.env);
 	return (0);
 }
+
+
+//Hay que revisar la matriz de pipes del pipex y cómo lo podemos adaptar a la minishell, o
+//explorar otras alternativas.
