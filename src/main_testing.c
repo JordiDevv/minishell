@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/10 14:11:33 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:11:42 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,31 +71,39 @@ char	*ft_prompt(char **env)
 	return (str);
 }
 
+static void	init_minishell(t_data **data, char **envp)
+{
+	t_msh	*msh;
+	
+	ft_draw();
+	msh->env = ft_env_parser(envp);
+	(*data) = malloc(sizeof(t_data));
+	(*data)->msh = msh;
+	get_path(*data);
+	(*data)->doors = malloc(sizeof(t_doors));
+}
+
+static void	init_dynamic_data(t_data **data)
+{
+	(*data)->msh->prompt = ft_prompt((*data)->msh->env);
+	(*data)->msh->input = readline((*data)->msh->prompt);
+	(*data)->msh->str = ft_expand_vars((*data)->msh->env, (*data)->msh->input);
+	(*data)->msh->str = ft_expand_home((*data)->msh->env, (*data)->msh->str);
+	(*data)->msh->lst = ft_proc_str((*data)->msh->str, (*data)->msh);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	char	*input;
-	char	*str;
-	char	*prompt;
-	t_msh	msh;
 	t_cmd	*cmd;
 	t_list	*aux_lst;
 	t_data	*data;
 	int		n_cmd;
 
-	ft_draw();
-	msh.env = ft_env_parser(envp);
-	data = malloc(sizeof(t_data));
-	data->msh = &msh;
-	get_path(data);
-	data->doors = malloc(sizeof(t_doors));
+	init_minishell(&data, envp);
 	n_cmd = 1;
 	while (1)
 	{
-		prompt = ft_prompt(data->msh->env);
-		input = readline(prompt);
-		str = ft_expand_vars(data->msh->env, input);
-		str = ft_expand_home(data->msh->env, str);
-		data->msh->lst = ft_proc_str(str, data->msh);
+		init_dynamic_data(&data);
 		data->doors->input_door = 0;
 		data->doors->output_door = 0;
 		aux_lst = data->msh->lst;
@@ -114,14 +122,17 @@ int	main(int argc, char **argv, char **envp)
 				data->doors->input_door = 1;
 			aux_lst = aux_lst->next;
 		}
-		free(str);
-		if (input == NULL)
+		free(data->msh->str);
+		if (data->msh->input == NULL)
 			break ;
 	}
-	ft_free_env(msh.env);
+	ft_free_env(data->msh->env);
 	return (0);
 }
 
 
 //Hay que revisar la matriz de pipes del pipex y cómo lo podemos adaptar a la minishell, o
 //explorar otras alternativas.
+
+//Reservamos memoria para data y para data->doors
+//En "create_pipes" reservamos memoria para pipes_fds

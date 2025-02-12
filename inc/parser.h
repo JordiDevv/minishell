@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/10 12:39:54 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:45:46 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ typedef struct s_cmd
 typedef struct s_msh
 {
 	char	**env;
+	char	*input;
+	char	*str;
+	char	*prompt;
 	t_list	*lst;
 }		t_msh;
 
