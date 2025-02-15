@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/31 13:27:30 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/02/15 22:13:23 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ void		ft_ptend(char **str);
 int			ft_full(char **str, t_cmd *cmd, int i, int *m);
 int			ft_redir_in(char **str, t_cmd *cmd, int i);
 int			ft_redir_out(char **str, t_cmd *cmd, int i);
+int			ft_markfind(char *str);
+char		**ft_split_adv(const char *s, const char c);
 
 #endif
