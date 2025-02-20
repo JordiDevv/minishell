@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/20 12:34:40 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:52:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void ex_native(t_data *data, t_msh msh, t_list *aux_lst, int n_cmd)
     if (/*!only_one_cmd(program_data->msh, n_cmd)*/data->doors->input_door || data->doors->output_door)
 	{
 		write(1, "Llega\n", 6);
-        data->pipe_fds = create_pipe();
+        data->pipe_fds = create_pipes(data->n_pipes);
 	}
     data->full_rute = valid_cmd(cmd, data);
     execute_cmd(data, msh, cmd->split);

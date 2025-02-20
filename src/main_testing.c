@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/20 13:19:49 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:07:22 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	ft_print_list(t_msh *msh)
 		printf("cmd del =  %s\n", ((t_cmd *) aux->content)->del);
 		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
 		printf("cmd append =  %s\n", ((t_cmd *) aux->content)->append);
+		write (1, "Llega\n", 6);
 		while (((t_cmd *)aux->content)->split \
 			&& ((t_cmd *)aux->content)->split[i])
 		{
@@ -109,14 +110,18 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 	data->doors = malloc(sizeof(t_doors));
 }
 
-static void	init_dynamic_data(t_msh *msh)
+static void	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
 	msh->input = readline(msh->prompt);
-	//contar pipes
+	data->n_pipes = count_pipes(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
+	if (((t_cmd *) (msh->lst->content))->input)
+		data->n_pipes++;
+	if (((t_cmd *) (msh->lst->content))->output)
+		data->n_pipes++;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -130,25 +135,27 @@ int	main(int argc, char **argv, char **envp)
 	n_cmd = 1;
 	while (1)
 	{
-		init_dynamic_data(&msh);
+		init_dynamic_data(&msh, &data);
 		ft_print_list(&msh);
 		data.doors->input_door = 0;
 		data.doors->output_door = 0;
 		aux_lst = msh.lst;
-		while (aux_lst)
-		{
-			if (aux_lst->next)
-				data.doors->output_door = 1;
-			else
-				data.doors->output_door = 0;
-			if (((t_cmd *) aux_lst->content)->built)
-				ex_built();
-			else
-				ex_native(&data, msh, aux_lst, n_cmd);
-			if (!data.doors->input_door)
-				data.doors->input_door = 1;
-			aux_lst = aux_lst->next;
-		}
+		// while (aux_lst)
+		// {
+		// 	if (aux_lst->next)
+		// 		data.doors->output_door = 1;
+		// 	else
+		// 		data.doors->output_door = 0;
+		// 	if (((t_cmd *) aux_lst->content)->built)
+		// 		ex_built();
+		// 	else
+		// 		ex_native(&data, msh, aux_lst, n_cmd);
+		// 	if (!data.doors->input_door)
+		// 		data.doors->input_door = 1;
+		// 	aux_lst = aux_lst->next;
+		// }
+		write (1, ft_itoa(data.n_pipes), 1);
+		write (1, "\n", 1);
 		free(msh.str);
 		if (msh.input == NULL)
 			break ;
@@ -161,5 +168,5 @@ int	main(int argc, char **argv, char **envp)
 //Hay que revisar la matriz de pipes del pipex y cómo lo podemos adaptar a la minishell, o
 //explorar otras alternativas.
 
-//Reservamos memoria para data y para data->doors
+//Reservamos memoria para data->doors
 //En "create_pipes" reservamos memoria para pipes_fds

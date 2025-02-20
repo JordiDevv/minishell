@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_pipe.c                                      :+:      :+:    :+:   */
+/*   create_pipes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/12 11:13:51 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:55:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int *create_pipe()
+int count_pipes(char *line)
+{
+    int i;
+    int n;
+
+    i = 0;
+    n = 0;
+    while (line[i])
+    {
+        if (line[i] == '|')
+            n++;
+        i++;
+    }
+    return (n);
+}
+
+int *create_pipes(int n_pipes)
 {
 	int *pipe_fds;
 
