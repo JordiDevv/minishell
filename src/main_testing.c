@@ -6,12 +6,42 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/20 12:34:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:19:49 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 #include "../inc/executor.h"
+
+static void	ft_print_list(t_msh *msh)
+{
+	t_list	*aux;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 1;
+	aux = msh->lst;
+	while (aux)
+	{
+		printf("\ncommand number %d\n", j);
+		printf("cmd built =  %s\n", ((t_cmd *) aux->content)->built);
+		printf("cmd full =  %s\n", ((t_cmd *) aux->content)->full);
+		printf("cmd input =  %s\n", ((t_cmd *) aux->content)->input);
+		printf("cmd del =  %s\n", ((t_cmd *) aux->content)->del);
+		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
+		printf("cmd append =  %s\n", ((t_cmd *) aux->content)->append);
+		while (((t_cmd *)aux->content)->split \
+			&& ((t_cmd *)aux->content)->split[i])
+		{
+			printf("split %d = %s\n", i, ((t_cmd *) aux->content)->split[i]);
+			i++;
+		}
+		i = 0;
+		j++;
+		aux = aux->next;
+	}
+}
 
 /*Just an ASCII artpiece to know we entered MINISHELL*/
 
@@ -83,6 +113,7 @@ static void	init_dynamic_data(t_msh *msh)
 {
 	msh->prompt = ft_prompt(msh->env);
 	msh->input = readline(msh->prompt);
+	//contar pipes
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
@@ -90,18 +121,17 @@ static void	init_dynamic_data(t_msh *msh)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_cmd	*cmd;
 	t_list	*aux_lst;
 	t_msh	msh;
 	t_data	data;
 	int		n_cmd;
 
 	init_minishell(&data, &msh, envp);
-	write(1, "H\n", 2);
 	n_cmd = 1;
 	while (1)
 	{
 		init_dynamic_data(&msh);
+		ft_print_list(&msh);
 		data.doors->input_door = 0;
 		data.doors->output_door = 0;
 		aux_lst = msh.lst;
