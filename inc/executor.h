@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/10 12:49:49 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:34:45 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@
 # include <stdbool.h>
 # include "parser.h"
 
+typedef struct  s_doors
+{
+    bool    input_door;
+    bool    output_door;
+}           t_doors;
+
+typedef	struct	s_data
+{
+	char	**split_path;
+	t_doors	*doors;
+    int     *pipe_fds;
+    char    *full_rute;
+}	t_data;
+
 void	ex_pwd(char **envp);
 void	ex_echo(char *txt);
 int     ex_exit(int n);
@@ -38,12 +52,12 @@ int     ex_exit(int n);
 int     open_file(char *file, char redirection);
 int     *create_pipe();
 int     redirect(int input, int output, int *fds);
-int     execute_cmd(int *pipe_fds, char *rute, char **split_cmd, t_data *data);
+int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);
 
 void    ex_built();
-void    ex_native(t_data *program_data, t_cmd *cmd, int n_cmd);
+void    ex_native(t_data *program_data, t_msh msh, t_list *aux_lst, int n_cmd);
 
-void	get_path(t_data *msh);
+void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
 
 #endif

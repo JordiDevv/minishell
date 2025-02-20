@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/12 12:11:42 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:34:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,62 +71,59 @@ char	*ft_prompt(char **env)
 	return (str);
 }
 
-static void	init_minishell(t_data **data, char **envp)
+static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 {
-	t_msh	*msh;
-	
 	ft_draw();
 	msh->env = ft_env_parser(envp);
-	(*data) = malloc(sizeof(t_data));
-	(*data)->msh = msh;
-	get_path(*data);
-	(*data)->doors = malloc(sizeof(t_doors));
+	get_path(data, msh);
+	data->doors = malloc(sizeof(t_doors));
 }
 
-static void	init_dynamic_data(t_data **data)
+static void	init_dynamic_data(t_msh *msh)
 {
-	(*data)->msh->prompt = ft_prompt((*data)->msh->env);
-	(*data)->msh->input = readline((*data)->msh->prompt);
-	(*data)->msh->str = ft_expand_vars((*data)->msh->env, (*data)->msh->input);
-	(*data)->msh->str = ft_expand_home((*data)->msh->env, (*data)->msh->str);
-	(*data)->msh->lst = ft_proc_str((*data)->msh->str, (*data)->msh);
+	msh->prompt = ft_prompt(msh->env);
+	msh->input = readline(msh->prompt);
+	msh->str = ft_expand_vars(msh->env, msh->input);
+	msh->str = ft_expand_home(msh->env, msh->str);
+	msh->lst = ft_proc_str(msh->str, msh);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_cmd	*cmd;
 	t_list	*aux_lst;
-	t_data	*data;
+	t_msh	msh;
+	t_data	data;
 	int		n_cmd;
 
-	init_minishell(&data, envp);
+	init_minishell(&data, &msh, envp);
+	write(1, "H\n", 2);
 	n_cmd = 1;
 	while (1)
 	{
-		init_dynamic_data(&data);
-		data->doors->input_door = 0;
-		data->doors->output_door = 0;
-		aux_lst = data->msh->lst;
+		init_dynamic_data(&msh);
+		data.doors->input_door = 0;
+		data.doors->output_door = 0;
+		aux_lst = msh.lst;
 		while (aux_lst)
 		{
 			if (aux_lst->next)
-				data->doors->output_door = 1;
+				data.doors->output_door = 1;
 			else
-				data->doors->output_door = 0;
-			cmd = ((t_cmd *) aux_lst->content);
-			if (cmd->built)
+				data.doors->output_door = 0;
+			if (((t_cmd *) aux_lst->content)->built)
 				ex_built();
 			else
-				ex_native(data, cmd, n_cmd);
-			if (!data->doors->input_door)
-				data->doors->input_door = 1;
+				ex_native(&data, msh, aux_lst, n_cmd);
+			if (!data.doors->input_door)
+				data.doors->input_door = 1;
 			aux_lst = aux_lst->next;
 		}
-		free(data->msh->str);
-		if (data->msh->input == NULL)
+		free(msh.str);
+		if (msh.input == NULL)
 			break ;
 	}
-	ft_free_env(data->msh->env);
+	ft_free_env(msh.env);
 	return (0);
 }
 

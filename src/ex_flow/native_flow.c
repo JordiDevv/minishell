@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/10 14:10:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:34:40 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
     return (0);
 }*/
 
-void ex_native(t_data *data, t_cmd *cmd, int n_cmd)
+void ex_native(t_data *data, t_msh msh, t_list *aux_lst, int n_cmd)
 {
-    int     *pipe_fds;
-    char    *full_rute;
+    t_cmd	*cmd;
 
-    pipe_fds = NULL;
+	cmd = ((t_cmd *) aux_lst->content);
+    data->pipe_fds = NULL;
     if (/*!only_one_cmd(program_data->msh, n_cmd)*/data->doors->input_door || data->doors->output_door)
 	{
 		write(1, "Llega\n", 6);
-        pipe_fds = create_pipe();
+        data->pipe_fds = create_pipe();
 	}
-    full_rute = valid_cmd(cmd, data);
-    execute_cmd(pipe_fds, full_rute, cmd->split, data);
+    data->full_rute = valid_cmd(cmd, data);
+    execute_cmd(data, msh, cmd->split);
     wait(NULL);
 }
