@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/21 17:41:07 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:13:17 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
-	data->n_pipes = count_pipes(msh->lst);
+	data->pipe_fds = prepare_pipes(msh->lst);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -150,8 +150,6 @@ int	main(int argc, char **argv, char **envp)
 		// 		data.doors->input_door = 1;
 		// 	aux_lst = aux_lst->next;
 		// }
-		write (1, ft_itoa(data.n_pipes), 1);
-		write (1, "\n", 1);
 		free(msh.str);
 		if (msh.input == NULL)
 			break ;

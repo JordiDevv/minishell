@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/21 17:44:14 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:15:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ typedef	struct	s_data
 {
 	char	**split_path;
 	t_doors	*doors;
-    int     n_pipes;
-    int     *pipe_fds;
+    int     **pipe_fds;
     char    *full_rute;
 }	t_data;
 
@@ -51,8 +50,7 @@ void	ex_echo(char *txt);
 int     ex_exit(int n);
 
 int     open_file(char *file, char redirection);
-int     count_pipes(t_list *lst);
-int     *create_pipes(int n_pipes);
+int     **prepare_pipes(t_list *lst);
 int     redirect(int input, int output, int *fds);
 int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);
 
