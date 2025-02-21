@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/21 19:13:17 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:34:17 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	ft_print_list(t_msh *msh)
 		printf("cmd del =  %s\n", ((t_cmd *) aux->content)->del);
 		printf("cmd output =  %s\n", ((t_cmd *) aux->content)->output);
 		printf("cmd append =  %s\n", ((t_cmd *) aux->content)->append);
-		write (1, "Llega\n", 6);
 		while (((t_cmd *)aux->content)->split \
 			&& ((t_cmd *)aux->content)->split[i])
 		{
