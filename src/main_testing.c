@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/21 20:34:17 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:51:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	main(int argc, char **argv, char **envp)
 	int		n_cmd;
 
 	init_minishell(&data, &msh, envp);
-	n_cmd = 1;
+	n_cmd = 0;
 	while (1)
 	{
 		init_dynamic_data(&msh, &data);
@@ -149,6 +149,12 @@ int	main(int argc, char **argv, char **envp)
 		// 		data.doors->input_door = 1;
 		// 	aux_lst = aux_lst->next;
 		// }
+		if (data.pipe_fds)
+		{
+			while (data.pipe_fds[n_cmd])
+				n_cmd++;
+		}
+		write(1, ft_itoa(n_cmd), 1);
 		free(msh.str);
 		if (msh.input == NULL)
 			break ;
