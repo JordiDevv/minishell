@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/20 11:58:24 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:33:35 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void		ft_ptend(char **str);
 int			ft_full(char **str, t_cmd *cmd, int i, int *m);
 int			ft_redir_in(char **str, t_cmd *cmd, int i);
 int			ft_redir_out(char **str, t_cmd *cmd, int i);
+int			ft_markfind(char *str);
+char		**ft_split_adv(const char *s, const char c);
 
 #endif
