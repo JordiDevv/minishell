@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/20 15:41:10 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:44:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ex_echo(char *txt);
 int     ex_exit(int n);
 
 int     open_file(char *file, char redirection);
-int     count_pipes(char *line);
+int     count_pipes(t_list *lst);
 int     *create_pipes(int n_pipes);
 int     redirect(int input, int output, int *fds);
 int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);

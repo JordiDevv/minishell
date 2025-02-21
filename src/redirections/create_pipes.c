@@ -6,25 +6,26 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/20 15:55:57 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:45:45 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int count_pipes(char *line)
+int count_pipes(t_list *lst)
 {
-    int i;
     int n;
 
-    i = 0;
     n = 0;
-    while (line[i])
+    if (((t_cmd *) (lst->content))->input)
+		n++;
+    while (lst->next)
     {
-        if (line[i] == '|')
-            n++;
-        i++;
+        lst = lst->next;
+        n++;
     }
+	if (((t_cmd *) (lst->content))->output)
+		n++;
     return (n);
 }
 

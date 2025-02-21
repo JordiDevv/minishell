@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/20 16:07:22 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:41:07 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,10 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
 	msh->input = readline(msh->prompt);
-	data->n_pipes = count_pipes(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
-	if (((t_cmd *) (msh->lst->content))->input)
-		data->n_pipes++;
-	if (((t_cmd *) (msh->lst->content))->output)
-		data->n_pipes++;
+	data->n_pipes = count_pipes(msh->lst);
 }
 
 int	main(int argc, char **argv, char **envp)
