@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/22 13:21:52 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:48:36 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ int     **prepare_pipes(t_list *lst);
 int     redirect(int input, int output, int *fds);
 int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);
 
+void    ex_loop(t_msh msh, t_data *data);
 void    ex_built();
-void    ex_native(t_data *program_data, t_msh msh, t_list *aux_lst);
+void    ex_native(t_data *program_data, t_msh msh, t_cmd *cmd);
 
 void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);

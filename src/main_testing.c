@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/22 13:33:49 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:49:07 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		init_dynamic_data(&msh, &data);
-		ft_print_list(&msh);
 		ex_loop(msh, &data);
 		free(msh.str);
 		if (msh.input == NULL)
