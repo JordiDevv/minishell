@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/21 20:51:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:49:05 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
 	data->pipe_fds = prepare_pipes(msh->lst);
+	data->pipe_index = 0;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -124,37 +125,15 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*aux_lst;
 	t_msh	msh;
 	t_data	data;
-	int		n_cmd;
 
 	init_minishell(&data, &msh, envp);
-	n_cmd = 0;
 	while (1)
 	{
 		init_dynamic_data(&msh, &data);
 		ft_print_list(&msh);
 		data.doors->input_door = 0;
 		data.doors->output_door = 0;
-		aux_lst = msh.lst;
-		// while (aux_lst)
-		// {
-		// 	if (aux_lst->next)
-		// 		data.doors->output_door = 1;
-		// 	else
-		// 		data.doors->output_door = 0;
-		// 	if (((t_cmd *) aux_lst->content)->built)
-		// 		ex_built();
-		// 	else
-		// 		ex_native(&data, msh, aux_lst, n_cmd);
-		// 	if (!data.doors->input_door)
-		// 		data.doors->input_door = 1;
-		// 	aux_lst = aux_lst->next;
-		// }
-		if (data.pipe_fds)
-		{
-			while (data.pipe_fds[n_cmd])
-				n_cmd++;
-		}
-		write(1, ft_itoa(n_cmd), 1);
+		ex_loop(msh, &data);
 		free(msh.str);
 		if (msh.input == NULL)
 			break ;

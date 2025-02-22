@@ -6,13 +6,34 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/21 20:32:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:53:47 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int    execute_cmd(t_data *data, t_msh msh, char **split_cmd)
+void ex_loop(t_msh msh, t_data *data)
+{
+    t_list  *aux_lst;
+
+    aux_lst = msh.lst;
+    while (aux_lst)
+    {
+        if (aux_lst->next)
+            data->doors->output_door = 1;
+        else
+            data->doors->output_door = 0;
+        if (((t_cmd *) aux_lst->content)->built)
+            ex_built();
+        else
+            ex_native(data, msh, aux_lst);
+        if (!data->doors->input_door)
+            data->doors->input_door = 1;
+        aux_lst = aux_lst->next;
+    }
+}
+
+int execute_cmd(t_data *data, t_msh msh, char **split_cmd)
 {
     pid_t   pid;
 

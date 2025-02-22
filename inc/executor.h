@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/21 19:15:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:53:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef	struct	s_data
 	t_doors	*doors;
     int     **pipe_fds;
     char    *full_rute;
+    int     pipe_index;
 }	t_data;
 
 void	ex_pwd(char **envp);
@@ -55,7 +56,7 @@ int     redirect(int input, int output, int *fds);
 int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);
 
 void    ex_built();
-void    ex_native(t_data *program_data, t_msh msh, t_list *aux_lst, int n_cmd);
+void    ex_native(t_data *program_data, t_msh msh, t_list *aux_lst);
 
 void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
