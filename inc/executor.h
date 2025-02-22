@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/22 12:53:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:21:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define R "\033[31m"
 # define Y "\033[33m"
 # define RE "\033[0m"
+
+# define unlock 1
+# define lock 0
 
 # include <fcntl.h>
 # include <stdio.h>
