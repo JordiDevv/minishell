@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/22 17:48:36 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:16:00 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int     ex_exit(int n);
 
 int     open_file(char *file, char redirection);
 int     **prepare_pipes(t_list *lst);
-int     redirect(int input, int output, int *fds);
+int     redirect(int input, int output, t_data *data);
 int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);
 
 void    ex_loop(t_msh msh, t_data *data);

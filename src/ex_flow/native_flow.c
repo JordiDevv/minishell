@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/22 18:01:55 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:16:53 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,6 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 	}
 	printf(Y "%s: command not found\n" RE, cmd->split[0]);
 }
-
-/*static bool only_one_cmd(t_msh *msh, int n_cmd)
-{
-    t_cmd   *aux;
-
-    aux = (t_cmd *) msh->lst->content;
-    if (n_cmd == 1 && !(msh->lst->next) && !(aux->output) && !(aux->input))
-        return (1);
-    return (0);
-}*/
 
 void ex_native(t_data *data, t_msh msh, t_cmd *cmd)
 {
