@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/03 13:15:51 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/12 23:11:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int    redirect(int input, int output, t_data *data)
         printf(R "No pipe was received in a redirection.\n" RE);
         return (-1);
     }
+    //Creo que aquí iría el open_file y la redirección a ficheros
     if (input)
     {
         dup2(data->pipe_fds[data->pipe_index][0], STDIN_FILENO);
