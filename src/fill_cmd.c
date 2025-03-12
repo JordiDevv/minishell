@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:09:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/31 13:32:49 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/03/10 23:40:44 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,20 @@ space or > outside "" or '' marks. Returns new position in str.*/
 
 int	ft_redir_in(char **str, t_cmd *cmd, int i)
 {
-	cmd->input = (*str) + i + 1;
+	i++;
+	if ((*str)[i] && (*str)[i] == '<')
+	{
+		i++;
+		while ((*str)[i] && (*str)[i] == ' ')
+			i++;
+		cmd->del = (*str) + i;
+	}
+	else
+	{
+		while ((*str)[i] && (*str)[i] == ' ')
+			i++;
+		cmd->input = (*str) + i;
+	}
 	while ((*str)[i] && (*str)[i] != ' ' && (*str)[i] != '>')
 	{
 		i += ft_markfind(&((*str)[i]));
@@ -86,9 +99,7 @@ int	ft_redir_in(char **str, t_cmd *cmd, int i)
 	}
 	if ((*str)[i] && (*str)[i] != '>')
 		(*str)[i] = '<';
-	if (cmd->input && cmd->input[0] == '<')
-		cmd->del = &((cmd->input)[1]);
-	return (i - 1);
+	return (i);
 }
 
 /*Recieves pointer to str the position of ">" char within str and
@@ -97,7 +108,20 @@ space or < outside "" or '' marks. Returns new position in str.*/
 
 int	ft_redir_out(char **str, t_cmd *cmd, int i)
 {
-	cmd->output = (*str) + i + 1;
+	i++;
+	if ((*str)[i] && (*str)[i] == '>')
+	{
+		i++;
+		while ((*str)[i] && (*str)[i] == ' ')
+			i++;
+		cmd->append = (*str) + i;
+	}
+	else
+	{
+		while ((*str)[i] && (*str)[i] == ' ')
+			i++;
+		cmd->output = (*str) + i;
+	}
 	while ((*str)[i] && (*str)[i] != ' ' && (*str)[i] != '<')
 	{
 		i += ft_markfind(&((*str)[i]));
@@ -105,7 +129,5 @@ int	ft_redir_out(char **str, t_cmd *cmd, int i)
 	}
 	if ((*str)[i] && (*str)[i] != '<')
 		(*str)[i] = '>';
-	if (cmd->output && cmd->output[0] == '>')
-		cmd->append = &((cmd->output)[1]);
-	return (i - 1);
+	return (i);
 }
