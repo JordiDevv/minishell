@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:50:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/22 12:36:23 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/10 01:30:47 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int	open_file(char *file, char redirection)
 	int	fd;
 
 	fd = -1;
-	if (access(file, F_OK))
+	if (access(file, F_OK) && redirection == '<')
 	{
 		printf(Y "-bash: %s: %s\n" RE, file, strerror(errno));
 		return (-1);
 	}
 	else
 	{
-		if (redirection == '>')
+		if (redirection == '<')
 			fd = open(file, O_RDONLY);
-		else if (redirection == '<')
+		else if (redirection == '>')
 			fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	}
 	if (fd < 0)

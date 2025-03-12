@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/03/03 13:17:33 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/10 01:39:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
+	ft_print_list(msh);
 	data->pipe_fds = prepare_pipes(msh->lst);
 	data->pipe_index = 0;
 	// if (((t_cmd *) msh->lst->content)->input)
