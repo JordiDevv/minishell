@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/10 01:37:31 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:52:12 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int **prepare_pipes(t_list *lst)
     int n_pipes;
 
     n_pipes = count_pipes(lst);
-    printf("%i\n", n_pipes);
-    exit(EXIT_SUCCESS);
     if (n_pipes == 0)
         return (NULL);
     pipe_fds = malloc(sizeof(int *) * (n_pipes + 1));
