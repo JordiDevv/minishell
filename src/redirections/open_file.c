@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:50:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/12 23:01:19 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/23 13:00:05 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void open_file(t_data *data, t_cmd *cmd)
 {
-	if (access(cmd->input, F_OK) && cmd->input == '<')
+	if (cmd->input && access(cmd->input, F_OK))
 	{
 		printf(Y "-bash: %s: %s\n" RE, cmd->input, strerror(errno));
-		return (-1);
+		//Error
 	}
 	else
 	{
@@ -34,6 +34,6 @@ void open_file(t_data *data, t_cmd *cmd)
 		|| (data->fd_output && data->fd_output < 0))
 	{
 		perror(R "Error opening, or creating, one redirection file\n" RE);
-		return (-1);
+		//Error
 	}
 }

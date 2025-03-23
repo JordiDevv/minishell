@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/03/12 19:53:22 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/23 20:54:36 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,10 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	msh->lst = ft_proc_str(msh->str, msh);
 	data->pipe_fds = prepare_pipes(msh->lst);
 	data->pipe_index = 0;
+	data->fd_input = 0;
+	data->fd_output = 0;
+	data->fd_stdin = 0;
+	data->fd_stdout = 0;
 	if (((t_cmd *) msh->lst->content)->input)
 		data->doors->input_door = unlock;
 	else
