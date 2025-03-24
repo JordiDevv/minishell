@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/23 21:51:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:30:40 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void ex_loop(t_msh msh, t_data *data)
             ex_native(data, msh, cmd);
         data->doors->input_door = unlock;
         aux_lst = aux_lst->next;
+        if (data->fd_input)
+            close(data->fd_input);
+        if (data->fd_output)
+            close(data->fd_output);
     }
 }
 

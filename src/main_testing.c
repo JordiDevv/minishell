@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/03/23 20:54:36 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:14:30 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,7 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	data->fd_output = 0;
 	data->fd_stdin = 0;
 	data->fd_stdout = 0;
-	if (((t_cmd *) msh->lst->content)->input)
-		data->doors->input_door = unlock;
-	else
-		data->doors->input_door = lock;
+	data->doors->input_door = lock;
 	data->doors->output_door = lock;
 }
 
