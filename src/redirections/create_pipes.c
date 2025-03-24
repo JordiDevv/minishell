@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/12 19:52:12 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:04:28 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,11 @@ static int count_pipes(t_list *lst)
     int n;
 
     n = 0;
-    if (((t_cmd *) (lst->content))->input)
-		n++;
     while (lst->next)
     {
         lst = lst->next;
         n++;
     }
-	if (((t_cmd *) (lst->content))->output)
-		n++;
     return (n);
 }
 

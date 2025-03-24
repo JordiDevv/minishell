@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/23 21:53:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/24 13:02:35 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,13 @@ void file_redirection(t_data *data, t_cmd *cmd)
         data->fd_stdin = dup(STDIN_FILENO);
         dup2(data->fd_input, STDIN_FILENO);
         close(data->fd_input);
-        close(data->pipe_fds[data->pipe_index][0]);
     }
     else if (cmd->output || cmd->append)
     {
+        data->doors->output_door = unlock;
         data->fd_stdout = dup(STDOUT_FILENO);
         dup2(data->fd_stdout, STDOUT_FILENO);
         close(data->fd_stdout);
-        close(data->pipe_fds[data->pipe_index][1]);
     }
     //else if (cmd->del)
     data->doors->input_door = lock;
