@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/24 13:22:12 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/03/28 02:40:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,29 @@ int    redirect(int input, int output, t_data *data)
     return (0);
 }
 
+static void	input_heredoc(t_data* data, t_cmd *cmd)
+{
+	char	*line;
+
+	while (1)
+	{
+		write(1, "> ", 2);
+		line = ft_get_next_line(0);
+		if (!ft_strncmp(line, cmd->del, ft_strlen(cmd->del)))
+			break ;
+		write(data->pipe_fds[0][1], line, ft_strlen(line));
+		free(line);
+	}
+	if (line)
+		free(line);
+	close(data->pipe_fds[0][1]);
+    data->fd_stdin = dup(STDIN_FILENO);
+	dup2(data->pipe_fds[0][0], STDIN_FILENO);
+	close(data->pipe_fds[0][0]);
+    data->fd_stdout = dup(STDOUT_FILENO);
+    dup2(data->pipe_fds[1][1], STDOUT_FILENO);
+}
+
 void file_redirection(t_data *data, t_cmd *cmd)
 {
     open_file(data, cmd);
@@ -52,5 +75,6 @@ void file_redirection(t_data *data, t_cmd *cmd)
         dup2(data->fd_output, STDOUT_FILENO);
         close(data->fd_output);
     }
-    //else if (cmd->del)
+    else if (cmd->del)
+        input_heredoc(data, cmd);
 }
