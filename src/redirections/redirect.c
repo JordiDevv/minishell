@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/03 18:38:36 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:18:05 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	input_heredoc(t_data* data, t_cmd *cmd)
     data->fd_stdin = dup(STDIN_FILENO);
 	dup2(data->pipe_fds[0][0], STDIN_FILENO);
 	close(data->pipe_fds[0][0]);
+    data->pipe_index++;
 }
 
 void file_redirection(t_data *data, t_cmd *cmd)

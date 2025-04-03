@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/03 15:05:12 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:43:00 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ void ex_loop(t_msh msh, t_data *data)
     }
 }
 
+void end_process(t_data *data)
+{
+    if (data->pipe_fds && data->pipe_fds[data->pipe_index])
+        close(data->pipe_fds[data->pipe_index][1]);
+    if (data->fd_stdin)
+        dup2(data->fd_stdin, STDIN_FILENO);
+    if (data->fd_stdout)
+        dup2(data->fd_stdout, STDOUT_FILENO);
+    if (data->doors->input_door)
+        data->pipe_index++;
+}
+
 int execute_cmd(t_data *data, t_msh msh, char **split_cmd)
 {
     pid_t   pid;
@@ -52,21 +64,12 @@ int execute_cmd(t_data *data, t_msh msh, char **split_cmd)
     }
     if (pid == 0)
     {
-        if (data->pipe_fds)
+        if (data->pipe_fds && (data->doors->input_door 
+                || data->doors->output_door))
             redirect(data->doors->input_door, data->doors->output_door, data);
         if (execve(data->full_rute, split_cmd, msh.env) == -1)
             return (-1);
     }
     else
-    {
-        write(1, ft_itoa(data->pipe_index), 1);
-        if (data->pipe_fds && !((t_cmd *)msh.lst->content)->del)
-            close(data->pipe_fds[data->pipe_index][1]);
-        if (data->fd_stdin)
-            dup2(data->fd_stdin, STDIN_FILENO);
-        if (data->fd_stdout)
-            dup2(data->fd_stdout, STDOUT_FILENO);
-        if (data->doors->input_door)
-            data->pipe_index++;
-    }
+        end_process(data);
 }

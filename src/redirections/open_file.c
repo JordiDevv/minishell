@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:50:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/24 13:52:01 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/04 00:19:22 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void open_file(t_data *data, t_cmd *cmd)
 	{
 		if (cmd->input)
 			data->fd_input = open(cmd->input, O_RDONLY);
-		else if (cmd->output)
+		if (cmd->output)
 			data->fd_output = open(cmd->output, O_WRONLY | O_CREAT
 									| O_TRUNC, S_IRUSR | S_IWUSR);
 		else if (cmd->append)
