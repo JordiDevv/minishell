@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/28 02:16:52 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:05:12 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int execute_cmd(t_data *data, t_msh msh, char **split_cmd)
     }
     else
     {
-        if (data->pipe_fds)
+        write(1, ft_itoa(data->pipe_index), 1);
+        if (data->pipe_fds && !((t_cmd *)msh.lst->content)->del)
             close(data->pipe_fds[data->pipe_index][1]);
         if (data->fd_stdin)
             dup2(data->fd_stdin, STDIN_FILENO);
