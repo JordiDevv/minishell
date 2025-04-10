@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/08 12:58:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:36:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		init_dynamic_data(&msh, &data);
-		ex_loop(msh, &data);
+		ex_loop(msh, &data, envp);
 		free(msh.str);
 		if (msh.input == NULL)
 			break ;

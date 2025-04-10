@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/03/23 20:47:03 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:42:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int     redirect(int input, int output, t_data *data);
 void    file_redirection(t_data *data, t_cmd *cmd);
 int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);
 
-void    ex_loop(t_msh msh, t_data *data);
-void    ex_built();
+void    ex_loop(t_msh msh, t_data *data, char **envp);
+void    ex_built(t_cmd *cmd, char **envp);
 void    ex_native(t_data *program_data, t_msh msh, t_cmd *cmd);
 
 void	get_path(t_data *data, t_msh *msh);

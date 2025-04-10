@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/08 12:58:03 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/10 15:42:32 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-void ex_loop(t_msh msh, t_data *data)
+void ex_loop(t_msh msh, t_data *data, char **envp)
 {
     t_list  *aux_lst;
     t_cmd   *cmd;
@@ -28,7 +28,7 @@ void ex_loop(t_msh msh, t_data *data)
         if (cmd->input || cmd->output || cmd->del || cmd->append)
             file_redirection(data, cmd);
         if (cmd->built)
-            ex_built();
+            ex_built(cmd, envp);
         else
             ex_native(data, msh, cmd);
         data->doors->input_door = unlock;
