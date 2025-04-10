@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/10 15:42:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:38:45 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void ex_loop(t_msh msh, t_data *data, char **envp)
         if (cmd->input || cmd->output || cmd->del || cmd->append)
             file_redirection(data, cmd);
         if (cmd->built)
-            ex_built(cmd, envp);
+            ex_built(cmd, data, envp);
         else
             ex_native(data, msh, cmd);
         data->doors->input_door = unlock;

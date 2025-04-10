@@ -6,18 +6,21 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/10 16:02:35 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:40:43 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-void ex_built(t_cmd *cmd, char **envp)
+void ex_built(t_cmd *cmd, t_data *data, char **envp)
 {
+    if (data->pipe_fds && (data->doors->input_door 
+            || data->doors->output_door))
+        redirect(data->doors->input_door, data->doors->output_door, data);
     if (!ft_strncmp(cmd->built, "pwd", ft_strlen(cmd->built)))
         ex_pwd(envp);
     else if(!ft_strncmp(cmd->built, "echo", ft_strlen(cmd->built)))
-        printf("built\n");
+        ex_echo("Texto de prueba\n");
     else if(!ft_strncmp(cmd->built, "cd", ft_strlen(cmd->built)))
         printf("built\n");
     else if(!ft_strncmp(cmd->built, "export", ft_strlen(cmd->built)))
@@ -30,4 +33,5 @@ void ex_built(t_cmd *cmd, char **envp)
         printf("built\n");
     else
         printf("built\n");
+    end_process(data);
 }
