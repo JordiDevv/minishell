@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/11 14:04:38 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:26:01 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@ int	main(int argc, char **argv, char **envp)
 	init_minishell(&data, &msh, envp);
 	while (1)
 	{
-		ft_print_list(&msh);
 		init_dynamic_data(&msh, &data);
+		//ft_print_list(&msh);
 		ex_loop(msh, &data, envp);
 		free(msh.str);
 		if (msh.input == NULL)
