@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/17 18:16:47 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/17 21:38:18 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	ex_echo(t_cmd *cmd)
 	}
 	while (cmd->split[i])
 	{
-		printf("%s", cmd->split[i]);
+		write(1, cmd->split[i], ft_strlen(cmd->split[i]));
 		if (cmd->split[i + 1])
-			printf(" ");
+			write(1, " ", 1);
 		i++;
 	}
 	if (has_newline)
-		printf("\n");
+		write(1, "\n", 1);
 }
