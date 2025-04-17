@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/10 16:41:58 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:15:05 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef	struct	s_data
 }	t_data;
 
 void	ex_pwd(char **envp);
-void	ex_echo(char *txt);
+void	ex_echo(t_cmd *cmd);
 int     ex_exit(int n);
 
 void    open_file(t_data *data, t_cmd *cmd);
