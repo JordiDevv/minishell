@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/17 21:41:52 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/18 13:05:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	data->fd_output = 0;
 	data->fd_stdin = 0;
 	data->fd_stdout = 0;
+	data->exit_code = 0;
+	data->should_exit = 0;
 	data->doors->input_door = lock;
 	data->doors->output_door = lock;
 }
@@ -139,11 +141,11 @@ int	main(int argc, char **argv, char **envp)
 		//ft_print_list(&msh);
 		ex_loop(msh, &data, envp);
 		free(msh.str);
-		if (msh.input == NULL)
+		if (msh.input == NULL || data.should_exit)
 			break ;
 	}
 	ft_free_env(msh.env);
-	return (0);
+	return (data.exit_code);
 }
 
 //Reservamos memoria para data->doors
