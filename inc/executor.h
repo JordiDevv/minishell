@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/18 13:04:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:30:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <string.h>
 # include <stdarg.h>
 # include <stdbool.h>
+# include <limits.h>
 # include "parser.h"
 
 typedef struct  s_doors
@@ -51,13 +52,13 @@ typedef	struct	s_data
     int     fd_output;
     int     fd_stdin;
     int     fd_stdout;
-    int     exit_code;
+    long    exit_code;
     int     should_exit;
 }	t_data;
 
 void	ex_pwd(char **envp);
 void	ex_echo(t_cmd *cmd);
-void    ex_exit(t_data *data);
+void    ex_exit(t_data *data, t_cmd *cmd);
 
 void    open_file(t_data *data, t_cmd *cmd);
 int     **prepare_pipes(t_list *lst);

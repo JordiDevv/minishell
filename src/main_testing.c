@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/18 13:05:10 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:32:00 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,8 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 	}
 	ft_free_env(msh.env);
-	return (data.exit_code);
+	printf("%li", data.exit_code);
+	return ((int)data.exit_code);
 }
 
 //Reservamos memoria para data->doors
