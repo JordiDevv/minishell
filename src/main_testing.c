@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/19 23:09:27 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:35:59 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,9 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	msh->input = readline(msh->prompt);
 	if (!msh->input)
 		return (1);
-	if (msh->input)
-		add_history(msh->input);
+	if (*(msh->input) == '\0')
+		return (2);
+	add_history(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
@@ -152,13 +153,16 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (g_signal == SIGINT)
 			printf("ctrl + c caught");
-		if (init_dynamic_data(&msh, &data))
+		if (init_dynamic_data(&msh, &data) == 1)
 			break ;
 		//ft_print_list(&msh);
-		ex_loop(msh, &data, envp);
-		free(msh.str);
-		if (msh.input == NULL || data.should_exit)
-			break ;
+		if (init_dynamic_data == 0)
+		{
+			ex_loop(msh, &data, envp);
+			free(msh.str);
+		}
+		/*if (msh.input == NULL || data.should_exit)
+			break ;*/
 	}
 	ft_free_env(msh.env);
 	printf("%li", data.exit_code);
