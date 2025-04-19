@@ -6,14 +6,14 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/17 21:38:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:53:46 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-void	ex_echo(t_cmd *cmd)
+int	ex_echo(t_cmd *cmd)
 {
 	bool	has_newline;
 	int		i;
@@ -39,4 +39,5 @@ void	ex_echo(t_cmd *cmd)
 	}
 	if (has_newline)
 		write(1, "\n", 1);
+	return (0);
 }

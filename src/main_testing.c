@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/18 20:32:00 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:53:00 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 	msh->env = ft_env_parser(envp);
 	get_path(data, msh);
 	data->doors = malloc(sizeof(t_doors));
+	data->exit_code = 0;
 }
 
 static void	init_dynamic_data(t_msh *msh, t_data *data)
@@ -122,7 +123,6 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	data->fd_output = 0;
 	data->fd_stdin = 0;
 	data->fd_stdout = 0;
-	data->exit_code = 0;
 	data->should_exit = 0;
 	data->doors->input_door = lock;
 	data->doors->output_door = lock;

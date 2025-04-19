@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/18 17:57:43 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:03:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void ex_built(t_cmd *cmd, t_data *data, char **envp)
             || data->doors->output_door))
         redirect(data->doors->input_door, data->doors->output_door, data);
     if (!ft_strncmp(cmd->built, "pwd", ft_strlen(cmd->built)))
-        ex_pwd(envp);
+        data->exit_code = ex_pwd(envp);
     else if(!ft_strncmp(cmd->built, "echo", ft_strlen(cmd->built)))
-        ex_echo(cmd);
+        data->exit_code = ex_echo(cmd);
     else if(!ft_strncmp(cmd->built, "cd", ft_strlen(cmd->built)))
         printf("built\n");
     else if(!ft_strncmp(cmd->built, "export", ft_strlen(cmd->built)))
