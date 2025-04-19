@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/03 13:36:20 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 18:04:18 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 
 void ex_native(t_data *data, t_msh msh, t_cmd *cmd)
 {
-    data->full_rute = valid_cmd(cmd, data);
+	data->full_rute = valid_cmd(cmd, data);
     execute_cmd(data, msh, cmd->split);
-    wait(NULL);
+    data->exit_code = wait_childs();
 }

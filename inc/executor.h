@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/19 11:51:37 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:44:22 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ typedef	struct	s_data
     int     should_exit;
 }	t_data;
 
-int	ex_pwd(char **envp);
-int	ex_echo(t_cmd *cmd);
-int ex_exit(t_data *data, t_cmd *cmd);
+int     ex_pwd(char **envp);
+int     ex_echo(t_cmd *cmd);
+void    ex_exit(t_data *data, t_cmd *cmd);
 
 void    open_file(t_data *data, t_cmd *cmd);
 int     **prepare_pipes(t_list *lst);
@@ -73,5 +73,6 @@ void    ex_native(t_data *program_data, t_msh msh, t_cmd *cmd);
 
 void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
+int     wait_childs();
 
 #endif
