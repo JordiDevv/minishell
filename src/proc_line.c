@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/30 13:44:30 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/02/15 22:26:12 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 		i++;
 	}
 	ft_ptend(&str);
-	cmd->split = ft_split(cmd->full, ' ');
+	cmd->split = ft_split_adv(cmd->full, ' ');
 }
 
 /*Funcion recieves first node and substring "str", 
@@ -66,6 +66,7 @@ t_list	*ft_new_node(char *str, t_list *first, t_msh *msh)
 	cmd->full = NULL;
 	cmd->split = NULL;
 	cmd->del = NULL;
+	cmd->append = NULL;
 	ft_cmd_fill(str, cmd);
 	node->content = (void *) cmd;
 	node->next = NULL;
