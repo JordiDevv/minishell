@@ -6,12 +6,14 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/19 22:13:56 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:09:27 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 #include "../inc/executor.h"
+
+volatile sig_atomic_t	g_signal = 0;
 
 static void	ft_print_list(t_msh *msh)
 {
@@ -101,6 +103,11 @@ char	*ft_prompt(char **env)
 	return (str);
 }
 
+void	ft_handler(int signum)
+{
+	g_signal = signum;
+}
+
 static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 {
 	ft_draw();
@@ -110,10 +117,12 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 	data->exit_code = 0;
 }
 
-static void	init_dynamic_data(t_msh *msh, t_data *data)
+static int	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
 	msh->input = readline(msh->prompt);
+	if (!msh->input)
+		return (1);
 	if (msh->input)
 		add_history(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
@@ -128,6 +137,7 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	data->should_exit = 0;
 	data->doors->input_door = lock;
 	data->doors->output_door = lock;
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -137,9 +147,13 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 
 	init_minishell(&data, &msh, envp);
+	signal(SIGINT, ft_handler);
 	while (1)
 	{
-		init_dynamic_data(&msh, &data);
+		if (g_signal == SIGINT)
+			printf("ctrl + c caught");
+		if (init_dynamic_data(&msh, &data))
+			break ;
 		//ft_print_list(&msh);
 		ex_loop(msh, &data, envp);
 		free(msh.str);
