@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/19 11:53:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 14:17:20 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ex_echo(t_cmd *cmd)
 
 	if (!cmd)
 	{
-		printf(Y "Error: problem executing echo" RE);
-		return ;
+		write(2, "Error: problem executing echo", 30);
+		return (1);
 	}
 	i = 1;
 	has_newline = true;
