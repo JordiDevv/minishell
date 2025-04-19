@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   home_exp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:35:14 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/12 13:41:55 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/01/15 11:14:07 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft/inc/libft.h"
 #include "../inc/parser.h"
 
 /*Receives str with marker pointing to ~ sign (i). 

@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/15 22:13:23 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:33:35 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
 # include "libft/inc/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <fcntl.h>
+# include <stdbool.h>
 
 typedef struct s_cmd
 {
@@ -32,6 +35,9 @@ typedef struct s_cmd
 typedef struct s_msh
 {
 	char	**env;
+	char	*input;
+	char	*str;
+	char	*prompt;
 	t_list	*lst;
 }		t_msh;
 
