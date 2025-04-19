@@ -6,14 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:36:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/19 01:14:59 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:47:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-//Faltan señales y el código del último comando por defecto: $?
 static long	ft_atol_safe(const char *str, bool *long_range)
 {
 	int	    sign;

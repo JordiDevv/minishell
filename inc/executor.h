@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/19 14:17:49 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 17:44:22 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void    ex_native(t_data *program_data, t_msh msh, t_cmd *cmd);
 
 void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
+int     wait_childs();
 
 #endif
