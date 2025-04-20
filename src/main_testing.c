@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 11:55:48 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/20 12:45:23 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,16 +147,23 @@ int	main(int argc, char **argv, char **envp)
 	{
 		parse_result = init_dynamic_data(&msh, &data);
 		if (parse_result == 1 || data.should_exit)
+		{
+			free(msh.prompt);
 			break ;
+		}
 		//ft_print_list(&msh);
 		if (parse_result == 0)
 		{
 			ex_loop(msh, &data, envp);
 			free(msh.str);
 		}
+		free(msh.prompt);
 	}
 	ft_free_env(msh.env);
-	printf("%li", data.exit_code);
+	free(msh.input);
+	free(data.doors);
+	ft_free_nodes(msh.lst);
+	printf("%li\n", data.exit_code);
 	return ((int)data.exit_code);
 }
 

@@ -6,30 +6,13 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/19 23:17:46 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/20 12:43:55 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "../inc/parser.h"
-
-/*frees environment*/
-int	ft_free_env(char **env)
-{
-	int	i;
-
-	if (!env)
-		return (-1);
-	i = 0;
-	while (env[i])
-	{
-		free(env[i]);
-		i++;
-	}
-	free (env);
-	return (0);
-}
 
 /*Function receives environment variables and variable to find
 if found, it returns a pointer to its value. if not found, returns NULL*/

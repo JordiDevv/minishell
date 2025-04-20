@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 11:16:12 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/20 12:44:25 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ int			ft_redir_out(char **str, t_cmd *cmd, int i);
 int			ft_markfind(char *str);
 char		**ft_split_adv(const char *s, const char c);
 void		ft_signal(void);
+void		ft_free_nodes(t_list *lst);
 #endif
