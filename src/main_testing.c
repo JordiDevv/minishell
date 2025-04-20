@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_testing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 11:55:48 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/20 19:00:49 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,23 +139,21 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*aux_lst;
 	t_msh	msh;
 	t_data	data;
-	int		parse_result;
 
 	init_minishell(&data, &msh, envp);
 	ft_signal();
 	while (1)
 	{
-		parse_result = init_dynamic_data(&msh, &data);
-		if (parse_result == 1 || data.should_exit)
+		if (init_dynamic_data(&msh, &data) == 1)
 			break ;
 		//ft_print_list(&msh);
-		if (parse_result == 0)
-		{
-			ex_loop(msh, &data, envp);
-			free(msh.str);
-		}
+		ex_loop(msh, &data, envp);
+		free(msh.str);
+		if (data.should_exit)
+			break ;
 	}
 	ft_free_env(msh.env);
+	write(1, "exit\n", 5);
 	printf("%li", data.exit_code);
 	return ((int)data.exit_code);
 }
