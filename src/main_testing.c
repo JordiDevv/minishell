@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/19 11:53:00 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/20 19:22:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,15 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 	data->exit_code = 0;
 }
 
-static void	init_dynamic_data(t_msh *msh, t_data *data)
+static int	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
 	msh->input = readline(msh->prompt);
+	if (!msh->input)
+		return (1);
+	if (*(msh->input) == '\0')
+		return (2);
+	add_history(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
@@ -126,6 +131,7 @@ static void	init_dynamic_data(t_msh *msh, t_data *data)
 	data->should_exit = 0;
 	data->doors->input_door = lock;
 	data->doors->output_door = lock;
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -133,18 +139,26 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*aux_lst;
 	t_msh	msh;
 	t_data	data;
+	int		parse_flag;
 
 	init_minishell(&data, &msh, envp);
+	ft_signal();
 	while (1)
 	{
-		init_dynamic_data(&msh, &data);
+		parse_flag = init_dynamic_data(&msh, &data);
+		if (parse_flag == 1)
+			break ;
 		//ft_print_list(&msh);
-		ex_loop(msh, &data, envp);
-		free(msh.str);
-		if (msh.input == NULL || data.should_exit)
+		else if (!parse_flag)
+		{
+			ex_loop(msh, &data, envp);
+			free(msh.str);
+		}
+		if (data.should_exit)
 			break ;
 	}
 	ft_free_env(msh.env);
+	write(1, "exit\n", 5);
 	printf("%li", data.exit_code);
 	return ((int)data.exit_code);
 }
