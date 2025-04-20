@@ -6,14 +6,12 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/19 23:35:59 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/20 11:55:48 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
 #include "../inc/executor.h"
-
-volatile sig_atomic_t	g_signal = 0;
 
 static void	ft_print_list(t_msh *msh)
 {
@@ -103,11 +101,6 @@ char	*ft_prompt(char **env)
 	return (str);
 }
 
-void	ft_handler(int signum)
-{
-	g_signal = signum;
-}
-
 static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 {
 	ft_draw();
@@ -146,23 +139,21 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*aux_lst;
 	t_msh	msh;
 	t_data	data;
+	int		parse_result;
 
 	init_minishell(&data, &msh, envp);
-	signal(SIGINT, ft_handler);
+	ft_signal();
 	while (1)
 	{
-		if (g_signal == SIGINT)
-			printf("ctrl + c caught");
-		if (init_dynamic_data(&msh, &data) == 1)
+		parse_result = init_dynamic_data(&msh, &data);
+		if (parse_result == 1 || data.should_exit)
 			break ;
 		//ft_print_list(&msh);
-		if (init_dynamic_data == 0)
+		if (parse_result == 0)
 		{
 			ex_loop(msh, &data, envp);
 			free(msh.str);
 		}
-		/*if (msh.input == NULL || data.should_exit)
-			break ;*/
 	}
 	ft_free_env(msh.env);
 	printf("%li", data.exit_code);
