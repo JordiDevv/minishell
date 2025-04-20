@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 19:09:12 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/20 19:16:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	if (!msh->input)
 		return (1);
 	if (*(msh->input) == '\0')
-		return (0);
+		return (2);
 	add_history(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
@@ -147,8 +147,11 @@ int	main(int argc, char **argv, char **envp)
 		if (init_dynamic_data(&msh, &data) == 1)
 			break ;
 		//ft_print_list(&msh);
-		ex_loop(msh, &data, envp);
-		free(msh.str);
+		else if (!init_dynamic_data(&msh, &data))
+		{
+			ex_loop(msh, &data, envp);
+			free(msh.str);
+		}
 		if (data.should_exit)
 			break ;
 	}
