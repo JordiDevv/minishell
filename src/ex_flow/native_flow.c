@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 13:15:57 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:20:08 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 	}
 	else
 		data->exit_code = 127;
+	if (data->full_rute)
+		free(data->full_rute);
 	end_process(data);
 }
