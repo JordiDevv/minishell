@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:45:33 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 22:21:22 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/22 00:29:34 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int  valid_var(char *var)
     i = 0;
     while (var[i])
     {
-        if (var[i] != '_' || !ft_isalnum(var[i])
+        if (var[i] != '_' && !ft_isalnum(var[i])
             || (ft_isdigit(var[i]) && i == 0))
         {
             write(2, "bash: export: `", 15);
@@ -73,6 +73,13 @@ int ex_export(t_msh *msh, t_data *data, t_cmd *cmd)
 
     //Deberíamos utilizar esa función para modificar envp y añadir al final la nueva variable
 
-    /*En data deberíamos agregar una nueva matriz que almacene las variables exportadas en formato
-    "declare -x MYVAR=value". Solo pueden empezar por letras o guiones bajos*/
+    /*Muestra export si solo se ejecuta el comando y valida si un formato es bueno.
+    ahora falta que compruebe si la variable existe en el entorno, y si existe que la modifique,
+    y si no existe que la cree*/
+
+    /*Solo se modifica si el formato es MYVAR=value, MYVAR la crea si no existe y MYVAR=value,
+    en caso de no existir, la crea y le asigna ese valor*/
+
+    /*Si haces export MYVAR, el formato con el que se verá después será: MYVAR=. Así se debe
+    guardar, el manejo del valor vacío es cosa del parser*/
 }

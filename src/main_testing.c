@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 22:21:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/22 00:01:28 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int	main(int argc, char **argv, char **envp)
 		if (data.should_exit || msh.parse_flag == 1)
 			break ;
 	}
-	ft_free_all(&data, &msh);
+	//ft_free_all(&data, &msh);
 	write(1, "exit\n", 5);
 	printf("%li", data.exit_code);
 	return ((int)data.exit_code);

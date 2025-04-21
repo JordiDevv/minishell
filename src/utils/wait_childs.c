@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:42:37 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 00:57:28 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 23:41:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	wait_childs()
 
 	wait(&status);
 	if (WIFEXITED(status))
-		return WEXITSTATUS(status);
+		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
-		return 128 + WTERMSIG(status);
+		return (128 + WTERMSIG(status));
 	return (1);
 }
