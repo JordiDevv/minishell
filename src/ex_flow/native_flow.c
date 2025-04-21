@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 16:00:27 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 18:59:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
     char    *full_rute;
 
 	i = 0;
-	while (data->split_path[i])
+	while (data->split_path[i] && cmd->split)
 	{
         full_rute = NULL;
 		full_rute = strmcat(3, 0, data->split_path[i], "/", cmd->split[0]);
@@ -33,8 +33,11 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 		free(full_rute);
 		i++;
 	}
-	write(2, cmd->split[0], ft_strlen(cmd->split[0]));
-	write(2, ": command not found\n", 21);
+	if (cmd->split)
+	{
+		write(2, cmd->split[0], ft_strlen(cmd->split[0]));
+		write(2, ": command not found\n", 21);
+	}
 	return (NULL);
 }
 
