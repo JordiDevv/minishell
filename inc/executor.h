@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 02:17:55 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:41:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,25 @@ typedef	struct	s_data
     int     fd_stdout;
     long    exit_code;
     int     should_exit;
+    char    **exported_vars;
 }	t_data;
 
 int     ex_pwd(char **envp);
 int     ex_echo(t_cmd *cmd);
 void    ex_exit(t_data *data, t_cmd *cmd);
 int     ex_env(char **envp, t_cmd *cmd);
+int     ex_export(t_msh *msh, t_data *data);
 
 void    open_file(t_data *data, t_cmd *cmd);
 int     **prepare_pipes(t_list *lst);
 int     redirect(int input, int output, t_data *data);
 void    file_redirection(t_data *data, t_cmd *cmd);
-int     execute_cmd(t_data *data, t_msh msh, char **split_cmd);
+int     execute_cmd(t_data *data, t_msh *msh, char **split_cmd);
 void    end_process(t_data *data);
 
-void    ex_loop(t_msh msh, t_data *data, char **envp);
-void    ex_built(t_cmd *cmd, t_data *data, char **envp);
-void    ex_native(t_data *program_data, t_msh msh, t_cmd *cmd);
+void    ex_loop(t_msh *msh, t_data *data);
+void    ex_built(t_cmd *cmd, t_data *data, t_msh *msh);
+void    ex_native(t_data *program_data, t_msh *msh, t_cmd *cmd);
 
 void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
@@ -79,5 +81,6 @@ char    *ft_realloc(char *old_str, size_t size);
 char    **mat_realloc(char **old_mat, size_t size);
 void    free_mat(char **mat);
 int     mat_len(char **mat);
+void    matlcpy(char **dst, char **src, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/20 20:01:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:35:26 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 	return (NULL);
 }
 
-void ex_native(t_data *data, t_msh msh, t_cmd *cmd)
+void ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 {
 	data->full_rute = valid_cmd(cmd, data);
 	if (data->full_rute)

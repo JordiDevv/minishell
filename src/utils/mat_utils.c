@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 02:19:03 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 02:19:35 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:42:35 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,27 @@ void    free_mat(char **mat)
     free(mat);
 }
 
-static int reallocating_mat(char ***old_mat, char ***new_mat, int *i)
+void    matlcpy(char **dst, char **src, size_t size)
+{
+    size_t i;
+
+    i = 0;
+    while (src[i] && i < size)
+    {
+        dst[i] = malloc((ft_strlen(src[i]) + 1) * sizeof(char));
+        if (!dst[i])
+        {
+            free_mat(dst);
+            return ;
+        }
+        ft_strlcpy(dst[i], src[i], ft_strlen(src[i]) + 1);
+        i++;
+    }
+    if (size)
+        dst[i] = NULL;
+}
+
+static int reallocating_mat(char ***old_mat, char ***new_mat, size_t *i)
 {
     (*new_mat)[*i] = malloc((ft_strlen((*old_mat)[*i]) + 1) * sizeof(char));
     if (!(*new_mat)[*i])
