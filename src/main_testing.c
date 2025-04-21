@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_testing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 16:04:30 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:56:32 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	ft_free_all(&data, &msh);
 	write(1, "exit\n", 5);
-	printf("%li", data.exit_code);
+	printf("%i", g_exit_status);
 	return ((int)data.exit_code);
 }
 

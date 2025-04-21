@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 10:26:05 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:47:23 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <signal.h>
+
+extern volatile sig_atomic_t g_exit_status;
 
 typedef struct s_cmd
 {
