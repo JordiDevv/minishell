@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/19 17:44:22 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 10:27:12 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ void    ex_native(t_data *program_data, t_msh msh, t_cmd *cmd);
 void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
 int     wait_childs();
+
+void	ft_free_all(t_data *data, t_msh *msh);
 
 #endif

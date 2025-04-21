@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 12:44:25 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 10:26:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_msh
 	char	*str;
 	char	*prompt;
 	t_list	*lst;
+	int		parse_flag;
 }		t_msh;
 
 char		**ft_env_parser(char **envp);
@@ -62,4 +63,5 @@ int			ft_markfind(char *str);
 char		**ft_split_adv(const char *s, const char c);
 void		ft_signal(void);
 void		ft_free_nodes(t_list *lst);
+
 #endif
