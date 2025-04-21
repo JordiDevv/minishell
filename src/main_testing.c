@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 11:32:18 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:55:03 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			ex_loop(msh, &data, envp);
 			free(msh.str);
-			free (msh.prompt);
-			ft_free_nodes(msh.lst);
-			free (data.full_rute);
+			ft_free_ex(&data, &msh);
 		}
 		if (data.should_exit || msh.parse_flag == 1)
 			break ;

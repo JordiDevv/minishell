@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 10:27:12 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:38:54 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ char	*strmcat(int n, int i, ...);
 int     wait_childs();
 
 void	ft_free_all(t_data *data, t_msh *msh);
+void	ft_free_ex(t_data *data, t_msh *msh);
 
 #endif
