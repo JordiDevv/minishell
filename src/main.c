@@ -6,12 +6,12 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/31 15:30:15 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:11:24 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../libft/libft.h"
 // #include "../inc/parser.h"
+// #include "../inc/executor.h"
 
 // void	ft_print_list(t_msh *msh)
 // {
@@ -107,20 +107,31 @@
 // 	char	*str;
 // 	char	*prompt;
 // 	t_msh	msh;
+// 	t_cmd	*cmd;
+// 	t_list	*aux_lst;
+// 	int		n_cmd;
 
 // 	ft_draw();
 // 	msh.env = ft_env_parser(envp);
+// 	get_path(&msh);
+// 	n_cmd = 1;
 // 	while (1)
 // 	{
 // 		prompt = ft_prompt(msh.env);
 // 		input = readline(prompt);
-// 		printf("input = %s\n", input);
 // 		str = ft_expand_vars(msh.env, input);
-// 		printf("expanded str = %s\n", str);
 // 		str = ft_expand_home(msh.env, str);
-// 		printf("expanded home = %s\n", str);
 // 		msh.lst = ft_proc_str(str, &msh);
-// 		ft_print_list(&msh);
+// 		aux_lst = msh.lst;
+// 		while (aux_lst)
+// 		{
+// 			cmd = ((t_cmd *) aux_lst->content);
+// 			if (cmd->built)
+// 				ex_built();
+// 			else
+// 				ex_native(msh, cmd, n_cmd);
+// 			aux_lst = aux_lst->next;
+// 		}
 // 		free(str);
 // 		if (input == NULL)
 // 			break ;
