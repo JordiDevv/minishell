@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:33:37 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 14:38:29 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:49:31 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,34 @@ int	ft_free_env(char **env)
 	return (0);
 }
 
+void	ft_free_cmd_split(t_cmd *cmd)
+{
+	int		i;
+
+	i = 0;
+	if (!cmd->split)
+		return ;
+	while (cmd->split[i])
+	{
+		free(cmd->split[i]);
+		i++;
+	}
+	free(cmd->split);
+}
+
 /*frees nodes of commands*/
 void	ft_free_nodes(t_list *lst)
 {
 	t_list	*aux;
 	t_list	*aux2;
-	int		i;
 
 	if (!lst)
 		return ;
-	i = 0;
 	aux = lst;
 	while (aux)
 	{
 		aux2 = aux->next;
-		while (((t_cmd *) aux->content)->split[i])
-		{
-			free(((t_cmd *) aux->content)->split[i]);
-			i++;
-		}
-		free (((t_cmd *) aux->content)->split);
+		ft_free_cmd_split(((t_cmd *) aux->content));
 		free (aux->content);
 		free (aux);
 		aux = aux2;

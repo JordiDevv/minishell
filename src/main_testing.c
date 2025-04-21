@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 09:33:32 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:36:11 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,16 +146,13 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		parse_flag = init_dynamic_data(&msh, &data);
-		if (parse_flag == 1)
-			break ;
-		}
 		//ft_print_list(&msh);
-		else if (!parse_flag)
+		if (!parse_flag)
 		{
 			ex_loop(msh, &data, envp);
 			free(msh.str);
 		}
-		if (data.should_exit)
+		if (data.should_exit || parse_flag == 1)
 			break ;
 	}
 	ft_free_env(msh.env);
