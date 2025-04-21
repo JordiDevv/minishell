@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   native_flow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 12:31:04 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:15:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,20 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 		free(full_rute);
 		i++;
 	}
-	printf(Y "%s: command not found\n" RE, cmd->split[0]);
+	write(2, cmd->split[0], ft_strlen(cmd->split[0]));
+	write(2, ": command not found\n", 21);
 	return (NULL);
 }
 
-void ex_native(t_data *data, t_msh msh, t_cmd *cmd)
+void ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 {
 	data->full_rute = valid_cmd(cmd, data);
-    execute_cmd(data, msh, cmd->split);
-	free(data->full_rute);
-    data->exit_code = wait_childs();
+	if (data->full_rute)
+	{
+		execute_cmd(data, msh, cmd->split);
+		data->exit_code = wait_childs();
+	}
+	else
+		data->exit_code = 127;
+	end_process(data);
 }
