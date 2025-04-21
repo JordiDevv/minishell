@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 12:45:23 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 09:33:32 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,31 +139,28 @@ int	main(int argc, char **argv, char **envp)
 	t_list	*aux_lst;
 	t_msh	msh;
 	t_data	data;
-	int		parse_result;
+	int		parse_flag;
 
 	init_minishell(&data, &msh, envp);
 	ft_signal();
 	while (1)
 	{
-		parse_result = init_dynamic_data(&msh, &data);
-		if (parse_result == 1 || data.should_exit)
-		{
-			free(msh.prompt);
+		parse_flag = init_dynamic_data(&msh, &data);
+		if (parse_flag == 1)
 			break ;
 		}
 		//ft_print_list(&msh);
-		if (parse_result == 0)
+		else if (!parse_flag)
 		{
 			ex_loop(msh, &data, envp);
 			free(msh.str);
 		}
-		free(msh.prompt);
+		if (data.should_exit)
+			break ;
 	}
 	ft_free_env(msh.env);
-	free(msh.input);
-	free(data.doors);
-	ft_free_nodes(msh.lst);
-	printf("%li\n", data.exit_code);
+	write(1, "exit\n", 5);
+	printf("%li", data.exit_code);
 	return ((int)data.exit_code);
 }
 
