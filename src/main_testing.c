@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 11:55:03 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:28:43 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,16 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 static int	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
+	data->full_rute = NULL;
+	data->pipe_fds = NULL;
+	data->pipe_index = 0;
+	data->fd_input = 0;
+	data->fd_output = 0;
+	data->fd_stdin = 0;
+	data->fd_stdout = 0;
+	data->should_exit = 0;
+	data->doors->input_door = lock;
+	data->doors->output_door = lock;
 	msh->input = readline(msh->prompt);
 	if (!msh->input)
 		return (1);
@@ -123,14 +133,6 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str, msh);
 	data->pipe_fds = prepare_pipes(msh->lst);
-	data->pipe_index = 0;
-	data->fd_input = 0;
-	data->fd_output = 0;
-	data->fd_stdin = 0;
-	data->fd_stdout = 0;
-	data->should_exit = 0;
-	data->doors->input_door = lock;
-	data->doors->output_door = lock;
 	return (0);
 }
 
@@ -150,6 +152,7 @@ int	main(int argc, char **argv, char **envp)
 			ex_loop(msh, &data, envp);
 			free(msh.str);
 			ft_free_ex(&data, &msh);
+			ft_free_nodes(msh.lst);
 		}
 		if (data.should_exit || msh.parse_flag == 1)
 			break ;

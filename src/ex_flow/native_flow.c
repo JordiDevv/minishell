@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   native_flow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/19 18:04:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:05:34 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void ex_native(t_data *data, t_msh msh, t_cmd *cmd)
 {
 	data->full_rute = valid_cmd(cmd, data);
     execute_cmd(data, msh, cmd->split);
+	//free(data->full_rute);
     data->exit_code = wait_childs();
 }

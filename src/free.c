@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:33:37 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 11:56:51 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:26:57 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	ft_free_ex(t_data *data, t_msh *msh)
 	i = 0;
 	if (msh->prompt)
 		free (msh->prompt);
-	ft_free_nodes(msh->lst);
 	if (data->full_rute)
 		free (data->full_rute);
 	if (data->pipe_fds)
