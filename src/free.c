@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:33:37 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 12:35:16 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:55:10 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_free_nodes(t_list *lst)
 	{
 		aux2 = aux->next;
 		ft_free_matrix(((t_cmd *) aux->content)->split);
+		if (((t_cmd *) lst->content)->built)
+			free (((t_cmd *) lst->content)->built);
 		free (aux->content);
 		free (aux);
 		aux = aux2;
