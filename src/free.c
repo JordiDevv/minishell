@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:33:37 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 10:53:30 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:32:14 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ int	ft_free_env(char **env)
 	return (0);
 }
 
-void	ft_free_cmd_split(t_cmd *cmd)
+void	ft_free_matrix(char **matrix)
 {
 	int		i;
 
 	i = 0;
-	if (!cmd->split)
+	if (!matrix)
 		return ;
-	while (cmd->split[i])
+	while (matrix[i])
 	{
-		free(cmd->split[i]);
+		free(matrix[i]);
 		i++;
 	}
-	free(cmd->split);
+	free(matrix);
 }
 
 /*frees nodes of commands*/
@@ -58,7 +58,7 @@ void	ft_free_nodes(t_list *lst)
 	{
 		aux2 = aux->next;
 		
-		ft_free_cmd_split(((t_cmd *) aux->content));
+		ft_free_matrix(((t_cmd *) aux->content)->split);
 		free (aux->content);
 		free (aux);
 		aux = aux2;
