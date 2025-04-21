@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   home_exp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:35:14 by rhernand          #+#    #+#             */
-/*   Updated: 2025/01/15 11:14:07 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/19 23:18:01 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ char	*ft_expand_home(char **envp, char *str)
 	int		i;
 	int		m[2];
 
+	if (!str)
+		return (NULL);
+	if (str == "\0")
+		return (str);
 	i = 0;
 	m[0] = 0;
 	m[1] = 0;

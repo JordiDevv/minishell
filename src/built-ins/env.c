@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/31 17:24:07 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/04/19 23:45:59 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/04/20 00:00:21 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int    execute_cmd(int *pipe_fds, char *rute, char **split_cmd, char **envp)
+int ex_env(char **envp, t_cmd *cmd)
 {
-    pid_t   pid;
+    int i;
 
-    pid = fork();
-    if (pid < 0)
+    if (cmd->split[1])
     {
-        printf(R "Error forking for executing a comand.\n" RE);
-        return (-1);
+        write(2, "env: ‘", 9);
+        write(2, cmd->split[1], ft_strlen(cmd->split[1]));
+        write(2, "’: No such file or directory\n", 32);
+        return (127);
     }
-    if (pid == 0)
+    i = 0;
+    while (envp[i])
     {
-        if (pipe_fds)
-            redirect(1, 1, pipe_fds);
-        if (execve(rute, split_cmd, envp) == -1)
-            return (-1);
+        write(1, envp[i], ft_strlen(envp[i]));
+        write(1, "\n", 1);
+        i++;
     }
-    else
-    {
-        if (pipe_fds)
-            redirect(0, 0, pipe_fds);
-    }
+    return (0);
 }

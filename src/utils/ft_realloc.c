@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 14:18:51 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/04/21 00:58:05 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/04/21 02:19:26 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
-#include "../../inc/parser.h"
 
-int	ex_pwd(char **envp)
+char    *ft_realloc(char *old_str, size_t size)
 {
-	char	*pwd_value;
+    char    *new_str;
 
-	pwd_value = ft_find_var(envp, "PWD");
-	if (!pwd_value)
-	{
-		printf(Y "Error: pwd is corrupted\n" RE);
-		return (1);
-	}
-	printf("%s\n", pwd_value);
-	return (0);
+    if (!size)
+    {
+        free(old_str);
+        return (NULL);
+    }
+    new_str = malloc(size * sizeof(char));
+    if (!new_str)
+        return (NULL);
+    if (old_str)
+        ft_strlcpy(new_str, old_str, size);
+    free(old_str);
+    return (new_str);
 }

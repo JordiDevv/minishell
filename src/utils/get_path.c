@@ -6,14 +6,14 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:53:14 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/31 17:52:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:14:26 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-void	get_path(t_msh *msh)
+void	get_path(t_data *data, t_msh *msh)
 {
 	char	*path;
     int     i;
@@ -30,7 +30,8 @@ void	get_path(t_msh *msh)
 				perror(R "Error allocating path\n" RE);
 				//free_exit(program_data);
 			}
-			ft_strlcpy(path, msh->env[i] + 5, ft_strlen(msh->env[i]) - 4);
+			ft_strlcpy(path, msh->env[i] + 5, 
+				ft_strlen(msh->env[i]) - 4);
 		}
 	}
 	if (!path)
@@ -38,6 +39,6 @@ void	get_path(t_msh *msh)
 		printf(R "Error: Path wasn't found\n" RE);
 		//free_exit(msh);
 	}
-	msh->split_path = ft_split(path, ':');
+	data->split_path = ft_split(path, ':');
 	free(path);
 }

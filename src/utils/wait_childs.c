@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_pipe.c                                      :+:      :+:    :+:   */
+/*   wait_childs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/01/30 12:15:34 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/04/19 17:42:37 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/04/21 00:57:28 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int *create_pipe()
+int	wait_childs()
 {
-	int *pipe_fds;
+	int	status;
 
-    pipe_fds = malloc(sizeof(int *));
-	if (!pipe)
-	{
-		perror(R "Error allocating the pipe\n" RE);
-		return (NULL);
-	}
-    if (pipe(pipe_fds) < 0)
-    {
-        perror(R "Error creating the pipe\n" RE);
-        return (NULL);
-    }
-    return (pipe_fds);
+	wait(&status);
+	if (WIFEXITED(status))
+		return WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		return 128 + WTERMSIG(status);
+	return (1);
 }
