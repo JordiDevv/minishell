@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_testing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 12:35:24 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:13:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,13 @@ char	*ft_prompt(char **env)
 
 static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 {
+	size_t	env_size;
+
 	ft_draw();
 	msh->env = ft_env_parser(envp);
+	env_size = (mat_len(msh->env) + 1) * sizeof(char *);
+	data->exported_vars = malloc(env_size);
+	matlcpy(data->exported_vars, msh->env, env_size);
 	get_path(data, msh);
 	data->doors = malloc(sizeof(t_doors));
 	data->exit_code = 0;
@@ -149,7 +154,7 @@ int	main(int argc, char **argv, char **envp)
 		msh.parse_flag = init_dynamic_data(&msh, &data);
 		if (!msh.parse_flag)
 		{
-			ex_loop(msh, &data, envp);
+			ex_loop(&msh, &data);
 			free(msh.str);
 			ft_free_ex(&data, &msh);
 			ft_free_nodes(msh.lst);
