@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   strccmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 23:45:59 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 14:26:37 by jsanz-bo         ###   ########.fr       */
+/*   Created: 2025/04/22 10:55:40 by jsanz-bo          #+#    #+#             */
+/*   Updated: 2025/04/22 11:03:16 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int ex_env(char **envp, t_cmd *cmd)
+int strccmp(char *s1, char *s2, char c)
 {
     int i;
 
-    if (cmd->split[1])
-    {
-        write(2, "env: ‘", 6);
-        write(2, cmd->split[1], ft_strlen(cmd->split[1]));
-        write(2, "’: No such file or directory\n", 29);
-        return (127);
-    }
     i = 0;
-    while (envp[i])
+    while (s1[i] && s2[i])
     {
-        write(1, envp[i], ft_strlen(envp[i]));
-        write(1, "\n", 1);
+        if (s1[i] == c && s2[i] == c)
+            return (0);
         i++;
     }
-    return (0);
+    return (1);
 }

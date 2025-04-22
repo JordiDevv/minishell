@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 00:28:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:52:24 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 	matlcpy(data->exported_vars, msh->env, env_size);
 	get_path(data, msh);
 	data->doors = malloc(sizeof(t_doors));
-	data->exit_code = 0;
 }
 
 static int	init_dynamic_data(t_msh *msh, t_data *data)

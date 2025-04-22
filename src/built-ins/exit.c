@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:36:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/19 17:47:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:40:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,17 @@ void    ex_exit(t_data *data, t_cmd *cmd)
             n = ft_atol_safe(cmd->split[1], &long_range);
         if (is_number && cmd->split[2])
         {
-            write(2, "bash: exit: too many arguments\n", 32);
+            write(2, "bash: exit: too many arguments\n", 31);
             return ;
         }
         else if (!is_number || !long_range)
         {
-            write(2, "exit: bash: numeric argument required\n", 39);
-            data->exit_code = 2;
+            write(2, "exit: bash: numeric argument required\n", 38);
+            g_exit_status = 2;
         }
         else if (is_number)
-            data->exit_code = n;
+            g_exit_status = n;
     }
-    data->exit_code = (unsigned char)data->exit_code;
+    g_exit_status = (unsigned char)g_exit_status;
     data->should_exit = 1;
 }

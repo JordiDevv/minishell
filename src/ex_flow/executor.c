@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 16:01:06 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:56:39 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void ex_loop(t_msh *msh, t_data *data)
 void end_process(t_data *data)
 {
     if (data->pipe_fds && data->pipe_fds[data->pipe_index])
-        close(data->pipe_fds[data->pipe_index][1]);
+    {
+        if (data->pipe_fds[data->pipe_index][1])
+            close(data->pipe_fds[data->pipe_index][1]);
+    }
     if (data->fd_stdin)
         dup2(data->fd_stdin, STDIN_FILENO);
     if (data->fd_stdout)
@@ -66,7 +69,8 @@ int execute_cmd(t_data *data, t_msh *msh, char **split_cmd)
     {
         if (data->pipe_fds && (data->doors->input_door 
                 || data->doors->output_door))
-            redirect(data->doors->input_door, data->doors->output_door, data);
+            native_redirect(data->doors->input_door,
+                data->doors->output_door, data);
         if (execve(data->full_rute, split_cmd, msh->env) == -1)
             return (-1);
     }
