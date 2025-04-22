@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:45:33 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/22 00:29:34 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:19:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,32 @@ static int  valid_var(char *var)
     return (0);
 }
 
+static void modify_var(char **mat, char *var)
+{
+    int i;
+
+    i = 0;
+    if (ft_strchr(var, '='))
+    {
+        while (mat[i])
+        {
+            if (!strccmp(mat[i], var, '='))
+            {
+                free(mat[i]);
+                mat[i] = malloc((ft_strlen(var) + 1) * sizeof(char));
+                if (!mat[i])
+                {
+                    write(2, "Error allocating memory int the mat\n", 36);
+                    return ;
+                }
+                ft_strlcpy(mat[i], var, ft_strlen(var) + 1);
+                return ;
+            }
+            i++;
+        }
+    }
+}
+
 int ex_export(t_msh *msh, t_data *data, t_cmd *cmd)
 {
     int i;
@@ -60,10 +86,13 @@ int ex_export(t_msh *msh, t_data *data, t_cmd *cmd)
         while (cmd->split[i])
         {
             if (valid_var(cmd->split[i]))
-            {
                 error_flag = 1;
-                i++;
-                continue ;
+            else
+            {
+                if (ft_find_var(msh->env, cmd->split[i]))
+                    modify_var(msh->env, cmd->split[i]);
+                else
+                    add_var();
             }
             i++;
         }

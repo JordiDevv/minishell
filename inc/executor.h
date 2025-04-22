@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 20:56:22 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:03:45 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char    **mat_realloc(char **old_mat, size_t size);
 void    free_mat(char **mat);
 int     mat_len(char **mat);
 void    matlcpy(char **dst, char **src, size_t size);
+int     strccmp(char *s1, char *s2, char c);
 
 void	ft_free_all(t_data *data, t_msh *msh);
 void	ft_free_ex(t_data *data, t_msh *msh);
