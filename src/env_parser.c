@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/22 15:08:09 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:26:25 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,24 @@ char	*ft_subst_dolar(char **envp, char *str, int i, int j)
 	return (tmp);
 }
 
+char	*ft_subst_exit(char *str, int i)
+{
+	char	*tmp;
+	int		length;
+	char	*exit;
+
+	exit = ft_itoa(g_exit_status);
+	length = ft_strlen(str) + ft_strlen(exit) - 1;
+	tmp = malloc (length * sizeof(char));
+	if (!tmp)
+		return (NULL);
+	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, exit, length) \
+			|| !ft_strlcat(tmp, (str + (i + 2)), length))
+		return (NULL);
+	tmp[length] = '\0';
+	return (tmp);
+}
+
 /*Identifies $ signs in str, expands with correct env var.
 returns string with all vars expanded. */
 char	*ft_expand_vars(char **envp, char *str)
@@ -109,10 +127,15 @@ char	*ft_expand_vars(char **envp, char *str)
 		{
 			i++;
 			j = 0;
-			while (str[i + j] != ' ' && str[i + j])
-				j++;
-			str = ft_subst_dolar(envp, str, i, j);
-			i = i + j - 1;
+			if (str[i] == '?')
+				str = ft_subst_exit(str, i);
+			else
+			{
+				while (str[i + j] != ' ' && str[i + j])
+					j++;
+				str = ft_subst_dolar(envp, str, i, j);
+				i = i + j - 1;
+			}
 		}
 		i++;
 	}
