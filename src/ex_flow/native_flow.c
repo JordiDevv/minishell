@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   native_flow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 16:00:27 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:55:03 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,20 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 	return (NULL);
 }
 
-void ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
+void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 {
 	data->full_rute = valid_cmd(cmd, data);
 	if (data->full_rute)
 	{
 		execute_cmd(data, msh, cmd->split);
-		data->exit_code = wait_childs();
+		wait (&data->exit_code);
+		if (WIFEXITED (data->exit_code))
+			g_exit_status = WEXITSTATUS(data->exit_code);
+		if (WIFSIGNALED (data->exit_code))
+			g_exit_status = (128 + WTERMSIG(data->exit_code));
 	}
 	else
-		data->exit_code = 127;
+		g_exit_status = 127;
 	if (data->full_rute)
 		free(data->full_rute);
 	end_process(data);

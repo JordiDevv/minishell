@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 10:36:34 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 09:33:54 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:57:56 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "../inc/parser.h"
 #include <signal.h>
 
-volatile sig_atomic_t	g_signal = 0;
+volatile sig_atomic_t	g_exit_status = 0;
 
 void	sigint_handler(int signo)
 {
-	g_signal = signo;
+	g_exit_status = 128 + signo;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
