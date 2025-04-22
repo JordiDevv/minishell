@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 17:16:58 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/22 23:38:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int	ex_pwd(char **envp)
 		return (1);
 	}
 	write(1, pwd_value, ft_strlen(pwd_value));
+	write(1, "\n", 1);
 	return (0);
 }
