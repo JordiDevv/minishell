@@ -6,13 +6,13 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/04 00:18:05 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:55:27 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int    redirect(int input, int output, t_data *data)
+int    native_redirect(int input, int output, t_data *data)
 {
     if (!data->pipe_fds[data->pipe_index])
     {
@@ -22,7 +22,8 @@ int    redirect(int input, int output, t_data *data)
     if (input)
     {
         dup2(data->pipe_fds[data->pipe_index][0], STDIN_FILENO);
-        close(data->pipe_fds[data->pipe_index][1]);
+        if (data->pipe_fds[data->pipe_index][1])
+            close(data->pipe_fds[data->pipe_index][1]);
         data->pipe_index++;
     }
     else
