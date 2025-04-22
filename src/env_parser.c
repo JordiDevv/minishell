@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/20 12:43:55 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/22 15:08:09 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ char	*ft_subst_dolar(char **envp, char *str, int i, int j)
 		free(var);
 		return (str);
 	}
-	length = ft_strlen(str) + ft_strlen(env) - (j - i) - 2;
+	length = ft_strlen(str) + ft_strlen(env) - (j - i);
 	tmp = malloc (length * sizeof(char));
 	if (!tmp)
 		return (NULL);
-	if (!ft_strlcpy(tmp, str, i - 1) || !ft_strlcat(tmp, env, length) \
-			|| !ft_strlcat(tmp, (str + (i + j + 1)), length))
+	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, env, length) \
+			|| !ft_strlcat(tmp, (str + (i + j)), length))
 		return (NULL);
 	tmp[length] = '\0';
 	free(var);
@@ -100,25 +100,19 @@ char	*ft_expand_vars(char **envp, char *str)
 {
 	int		i;
 	int		j;
-	int		m[2];
 
 	i = 0;
-	m[0] = 0;
-	m[1] = 0;
 	while (str[i + 1])
 	{
-		if (str[i] == '\"')
-			m[0] = (m[0] + 1) % 2;
-		if (str[i] == '\'')
-			m[1] = (m[1] + 1) % 2;
-		if (str[i] == '$' && str[i + 1] == '(' && !m[0] && !m[1])
+		i += ft_markfind(str + i);
+		if (str[i] == '$')
 		{
 			i++;
 			j = 0;
-			while (str[i + j] != ')' && str[i + j])
+			while (str[i + j] != ' ' && str[i + j])
 				j++;
-			if (str[i + j])
-				str = ft_subst_dolar(envp, str, i + 1, j - 1);
+			str = ft_subst_dolar(envp, str, i, j);
+			i = i + j - 1;
 		}
 		i++;
 	}
