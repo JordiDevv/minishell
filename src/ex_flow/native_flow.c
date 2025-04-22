@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 18:06:17 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:55:03 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 			g_exit_status = (128 + WTERMSIG(data->exit_code));
 	}
 	else
-		data->exit_code = 127;
+		g_exit_status = 127;
 	if (data->full_rute)
 		free(data->full_rute);
 	end_process(data);
