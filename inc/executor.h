@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 00:32:57 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:39:20 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef	struct	s_data
     int     fd_output;
     int     fd_stdin;
     int     fd_stdout;
-    int     exit_code;
     int     should_exit;
     char    **exported_vars;
 }	t_data;

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:36:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 14:27:03 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:40:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ void    ex_exit(t_data *data, t_cmd *cmd)
         else if (!is_number || !long_range)
         {
             write(2, "exit: bash: numeric argument required\n", 38);
-            data->exit_code = 2;
+            g_exit_status = 2;
         }
         else if (is_number)
-            data->exit_code = n;
+            g_exit_status = n;
     }
-    data->exit_code = (unsigned char)data->exit_code;
+    g_exit_status = (unsigned char)g_exit_status;
     data->should_exit = 1;
 }
