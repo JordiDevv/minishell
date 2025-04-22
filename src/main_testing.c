@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_testing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/22 15:04:45 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:19:57 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_free_all(&data, &msh);
 	write(1, "exit\n", 5);
 	printf("%i", g_exit_status);
-	return ((int)data.exit_code);
+	return (g_exit_status);
 }
 
 //Reservamos memoria para data->doors
