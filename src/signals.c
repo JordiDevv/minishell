@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 10:36:34 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 17:49:33 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:29:02 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ volatile sig_atomic_t	g_exit_status = 0;
 
 void	sigint_handler(int signo)
 {
-	g_exit_status = signo;
+	g_exit_status = 128 + signo;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
