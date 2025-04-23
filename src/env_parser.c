@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 02:09:59 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:10:03 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_find_var(char **envp, char *var)
 	{
 		if (ft_strnstr(envp[i], var, ft_strlen(var)))
 		{
-			write(1, "LLEGA\n", 6);
 			name = ft_strnstr(envp[i], var, ft_strlen(var));
 			break ;
 		}

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 02:28:16 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:29:58 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int     ex_echo(t_cmd *cmd);
 void    ex_exit(t_data *data, t_cmd *cmd);
 int     ex_env(char **envp, t_cmd *cmd);
 int     ex_export(t_msh *msh, t_data *data, t_cmd *cmd);
+int     ex_unset(t_msh *msh, t_data *data, t_cmd *cmd);
 
 void    show_export(t_data *data);
 int     valid_var(char *var);
