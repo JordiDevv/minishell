@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:55:40 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/22 11:03:16 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 01:14:21 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int strccmp(char *s1, char *s2, char c)
     int i;
 
     i = 0;
-    while (s1[i] && s2[i])
+    while (s1[i] && s2[i] && s1[i] == s2[i])
     {
         if (s1[i] == c && s2[i] == c)
             return (0);

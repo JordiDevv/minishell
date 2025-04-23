@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 02:19:03 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/21 12:42:35 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 02:16:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ void    matlcpy(char **dst, char **src, size_t size)
         dst[i] = NULL;
 }
 
-static int reallocating_mat(char ***old_mat, char ***new_mat, size_t *i)
+static int reallocating_mat(char **old_mat, char **new_mat, size_t *i)
 {
-    (*new_mat)[*i] = malloc((ft_strlen((*old_mat)[*i]) + 1) * sizeof(char));
-    if (!(*new_mat)[*i])
+    new_mat[*i] = malloc((ft_strlen(old_mat[*i]) + 1) * sizeof(char));
+    if (!new_mat[*i])
     {
-        free_mat((*new_mat));
+        free_mat(new_mat);
         return (1);
     }
-    ft_strlcpy((*new_mat)[*i], (*old_mat)[*i], ft_strlen((*old_mat)[*i]) + 1);
+    ft_strlcpy(new_mat[*i], old_mat[*i], ft_strlen(old_mat[*i]) + 1);
     (*i)++;
     return (0);
 }
@@ -80,12 +80,15 @@ char    **mat_realloc(char **old_mat, size_t size)
     {
         while (i < size && old_mat[i])
         {
-            if (reallocating_mat(&old_mat, &new_mat, &i))
+            if (reallocating_mat(old_mat, new_mat, &i))
                 return (NULL);
         }
     }
     while (i < size)
+    {
         new_mat[i] = NULL;
+        i++;
+    }
     free_mat(old_mat);
     return (new_mat);
 }

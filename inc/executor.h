@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 00:51:51 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 02:28:16 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void    show_export(t_data *data);
 int     valid_var(char *var);
 int     locate_var(char **mat, char *var);
 void    modify_var(char **mat, char *var, int i);
-void    add_var(char **mat, char *var);
+void    add_var(char ***mat, char *var);
 
 void    open_file(t_data *data, t_cmd *cmd);
 int     **prepare_pipes(t_list *lst);
