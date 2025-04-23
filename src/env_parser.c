@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/22 15:26:25 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:34:54 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	*ft_expand_vars(char **envp, char *str)
 	i = 0;
 	while (str[i + 1])
 	{
-		i += ft_markfind(str + i);
+		i += ft_markfind_single(str + i);
 		if (str[i] == '$')
 		{
 			i++;
@@ -131,7 +131,8 @@ char	*ft_expand_vars(char **envp, char *str)
 				str = ft_subst_exit(str, i);
 			else
 			{
-				while (str[i + j] != ' ' && str[i + j])
+				while (str[i + j] != ' ' && str[i + j] != '\'' \
+						&& str[i + j] != '\"' && str[i + j])
 					j++;
 				str = ft_subst_dolar(envp, str, i, j);
 				i = i + j - 1;
