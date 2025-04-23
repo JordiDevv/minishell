@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:09:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 12:55:48 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:17:37 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int	ft_redir_in(char **str, t_cmd *cmd, int i)
 	}
 	if ((*str)[i] && (*str)[i] != '>')
 		(*str)[i] = '<';
+	if (!(*str)[i])
+		return (i - 1);
 	return (i);
 }
 
@@ -115,5 +117,7 @@ int	ft_redir_out(char **str, t_cmd *cmd, int i)
 	}
 	if ((*str)[i] && (*str)[i] != '<')
 		(*str)[i] = '>';
+	if (!(*str)[i])
+		return (i - 1);
 	return (i);
 }
