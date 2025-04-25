@@ -6,37 +6,11 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:09:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/08 18:54:38 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:17:37 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
-
-int	ft_markfind(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '\"')
-	{
-		i++;
-		while (str[i] && str[i] != '\"')
-			i++;
-		if (str[i])
-			i++;
-		return (i);
-	}
-	else if (str[i] == '\'')
-	{
-		i++;
-		while (str[i] && str[i] != '\'')
-			i++;
-		if (str[i])
-			i++;
-		return (i);
-	}
-	return (0);
-}
 
 /*After pointers are set up, ft_ptend() finds key chars
 outside "" or '' marks. Overrides them with "\0" 
@@ -111,6 +85,8 @@ int	ft_redir_in(char **str, t_cmd *cmd, int i)
 	}
 	if ((*str)[i] && (*str)[i] != '>')
 		(*str)[i] = '<';
+	if (!(*str)[i])
+		return (i - 1);
 	return (i);
 }
 
@@ -141,5 +117,7 @@ int	ft_redir_out(char **str, t_cmd *cmd, int i)
 	}
 	if ((*str)[i] && (*str)[i] != '<')
 		(*str)[i] = '>';
+	if (!(*str)[i])
+		return (i - 1);
 	return (i);
 }

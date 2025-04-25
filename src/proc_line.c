@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 16:37:16 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:43:49 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,24 @@ t_list	*ft_proc_str(char *str, t_msh *msh)
 {
 	int			j;
 	t_list		*first;
-	int			m[2];
+	char		*aux;
 
 	j = 0;
-	m[0] = 0;
-	m[1] = 0;
 	first = NULL;
-	while (str[j])
+	aux = str;
+	while (aux[j])
 	{
-		if (str[j] == '\"')
-			m[0] = (m[0] + 1) % 2;
-		if (str[j] == '\'')
-			m[1] = (m[1] + 1) % 2;
-		if (str[j] == '|' && !m[0] && !m[1])
+		j += ft_markfind(aux + j);
+		if (aux[j] == '|')
 		{
-			str[j] = '\0';
-			first = ft_new_node(str, first, msh);
-			str += (j-- + 1);
+			aux[j] = '\0';
+			first = ft_new_node(aux, first, msh);
+			aux += (j + 1);
+			j = -1;
 		}
 		j++;
 	}
-	if (str[0])
-		first = ft_new_node(str, first, msh);
+	if (aux[0])
+		first = ft_new_node(aux, first, msh);
 	return (first);
 }

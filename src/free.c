@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:33:37 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/21 16:25:57 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:53:49 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,17 @@ void	ft_free_ex(t_data *data, t_msh *msh)
 
 void	ft_free_all(t_data *data, t_msh *msh)
 {
+	int	i;
+
+	i = 0;
 	ft_free_ex(data, msh);
 	if (data->doors)
 		free(data->doors);
 	ft_free_matrix(data->split_path);
-	if (msh->input)
+	if (msh->input && !data->should_exit)
 		free (msh->input);
 	ft_free_env(msh->env);
+	if (data->exported_vars)
+		ft_free_matrix(data->exported_vars);
 	return ;
 }
