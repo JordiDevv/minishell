@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:04:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 02:30:44 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/25 10:14:15 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ void    add_var(char ***mat, char *var)
     int len;
 
     len = mat_len(*mat);
-    *mat = mat_realloc(*mat, len + 2);
+    *mat = mat_realloc(*mat, len + 2, NULL);
     (*mat)[len] = malloc((ft_strlen(var) + 1) * sizeof(char));
     if (!(*mat)[len])
         return ;
     ft_strlcpy((*mat)[len], var, ft_strlen(var) + 1);
 }
+
+//Hay que meter en algún punto de add_var, que si no termina en '=' se concatene

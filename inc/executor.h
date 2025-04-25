@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/24 00:29:58 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:52:42 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,12 @@ void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
 int     wait_childs();
 char    *ft_realloc(char *old_str, size_t size);
-char    **mat_realloc(char **old_mat, size_t size);
+char    **mat_realloc(char **old_mat, size_t size, char *unset);
 void    free_mat(char **mat);
 int     mat_len(char **mat);
 void    matlcpy(char **dst, char **src, size_t size);
 int     strccmp(char *s1, char *s2, char c);
+int     strrefccmp(char *ref, char *cmp, char c);
 
 void	ft_free_all(t_data *data, t_msh *msh);
 void	ft_free_ex(t_data *data, t_msh *msh);

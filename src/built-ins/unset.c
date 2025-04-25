@@ -6,47 +6,76 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:09:39 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/24 01:28:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:58:46 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-static void unset_var(t_msh *msh, t_data *data, char *var)
+static void unset_var(char ***env, char ***export, char *var)
 {
-    /*Itera en todos los argumentos que se le pase: si existe en env y/o en exported, la elimina
-    de las pertinente; si no existe simplemente ignora ese argumento*/
-    /*Deberíamos, primero que nada comprobar si la variable existe en la matriz correspondiente
-    (con "locate_var"), y, en caso de existir, hacer un mat_realloc, pero pasando, o bien el str
-    con el nombre de la var, o bien el index de locate_var, para que, a la hora de copiar la
-    matriz lo haga saltando esa iteración del bucle. Previamente reservando memoria = mat_len,
-    sin + 1 para el NULL, porque queremos copiar una variable menos*/
+    int i;
+
+    i = 0;
+    while ((*export)[i])
+    {
+        if (!strrefccmp((*export)[i], var, '='))
+        {
+            *export = mat_realloc(*export, mat_len(*export), var);
+            break ;
+        }
+        i++;
+    }
+    while ((*env)[i])
+    {
+        if (!strrefccmp((*env)[i], var, '='))
+        {
+            *env = mat_realloc(*env, mat_len(*env), var);
+            break ;
+        }
+        i++;
+    }
+}
+
+static int valid_unset(t_cmd *cmd, int i, int *error_flag)
+{
+    int j;
+    int return_code;
+
+    j = 0;
+    while (cmd->split[i][j])
+    {
+        if ((cmd->split[i][j] != '_' && !ft_isalnum(cmd->split[i][j]))
+            || (j == 0 && ft_isdigit(cmd->split[i][j])))
+        {
+            *error_flag = 1;
+            if (!cmd->split[i][j + 1] && cmd->split[i][j] == '=')
+                return_code = 0;
+            else
+                return_code = 1;
+            break ;
+        }
+        j++;
+    }
+    return (return_code);
 }
 
 int ex_unset(t_msh *msh, t_data *data, t_cmd *cmd)
 {
     int i;
-    int j;
-    int error;
+    int error_flag;
+    int return_code;
     
     i = 1;
-    error = 0;
+    error_flag = 0;
+    return_code = 0;
     while (cmd->split[i])
     {
-        j = 0;
-        while (cmd->split[i][j])
-        {
-            if ((cmd->split[i][j] != '_' && !ft_isalnum(cmd->split[i][j]))
-                || (i == 0 && ft_isdigit(cmd->split[i][j])))
-            {
-                error = 1;
-                break ;
-            }
-            j++;
-        }
-        if (!error)
-            unset_var(msh, data, cmd->split[i]);
+        valid_unset(cmd, i, &return_code);
+        if (!error_flag)
+            unset_var(&(msh->env), &(data->exported_vars), cmd->split[i]);
         i++;
+        error_flag = 0;
     }
-    return(error);
+    return(return_code);
 }

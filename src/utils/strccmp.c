@@ -6,11 +6,23 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:55:40 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 01:14:21 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:58:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
+
+int strrefccmp(char *ref, char *cmp, char c)
+{
+    int i;
+
+    i = 0;
+    while (ref[i] && cmp[i] && ref[i] == cmp[i])
+        i++;
+    if (!cmp[i] && ref[i] == c)
+        return (0);
+    return (1);
+}
 
 int strccmp(char *s1, char *s2, char c)
 {
