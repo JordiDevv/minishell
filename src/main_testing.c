@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_testing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 00:52:24 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/26 12:51:18 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 static int	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
+	msh->input = NULL;
 	data->full_rute = NULL;
 	data->pipe_fds = NULL;
 	data->pipe_index = 0;
@@ -127,7 +128,7 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	data->should_exit = 0;
 	data->doors->input_door = lock;
 	data->doors->output_door = lock;
-	msh->input = readline(msh->prompt);
+	ft_prompt_marks(msh);
 	if (!msh->input)
 		return (1);
 	if (*(msh->input) == '\0')
