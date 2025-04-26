@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/26 13:21:19 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/26 13:46:11 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	ft_count_marks(char *str)
 		if (str[i++] == '\"')
 			dbl++;
 	}
-	if (sgl % 2 != 0 || dbl % 2 != 0)
-		return (1);
-	return (0);
+	if (((sgl % 2 == 0 && sgl != 0) || (dbl % 2 == 0 && dbl != 0))
+		|| (sgl == 0 && dbl == 0))
+		return (0);
+	return (1);
 }
 
 void	ft_prompt_marks(t_msh *msh)
