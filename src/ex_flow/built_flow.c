@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/25 01:50:57 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/26 18:36:42 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void ex_built(t_cmd *cmd, t_data *data, t_msh *msh)
     else if(!ft_strncmp(cmd->built, "echo", ft_strlen(cmd->built)))
         g_exit_status = ex_echo(cmd);
     else if(!ft_strncmp(cmd->built, "cd", ft_strlen(cmd->built)))
-        printf("built\n");
+        g_exit_status = ex_cd(cmd);
     else if(!ft_strncmp(cmd->built, "export", ft_strlen(cmd->built)))
         g_exit_status = ex_export(msh, data, cmd);
     else if(!ft_strncmp(cmd->built, "unset", ft_strlen(cmd->built)))
