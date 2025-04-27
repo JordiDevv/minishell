@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/27 18:10:50 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/27 18:15:31 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	return (0);
 }
 
-static void	ex_body(t_msh *msh, t_data *data)
+static void	main_loop(t_msh *msh, t_data *data)
 {
 	msh->parse_flag = init_dynamic_data(msh, data);
 	if (!msh->parse_flag)
@@ -81,7 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_signal();
 	while (1)
 	{
-		ex_body(&msh, &data);
+		main_loop(&msh, &data);
 		if (data.should_exit || msh.parse_flag == 1)
 			break ;
 	}
