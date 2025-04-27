@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:54:22 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/27 02:45:42 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/27 13:39:22 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ static int  checkout(t_cmd *cmd)
 
     if (cmd->split[2])
     {
-        write (2, "bash: cd: too many arguments\n", 29);
+        write(2, "bash: cd: too many arguments\n", 29);
         return (1);
     }
     if (cmd->split[1])
         dir = opendir(cmd->split[1]);
     if (cmd->split[1] && !dir)
     {
+        write(2, "bash: cd: ", 10);
         perror(cmd->split[1]);
         return (1);
     }
@@ -50,26 +51,11 @@ static int  go_home(t_cmd *cmd, t_msh *msh)
     return (0);
 }
 
-static int locate_varr(char **mat, char *var)
-{
-    int i;
-
-    i = 0;
-    while (mat[i])
-    {
-        if (!strrefccmp(var, mat[i], '='))
-            return (i);
-        i++;
-    }
-    return (-1);
-}
-
 static void update_var(char *var, char *content, t_msh *msh, t_data *data)
 {
     int     index;
     char    *complete_var;
 
-    write(1, "OK\n", 3);
     complete_var = strmcat(3, 0, var, "=", content);
     index = locate_var(msh->env, complete_var);
     modify_var(msh->env, complete_var, index);
@@ -78,16 +64,30 @@ static void update_var(char *var, char *content, t_msh *msh, t_data *data)
     free(complete_var);
 }
 
+static void update(char *oldpwd, t_msh *msh, t_data *data)
+{
+    char    *newpwd;
+
+    if (oldpwd)
+    {
+        update_var("OLDPWD", oldpwd, msh, data);
+        free(oldpwd);
+    }
+    newpwd = getcwd(NULL, 0);
+    if (newpwd)
+        update_var("PWD", newpwd, msh, data);
+    free(newpwd);
+}
+
 int ex_cd(t_cmd *cmd, t_msh *msh, t_data *data)
 {
     char    *oldpwd;
-    char    *newpwd;
     int     home_flag;
 
     if (checkout(cmd))
         return (1);
     oldpwd = NULL;
-    if (ft_find_var(msh->env, "OLDPWD"))
+    if (locate_var(msh->env, "OLDPWD") >= 0)
         oldpwd = getcwd(NULL, 0);
     home_flag = go_home(cmd, msh);
     if (home_flag == 1)
@@ -99,17 +99,6 @@ int ex_cd(t_cmd *cmd, t_msh *msh, t_data *data)
         perror(cmd->split[1]);
         return (1);
     }
-    if (oldpwd)
-    {
-        update_var("OLDPWD", oldpwd, msh, data);
-        free(oldpwd);
-    }
-    newpwd = getcwd(NULL, 0);
-    if (newpwd)
-        update_var("PWD", newpwd, msh, data);
-    free(newpwd);
+    update(oldpwd, msh, data);
     return (0);
 }
-
-/*Debemos actualizar el built-in pwd: No accede a la variable PWD, si no que utiliza
-getcwd*/
