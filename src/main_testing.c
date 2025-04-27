@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 02:07:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/27 17:37:03 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ static void	ft_print_list(t_msh *msh)
 }
 
 /*Just an ASCII artpiece to know we entered MINISHELL*/
+
+void	ft_init_data(t_data *data)
+{
+	data->full_rute = NULL;
+	data->pipe_fds = NULL;
+	data->pipe_index = 0;
+	data->fd_input = 0;
+	data->fd_output = 0;
+	data->fd_stdin = 0;
+	data->fd_stdout = 0;
+	data->should_exit = 0;
+	data->doors->input_door = lock;
+	data->doors->output_door = lock;
+}
 
 void	ft_draw(void)
 {
@@ -93,7 +107,7 @@ char	*ft_prompt(char **env)
 	str = malloc((size + 1) * sizeof(char));
 	if (!str || !tmp)
 		return (NULL);
-	if (!ft_strlcpy(str, usr, size) || !ft_strlcat(str, "@minishell:", size) \
+	if (!ft_strlcpy(str, usr, size) || !ft_strlcat(str, "@minishell:", size)
 		|| !ft_strlcat(str, pwd, size) || !ft_strlcat(str, "$ ", size))
 		return (NULL);
 	str[size] = '\0';
@@ -117,21 +131,22 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 static int	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
-	data->full_rute = NULL;
-	data->pipe_fds = NULL;
-	data->pipe_index = 0;
-	data->fd_input = 0;
-	data->fd_output = 0;
-	data->fd_stdin = 0;
-	data->fd_stdout = 0;
-	data->should_exit = 0;
-	data->doors->input_door = lock;
-	data->doors->output_door = lock;
-	msh->input = readline(msh->prompt);
-	if (!msh->input)
-		return (1);
-	if (*(msh->input) == '\0')
-		return (2);
+	ft_init_data(data);
+	if (isatty(STDIN_FILENO))
+	{
+		msh->input = readline(msh->prompt);
+		if (!msh->input)
+			return (1);
+		if (*(msh->input) == '\0')
+			return (2);
+	}
+	else
+	{
+		msh->input = ft_get_next_line(STDIN_FILENO);
+		write (1, "\n", 1);
+		if (!msh->input)
+			return (1);
+	}
 	add_history(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
@@ -164,7 +179,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	ft_free_all(&data, &msh);
 	write(1, "exit\n", 5);
-	printf("%i", g_exit_status);
 	return (g_exit_status);
 }
 
