@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:55:40 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/25 14:58:48 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/27 02:40:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int strrefccmp(char *ref, char *cmp, char c)
     i = 0;
     while (ref[i] && cmp[i] && ref[i] == cmp[i])
         i++;
-    if (!cmp[i] && ref[i] == c)
+    if ((!ref[i] && !cmp[i]) || (!cmp[i] && ref[i] == c))
         return (0);
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:04:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/25 10:14:15 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/27 02:41:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int locate_var(char **mat, char *var)
     i = 0;
     while (mat[i])
     {
-        if (!strccmp(mat[i], var, '='))
+        if (!strrefccmp(mat[i], var, '='))
             return (i);
         i++;
     }
