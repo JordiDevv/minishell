@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:04:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/22 16:48:28 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/27 12:42:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ int locate_var(char **mat, char *var)
     while (mat[i])
     {
         if (!strccmp(mat[i], var, '='))
-        return (i);
+            return (i);
         i++;
     }
-    write(1, "LLEGA\n", 6);
     return (-1);
 }
 
@@ -80,11 +79,14 @@ void    modify_var(char **mat, char *var, int i)
     ft_strlcpy(mat[i], var, ft_strlen(var) + 1);
 }
 
-void    add_var(char **mat, char *var)
+void    add_var(char ***mat, char *var)
 {
     int len;
 
-    len = mat_len(mat);
-    mat = mat_realloc(mat, len + 2);
-    ft_strlcpy(mat[len], var, ft_strlen(var) + 1);
+    len = mat_len(*mat);
+    *mat = mat_realloc(*mat, len + 2, NULL);
+    (*mat)[len] = malloc((ft_strlen(var) + 1) * sizeof(char));
+    if (!(*mat)[len])
+        return ;
+    ft_strlcpy((*mat)[len], var, ft_strlen(var) + 1);
 }

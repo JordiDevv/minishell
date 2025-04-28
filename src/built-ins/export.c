@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:45:33 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/22 15:27:58 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/23 02:27:54 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void export_var(t_msh *msh, t_data *data, t_cmd *cmd, int i)
     if (index >= 0)
         modify_var(data->exported_vars, cmd->split[i], index);
     else
-        add_var(data->exported_vars, cmd->split[i]);
+        add_var(&(data->exported_vars), cmd->split[i]);
     index = locate_var(msh->env, cmd->split[i]);
     if (index >= 0)
         modify_var(msh->env, cmd->split[i], index);
     else
-        add_var(msh->env, cmd->split[i]);
+        add_var(&(msh->env), cmd->split[i]);
 }
 
 int ex_export(t_msh *msh, t_data *data, t_cmd *cmd)
