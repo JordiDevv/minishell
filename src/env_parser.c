@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/28 18:28:29 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/28 20:12:15 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_subst_dolar(char **envp, char *str, int i, int j)
 		return (str);
 	}
 	length = ft_strlen(str) + ft_strlen(env) - (j - i);
-	tmp = malloc (length * sizeof(char));
+	tmp = malloc (length * sizeof(char) + 1);
 	if (!tmp)
 		return (NULL);
 	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, env, length)
