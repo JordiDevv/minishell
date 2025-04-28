@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/28 11:23:30 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:27:26 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_find_var(char **envp, char *var)
 	}
 	if (!name)
 		return (NULL);
-	value = ft_strchr(name, '=') + 1;
+	value = name + ft_strlen(var) + 1;
 	return (value);
 }
 
