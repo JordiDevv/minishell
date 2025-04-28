@@ -6,11 +6,41 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:04:01 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/28 12:13:39 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:53:17 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/parser.h"
+
+char	*ft_dup_var(char **env, char *var)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(ft_find_var(env, "PWD"));
+	if (!tmp)
+		return ("\0");
+	return (tmp);
+}
+
+char	*ft_concat_prompt(char **env, char *pwd)
+{
+	char	*str;
+	char	*usr;
+	t_size	size;
+
+	usr = ft_find_var(env, "USERNAME");
+	if (!*usr)
+		return ("\0");
+	size = ft_strlen(pwd) + ft_strlen(usr) + 14;
+	str = malloc((size + 1) * sizeof(char));
+	if (!str)
+		return ("\0");
+	if (!ft_strlcpy(str, usr, size) || !ft_strlcat(str, "@minishell:", size)
+		|| !ft_strlcat(str, pwd, size) || !ft_strlcat(str, "$ ", size))
+		return ("\0");
+	str[size] = '\0';
+	return (str);
+}
 
 /*ft_prompt recieves environment, finds PWD, HOME and USER,
 finds if the current dir contains HOME dir and creates
@@ -21,26 +51,18 @@ char	*ft_prompt(char **env)
 	char	*str;
 	char	*pwd;
 	char	*tmp;
-	char	*usr;
-	int		size;
+	char	*home;
 
-	tmp = ft_strdup(ft_find_var(env, "PWD"));
-	size = ft_strlen(ft_find_var(env, "HOME"));
+	tmp = ft_dup_var(env, "PWD");
+	home = ft_find_var(env, "HOME");
 	pwd = tmp;
-	if (ft_strnstr(pwd, ft_find_var(env, "HOME"), size))
+	if (ft_strnstr(pwd, home, ft_strlen(home)) && *pwd && *home)
 	{
-		pwd += size - 1;
+		pwd += ft_strlen(home) - 1;
 		pwd[0] = '~';
 	}
-	usr = ft_find_var(env, "USER");
-	size = ft_strlen(pwd) + ft_strlen(usr) + 14;
-	str = malloc((size + 1) * sizeof(char));
-	if (!str || !tmp)
-		return (NULL);
-	if (!ft_strlcpy(str, usr, size) || !ft_strlcat(str, "@minishell:", size)
-		|| !ft_strlcat(str, pwd, size) || !ft_strlcat(str, "$ ", size))
-		return (NULL);
-	str[size] = '\0';
-	free(tmp);
+	str = ft_concat_prompt(env, pwd);
+	if (tmp && *tmp != '\0')
+		free(tmp);
 	return (str);
 }

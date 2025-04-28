@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/28 12:21:11 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:49:22 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,8 @@ int	main(int argc, char **argv, char **envp)
 			ft_free_ex(&data, &msh);
 			ft_free_nodes(msh.lst);
 		}
-		free(msh.prompt);
+		if (msh.prompt && *msh.prompt)
+			free(msh.prompt);
 		if (data.should_exit || msh.parse_flag == 1)
 			break ;
 	}
