@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 13:18:34 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/28 22:22:55 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_list		*ft_proc_str(char *str, t_msh *msh);
 char		*ft_expand_home(char **env, char *str);
 char		*ft_subst_home(char **envp, char *str, int i);
 char		*ft_prompt(char **env);
+void		ft_print_list(t_msh *msh);
 void		ft_draw(void);
 void		ft_cmd_fill(char *str, t_cmd *cmd);
 t_list		*ft_new_node(char *str, t_list *first, t_msh *msh);
