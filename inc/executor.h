@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 16:42:39 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:14:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # include <limits.h>
 # include <dirent.h>
 # include "parser.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct  s_doors
 {
