@@ -6,12 +6,12 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 10:36:34 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 13:31:56 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:22:15 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/executor.h"
-#include "../inc/parser.h"
+#include "../../inc/executor.h"
+#include "../../inc/parser.h"
 #include <signal.h>
 
 volatile sig_atomic_t	g_exit_status = 0;

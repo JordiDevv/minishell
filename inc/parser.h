@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 12:59:00 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/30 01:30:40 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ char		*ft_find_var(char **envp, char *var);
 char		*ft_expand_vars(char **envp, char *str);
 char		*ft_subst_dolar(char **envp, char *str, int i, int j);
 int			ft_free_env(char **env);
-t_list		*ft_proc_str(char *str, t_msh *msh);
+t_list		*ft_proc_str(char *str);
 char		*ft_expand_home(char **env, char *str);
 char		*ft_subst_home(char **envp, char *str, int i);
 char		*ft_prompt(char **env);
 void		ft_print_list(t_msh *msh);
 void		ft_draw(void);
 void		ft_cmd_fill(char *str, t_cmd *cmd);
-t_list		*ft_new_node(char *str, t_list *first, t_msh *msh);
+t_list		*ft_new_node(char *str, t_list *first);
 void		ft_ptend(char **str);
-int			ft_full(char **str, t_cmd *cmd, int i, int *m);
+int			ft_full(char **str, t_cmd *cmd, int i);
 int			ft_redir_in(char **str, t_cmd *cmd, int i);
 int			ft_redir_out(char **str, t_cmd *cmd, int i);
 int			ft_markfind(char *str);

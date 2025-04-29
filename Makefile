@@ -1,9 +1,11 @@
 NAME = minishell
 GCC = gcc
-CFLAGS = -Wall -Wextra -Werror -lreadline
+CFLAGS = -Wall -Wextra -Werror
+LDFLAGS = -lreadline -lncurses -lhistory
 SRCSDIR = src
 OBJSDIR = obj
-SRCSFILES = built-ins/cd.c \
+SRCSFILES = main.c \
+			built-ins/cd.c \
 			built-ins/echo.c \
 			built-ins/env.c \
 			built-ins/exit.c \
@@ -19,20 +21,20 @@ SRCSFILES = built-ins/cd.c \
 			utils/export_utils.c \
 			utils/ft_realloc.c \
 			utils/get_path.c \
+			utils/main_utils.c \
 			utils/mat_utils.c \
 			utils/strccmp.c \
 			utils/strmcat.c \
 			utils/wait_childs.c \
-			env_parser.c \
-			fill_cmd.c \
-			free.c \
-			ft_split_adv.c \
-			home_exp.c \
-			main_testing.c \
-			mark_handlers.c \
-			proc_line.c \
-			prompt.c \
-			signals.c
+			parser/env_parser.c \
+			parser/fill_cmd.c \
+			parser/free.c \
+			parser/ft_split_adv.c \
+			parser/home_exp.c \
+			parser/mark_handlers.c \
+			parser/proc_line.c \
+			parser/prompt.c \
+			parser/signals.c
 OBJSFILES = $(SRCSFILES:.c=.o)
 SRCS = $(addprefix $(SRCSDIR)/, $(SRCSFILES))
 OBJS = $(addprefix $(OBJSDIR)/, $(OBJSFILES))
@@ -41,7 +43,7 @@ HEAD = -I inc
 all: $(NAME)
 
 $(NAME): libft $(OBJS)
-	$(GCC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(GCC) $(CFLAGS) $(OBJS) inc/libft/libft.a $(LDFLAGS) -o $(NAME)
 
 libft:
 	make -C inc/libft
@@ -52,19 +54,22 @@ $(OBJSDIR)/%.o: $(SRCSDIR)/%.c | obj
 obj:
 	mkdir -p $(OBJSDIR)
 	mkdir -p obj/built-ins
-	mkdir -p obj/ex_flow
+	mkdir -p obj/ex-flow
 	mkdir -p obj/redirections
 	mkdir -p obj/utils
+	mkdir -p obj/parser
 
 clean:
 	rm -rf $(OBJSDIR)
+	make -C inc/libft clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -C inc/libft fclean
 
 re: fclean all
 
 debug:
-	gcc $(filter-out main.c, src/*.c src/*/*.c) -g -lreadline inc/libft/libft.a
+	gcc $(filter-out main.c, src/*.c src/*/*.c) -Wall -Wextra -g -lreadline inc/libft/libft.a -o minishell
 
 .PHONY: clean fclean re debug

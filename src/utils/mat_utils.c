@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 02:19:03 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 13:08:40 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:53:52 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	re_loop(char **old_mat, char **new_mat, size_t size, char *unset)
 
 	i = 0;
 	j = 0;
-	while (i < size && old_mat[i])
+	while (i < (int)size && old_mat[i])
 	{
 		if (unset && !strrefccmp(old_mat[i], unset, '='))
 			i++;
@@ -95,7 +95,7 @@ char	**mat_realloc(char **old_mat, size_t size, char *unset)
 		if (i < 0)
 			return (NULL);
 	}
-	while (i < size)
+	while (i < (int)size)
 	{
 		new_mat[i] = NULL;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 12:00:55 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:35:09 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ex_built(t_cmd *cmd, t_data *data, t_msh *msh)
 		native_redirect(data->doors->input_door,
 			data->doors->output_door, data);
 	if (!ft_strncmp(cmd->built, "pwd", ft_strlen(cmd->built)))
-		g_exit_status = ex_pwd(msh->env);
+		g_exit_status = ex_pwd();
 	else if (!ft_strncmp(cmd->built, "echo", ft_strlen(cmd->built)))
 		g_exit_status = ex_echo(cmd);
 	else if (!ft_strncmp(cmd->built, "cd", ft_strlen(cmd->built)))

@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 13:53:45 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:15:48 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	add_history(msh->input);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
-	msh->lst = ft_proc_str(msh->str, msh);
+	msh->lst = ft_proc_str(msh->str);
 	data->pipe_fds = prepare_pipes(msh->lst);
 	return (0);
 }
@@ -74,7 +74,7 @@ static void	main_loop(t_msh *msh, t_data *data)
 	{
 		ex_loop(msh, data);
 		free(msh->str);
-		ft_free_ex(data, msh);
+		ft_free_ex(data);
 		ft_free_nodes(msh->lst);
 	}
 	if (*msh->prompt)
@@ -83,10 +83,12 @@ static void	main_loop(t_msh *msh, t_data *data)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_list	*aux_lst;
 	t_msh	msh;
 	t_data	data;
 
+	argc++;
+	if (!argv[0])
+		return (0);
 	if (!envp[0])
 	{
 		write(2, "Error: no environment received\n", 31);

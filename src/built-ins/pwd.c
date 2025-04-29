@@ -6,14 +6,14 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 11:55:39 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:34:18 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-int	ex_pwd(char **envp)
+int	ex_pwd(void)
 {
 	char	*pwd_value;
 

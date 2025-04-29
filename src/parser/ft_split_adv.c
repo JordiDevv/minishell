@@ -6,14 +6,14 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:40:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/28 19:11:08 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:20:38 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*Takes string s and divides it to different strings separated by 
 character c. Returns an array of resulting strings*/
 
-#include "../inc/parser.h"
+#include "../../inc/parser.h"
 
 static char	**ft_mal(const char *s, const char c)
 {

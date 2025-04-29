@@ -6,11 +6,11 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 13:21:06 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:22:43 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parser.h"
+#include "../../inc/parser.h"
 
 int	ft_markfind_single(char *str)
 {

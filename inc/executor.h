@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 13:43:33 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:14:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # include <limits.h>
 # include <dirent.h>
 # include "parser.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct  s_doors
 {
@@ -57,7 +59,7 @@ typedef	struct	s_data
     char    **exported_vars;
 }	t_data;
 
-int     ex_pwd(char **envp);
+int     ex_pwd(void);
 int     ex_echo(t_cmd *cmd);
 void    ex_exit(t_data *data, t_cmd *cmd);
 int     ex_env(char **envp, t_cmd *cmd);
@@ -94,6 +96,6 @@ int     strccmp(char *s1, char *s2, char c);
 int     strrefccmp(char *ref, char *cmp, char c);
 
 void	ft_free_all(t_data *data, t_msh *msh);
-void	ft_free_ex(t_data *data, t_msh *msh);
+void	ft_free_ex(t_data *data);
 
 #endif
