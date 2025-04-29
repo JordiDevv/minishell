@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_utils.c                                       :+:      :+:    :+:   */
+/*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:05:39 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 12:10:48 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:21:57 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-void	ft_print_list(t_msh *msh)
+/*void	ft_print_list(t_msh *msh)
 {
 	t_list	*aux;
 	int		i;
@@ -40,8 +40,7 @@ void	ft_print_list(t_msh *msh)
 		j++;
 		aux = aux->next;
 	}
-}
-
+}*/
 /*Just an ASCII artpiece to know we entered MINISHELL*/
 
 void	ft_draw(void)

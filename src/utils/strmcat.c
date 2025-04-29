@@ -6,13 +6,13 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:15:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 13:18:13 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:18:29 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-static size_t	ft_strlen(const char *s)
+/*static size_t	ft_strlen(const char *s)
 {
 	int	i;
 

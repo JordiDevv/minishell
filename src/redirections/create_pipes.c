@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 12:05:32 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:23:42 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	count_pipes(t_list *lst)
 	return (n);
 }
 
-static int	*create_pipe()
+static int	*create_pipe(void)
 {
 	int	*pipe_fd;
 
