@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:05:39 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/27 18:06:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:10:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,6 @@ void	ft_print_list(t_msh *msh)
 	}
 }
 
-void	ft_init_data(t_data *data)
-{
-	data->full_rute = NULL;
-	data->pipe_fds = NULL;
-	data->pipe_index = 0;
-	data->fd_input = 0;
-	data->fd_output = 0;
-	data->fd_stdin = 0;
-	data->fd_stdout = 0;
-	data->should_exit = 0;
-	data->doors->input_door = lock;
-	data->doors->output_door = lock;
-}
-
 /*Just an ASCII artpiece to know we entered MINISHELL*/
 
 void	ft_draw(void)
@@ -79,37 +65,4 @@ void	ft_draw(void)
 	"     `-'       `--'\n";
 
 	printf("%s\n", ascii);
-}
-
-/*ft_prompt recieves environment, finds PWD, HOME and USER,
-finds if the current dir contains HOME dir and creates
-a str that simulates bash prompt*/
-
-char	*ft_prompt(char **env)
-{
-	char	*str;
-	char	*pwd;
-	char	*tmp;
-	char	*usr;
-	int		size;
-
-	tmp = ft_strdup(ft_find_var(env, "PWD"));
-	size = ft_strlen(ft_find_var(env, "HOME"));
-	pwd = tmp;
-	if (ft_strnstr(pwd, ft_find_var(env, "HOME"), size))
-	{
-		pwd += size - 1;
-		pwd[0] = '~';
-	}
-	usr = ft_find_var(env, "USER");
-	size = ft_strlen(pwd) + ft_strlen(usr) + 14;
-	str = malloc((size + 1) * sizeof(char));
-	if (!str || !tmp)
-		return (NULL);
-	if (!ft_strlcpy(str, usr, size) || !ft_strlcat(str, "@minishell:", size)
-		|| !ft_strlcat(str, pwd, size) || !ft_strlcat(str, "$ ", size))
-		return (NULL);
-	str[size] = '\0';
-	free(tmp);
-	return (str);
 }
