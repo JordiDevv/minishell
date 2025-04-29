@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 12:55:52 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:33:13 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	*valid_program(t_cmd *cmd, t_data *data)
 	if (!access(cmd->full, F_OK))
 		write(1, "Existe\n", 7);
 	if (!access(cmd->full, X_OK))
+	//Puede ser que haya que reservar memoria creando aquí un string nuevo
 		return (cmd->full);
 	return (NULL);
 }
