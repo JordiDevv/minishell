@@ -6,21 +6,21 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:15:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 12:56:46 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:10:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-// static size_t	ft_strlen(const char *s)
-// {
-// 	int	i;
+/*static size_t	ft_strlen(const char *s)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (s[i])
-// 		i++;
-// 	return (i);
-// }
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}*/
 
 static void	ft_strcat(char *dst, const char *src)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   wait_childs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:42:37 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 00:53:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:10:01 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int	wait_childs()
+int	wait_childs(void)
 {
 	int	status;
 

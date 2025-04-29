@@ -26,12 +26,12 @@ static char	*valid_program(t_cmd *cmd, t_data *data)
 static char	*valid_cmd(t_cmd *cmd, t_data *data)
 {
 	int		i;
-    char    *full_rute;
+	char    *full_rute;
 
 	i = 0;
 	while (data->split_path[i] && cmd->split)
 	{
-        full_rute = NULL;
+	full_rute = NULL;
 		full_rute = strmcat(3, 0, data->split_path[i], "/", cmd->split[0]);
 		if (!full_rute)
 		{

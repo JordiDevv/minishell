@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 10:36:34 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/27 10:53:27 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:31:56 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ void	sigint_handler(int signo)
 {
 	g_exit_status = 128 + signo;
 	write(STDOUT_FILENO, "\n", 1);
-	/*if (isatty(STDIN_FILENO))
-	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}*/
 }
 
 void	ft_signal(void)

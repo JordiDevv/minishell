@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:04:01 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/28 18:53:17 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:03:14 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_concat_prompt(char **env, char *pwd)
 	char	*usr;
 	t_size	size;
 
-	usr = ft_find_var(env, "USERNAME");
+	usr = ft_find_var(env, "USER=") - 1;
 	if (!*usr)
 		return ("\0");
 	size = ft_strlen(pwd) + ft_strlen(usr) + 14;
