@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 14:20:10 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:05:34 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*ft_subst_exit(char *str, int i)
 	if (!tmp)
 		return (NULL);
 	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, exit, length)
-		|| !ft_strlcat(tmp, (str + (i + 2)), length))
+		|| !ft_strlcat(tmp, (str + (i + 1)), length))
 		return (NULL);
 	tmp[length] = '\0';
 	return (tmp);

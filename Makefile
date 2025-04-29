@@ -61,13 +61,15 @@ obj:
 
 clean:
 	rm -rf $(OBJSDIR)
+	make -C inc/libft clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -C inc/libft fclean
 
 re: fclean all
 
 debug:
-	gcc $(filter-out main.c, src/*.c src/*/*.c) -Wall -Wextra -g -lreadline inc/libft/libft.a
+	gcc $(filter-out main.c, src/*.c src/*/*.c) -Wall -Wextra -g -lreadline inc/libft/libft.a -o minishell
 
 .PHONY: clean fclean re debug
