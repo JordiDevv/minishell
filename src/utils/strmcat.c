@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:15:23 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/28 18:25:20 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:09:33 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 		i++;
 	return (i);
 }*/
-
 
 static void	ft_strcat(char *dst, const char *src)
 {

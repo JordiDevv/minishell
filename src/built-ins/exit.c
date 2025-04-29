@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:36:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 00:40:52 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:51:03 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 static long	ft_atol_safe(const char *str, bool *long_range)
 {
-	int	    sign;
-	int	    i;
+	int		sign;
+	int		i;
 	long	n;
 
 	sign = 1;
@@ -33,57 +33,57 @@ static long	ft_atol_safe(const char *str, bool *long_range)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-        if (sign == 1 && (n > (LONG_MAX - (str[i] - 48)) / 10))
+		if (sign == 1 && (n > (LONG_MAX - (str[i] - 48)) / 10))
 			*long_range = false;
 		if (sign == -1 && (n > (-(LONG_MIN + (str[i] - 48)) / 10)))
-            *long_range = false;
+			*long_range = false;
 		n = n * 10 + (str[i] - 48);
-        i++;
+		i++;
 	}
 	return (n * sign);
 }
 
-static bool  valid_number(char *string)
+static bool	valid_number(char *string)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (string[i] == '-')
-        i++;
-    while (string[i])
-    {
-        if (!ft_isdigit(string[i]))
-            return (false);
-        i++;
-    }
-    return (true);
+	i = 0;
+	if (string[i] == '-')
+		i++;
+	while (string[i])
+	{
+		if (!ft_isdigit(string[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
-void    ex_exit(t_data *data, t_cmd *cmd)
+void	ex_exit(t_data *data, t_cmd *cmd)
 {
-    bool    is_number;
-    long    n;
-    bool    long_range;
+	bool	is_number;
+	long	n;
+	bool	long_range;
 
-    long_range = true;
-    if (cmd->split[1])
-    {
-        is_number = valid_number(cmd->split[1]);
-        if (is_number)
-            n = ft_atol_safe(cmd->split[1], &long_range);
-        if (is_number && cmd->split[2])
-        {
-            write(2, "bash: exit: too many arguments\n", 31);
-            return ;
-        }
-        else if (!is_number || !long_range)
-        {
-            write(2, "exit: bash: numeric argument required\n", 38);
-            g_exit_status = 2;
-        }
-        else if (is_number)
-            g_exit_status = n;
-    }
-    g_exit_status = (unsigned char)g_exit_status;
-    data->should_exit = 1;
+	long_range = true;
+	if (cmd->split[1])
+	{
+		is_number = valid_number(cmd->split[1]);
+		if (is_number)
+			n = ft_atol_safe(cmd->split[1], &long_range);
+		if (is_number && cmd->split[2])
+		{
+			write(2, "bash: exit: too many arguments\n", 31);
+			return ;
+		}
+		else if (!is_number || !long_range)
+		{
+			write(2, "exit: bash: numeric argument required\n", 38);
+			g_exit_status = 2;
+		}
+		else if (is_number)
+			g_exit_status = n;
+	}
+	g_exit_status = (unsigned char)g_exit_status;
+	data->should_exit = 1;
 }

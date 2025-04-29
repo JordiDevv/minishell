@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:53:14 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/02/20 12:14:26 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:12:58 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 void	get_path(t_data *data, t_msh *msh)
 {
 	char	*path;
-    int     i;
+	int		i;
 
 	path = NULL;
-    i = -1;
+	i = -1;
 	while (msh->env[++i])
 	{
 		if (!ft_strncmp(msh->env[i], "PATH=", 5))
@@ -30,7 +30,7 @@ void	get_path(t_data *data, t_msh *msh)
 				perror(R "Error allocating path\n" RE);
 				//free_exit(program_data);
 			}
-			ft_strlcpy(path, msh->env[i] + 5, 
+			ft_strlcpy(path, msh->env[i] + 5,
 				ft_strlen(msh->env[i]) - 4);
 		}
 	}
