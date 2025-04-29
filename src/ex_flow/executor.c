@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 12:03:32 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:36:56 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ int	execute_cmd(t_data *data, t_msh *msh, char **split_cmd)
 		if (execve(data->full_rute, split_cmd, msh->env) == -1)
 			return (-1);
 	}
+	return (0);
 }

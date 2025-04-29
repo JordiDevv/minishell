@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:54:22 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 11:46:33 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:31:09 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	go_home(t_cmd *cmd, t_msh *msh)
 	char	*home;
 
 	home = ft_find_var(msh->env, "HOME");
-	if (!cmd->split[1] || cmd->split[1] && !cmd->split[1][0])
+	if (!cmd->split[1] || (cmd->split[1] && !cmd->split[1][0]))
 	{
 		if (!home || chdir(home) < 0)
 		{

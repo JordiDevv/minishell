@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 13:16:49 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:31:33 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	ex_echo(t_cmd *cmd)
 {
 	bool	has_newline;
 	int		i;
-	int		j;
 
 	if (!cmd)
 	{

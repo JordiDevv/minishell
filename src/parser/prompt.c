@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:04:01 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 14:21:33 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:52:07 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_dup_var(char **env, char *var)
 {
 	char	*tmp;
 
-	tmp = ft_strdup(ft_find_var(env, "PWD"));
+	tmp = ft_strdup(ft_find_var(env, var));
 	if (!tmp)
 		return ("\0");
 	return (tmp);

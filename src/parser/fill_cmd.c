@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:09:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 14:20:03 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:41:08 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ cmd and switches to tell if it is inside or outside "" or '' signs.
 sets cmd->full pointer. if cmd is builtin, sets cmd->builtin.
 iterates untill if finds key char*/
 
-int	ft_full(char **str, t_cmd *cmd, int i, int *m)
+int	ft_full(char **str, t_cmd *cmd, int i)
 {
 	cmd->full = (*str) + i;
 	if (ft_strnstr((*str) + i, "echo", 4) && cmd->built == NULL)

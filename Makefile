@@ -65,6 +65,6 @@ fclean: clean
 re: fclean all
 
 debug:
-	gcc $(filter-out main.c, src/*.c src/*/*.c) -g -lreadline inc/libft/libft.a
+	gcc $(filter-out main.c, src/*.c src/*/*.c) -Wall -Wextra -g -lreadline inc/libft/libft.a
 
 .PHONY: clean fclean re debug
