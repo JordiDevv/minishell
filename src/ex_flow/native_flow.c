@@ -6,14 +6,21 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/23 00:53:06 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/28 22:32:29 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-static char    *valid_cmd(t_cmd *cmd, t_data *data)
+static char	*valid_program(t_cmd *cmd, t_data *data)
+{
+	if (!access(cmd->full, X_OK))
+		return (cmd->full);
+	return (NULL);
+}
+
+static char	*valid_cmd(t_cmd *cmd, t_data *data)
 {
 	int		i;
 	char    *full_rute;
@@ -25,8 +32,8 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 		full_rute = strmcat(3, 0, data->split_path[i], "/", cmd->split[0]);
 		if (!full_rute)
 		{
-			printf(R "Error concatenating the full rute" RE);
-			//free_exit(program_data);
+			write(2, "Error concatenating the full rute\n", 34);
+			return (NULL);
 		}
 		if (!access(full_rute, X_OK))
 			return (full_rute);
@@ -43,7 +50,9 @@ static char    *valid_cmd(t_cmd *cmd, t_data *data)
 
 void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 {
-	data->full_rute = valid_cmd(cmd, data);
+	data->full_rute = valid_program(cmd, data);
+	if (!data->full_rute)
+		data->full_rute = valid_cmd(cmd, data);
 	if (data->full_rute)
 	{
 		execute_cmd(data, msh, cmd->split);
