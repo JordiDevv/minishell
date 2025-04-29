@@ -6,20 +6,43 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 13:33:13 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:32:51 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
+static char	*delete_newline(char *src)
+{
+	char	*dst;
+	int		i;
+	int		j;
+
+	dst = malloc(ft_strlen(src) * sizeof(char));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (src[i])
+	{
+		if (src[i] == '\n')
+		{
+			i++;
+			continue ;
+		}
+		dst[j] = src[i];
+		i++;
+		j++;
+	}
+	return (dst);
+}
+
 static char	*valid_program(t_cmd *cmd, t_data *data)
 {
-	if (!access(cmd->full, F_OK))
-		write(1, "Existe\n", 7);
-	if (!access(cmd->full, X_OK))
-	//Puede ser que haya que reservar memoria creando aquí un string nuevo
-		return (cmd->full);
+	char *full_rute = delete_newline(cmd->full);
+	if (!access(full_rute, X_OK))
+		return (full_rute);
 	return (NULL);
 }
 
