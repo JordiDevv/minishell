@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 14:32:51 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:37:33 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static char	*delete_newline(char *src)
 static char	*valid_program(t_cmd *cmd, t_data *data)
 {
 	char *full_rute = delete_newline(cmd->full);
+	//Debe limpiar todo lo que haya después de la ruta
 	if (!access(full_rute, X_OK))
 		return (full_rute);
 	return (NULL);
