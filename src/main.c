@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 12:10:39 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:53:45 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static void	main_loop(t_msh *msh, t_data *data)
 		ft_free_ex(data, msh);
 		ft_free_nodes(msh->lst);
 	}
-	free(msh->prompt);
+	if (*msh->prompt)
+		free(msh->prompt);
 }
 
 int	main(int argc, char **argv, char **envp)
