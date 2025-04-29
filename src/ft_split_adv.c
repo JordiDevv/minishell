@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 19:40:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/02/20 15:40:39 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/28 19:11:08 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ static char	**ft_fill(const char *s, const char c, char **strs)
 		while (s[i] == c && s[i])
 			i++;
 		while (s[i + len] != c && s[i + len])
-		{
-			len += ft_markfind((char *)&(s[i + len]));
-			len++;
-		}
+			len += ft_markfind((char *)&(s[i + len])) + 1;
 		if (s[i])
 		{
 			strs[j] = ft_substr(s, i, len);

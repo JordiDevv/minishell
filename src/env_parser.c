@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/27 13:45:45 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/28 20:12:15 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	*ft_find_var(char **envp, char *var)
 	int		i;
 
 	name = NULL;
-	var = ft_strjoin(var, "=");
 	i = 0;
 	while (envp[i])
 	{
@@ -34,10 +33,9 @@ char	*ft_find_var(char **envp, char *var)
 		}
 		i++;
 	}
-	free (var);
 	if (!name)
-		return (NULL);
-	value = ft_strchr(name, '=') + 1;
+		return ("\0");
+	value = name + ft_strlen(var) + 1;
 	return (value);
 }
 
@@ -83,11 +81,11 @@ char	*ft_subst_dolar(char **envp, char *str, int i, int j)
 		return (str);
 	}
 	length = ft_strlen(str) + ft_strlen(env) - (j - i);
-	tmp = malloc (length * sizeof(char));
+	tmp = malloc (length * sizeof(char) + 1);
 	if (!tmp)
 		return (NULL);
-	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, env, length) \
-			|| !ft_strlcat(tmp, (str + (i + j)), length))
+	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, env, length)
+		|| !ft_strlcat(tmp, (str + (i + j)), length))
 		return (NULL);
 	tmp[length] = '\0';
 	free(var);
@@ -105,8 +103,8 @@ char	*ft_subst_exit(char *str, int i)
 	tmp = malloc (length * sizeof(char));
 	if (!tmp)
 		return (NULL);
-	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, exit, length) \
-			|| !ft_strlcat(tmp, (str + (i + 2)), length))
+	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, exit, length)
+		|| !ft_strlcat(tmp, (str + (i + 2)), length))
 		return (NULL);
 	tmp[length] = '\0';
 	return (tmp);
