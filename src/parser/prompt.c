@@ -6,11 +6,11 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:04:01 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 14:03:14 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:21:33 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parser.h"
+#include "../../inc/parser.h"
 
 char	*ft_dup_var(char **env, char *var)
 {

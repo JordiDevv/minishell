@@ -6,11 +6,11 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 12:43:49 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:22:53 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parser.h"
+#include "../../inc/parser.h"
 
 /*Receives str and pointer to cmd. Iterates over str 
 looking for key chars outside "" or ''.

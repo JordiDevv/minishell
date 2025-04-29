@@ -6,13 +6,11 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 13:10:08 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:20:10 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../inc/parser.h"
+#include "../../inc/parser.h"
 
 /*Function receives environment variables and variable to find
 if found, it returns a pointer to its value. if not found, returns NULL*/

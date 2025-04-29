@@ -6,12 +6,12 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:33:37 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 13:53:49 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:20:29 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parser.h"
-#include "../inc/executor.h"
+#include "../../inc/parser.h"
+#include "../../inc/executor.h"
 
 /*frees environment*/
 int	ft_free_env(char **env)

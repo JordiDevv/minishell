@@ -3,7 +3,8 @@ GCC = gcc
 CFLAGS = -Wall -Wextra -Werror -lreadline
 SRCSDIR = src
 OBJSDIR = obj
-SRCSFILES = built-ins/cd.c \
+SRCSFILES = main.c \
+			built-ins/cd.c \
 			built-ins/echo.c \
 			built-ins/env.c \
 			built-ins/exit.c \
@@ -23,16 +24,15 @@ SRCSFILES = built-ins/cd.c \
 			utils/strccmp.c \
 			utils/strmcat.c \
 			utils/wait_childs.c \
-			env_parser.c \
-			fill_cmd.c \
-			free.c \
-			ft_split_adv.c \
-			home_exp.c \
-			main_testing.c \
-			mark_handlers.c \
-			proc_line.c \
-			prompt.c \
-			signals.c
+			parser/env_parser.c \
+			parser/fill_cmd.c \
+			parser/free.c \
+			parser/ft_split_adv.c \
+			parser/home_exp.c \
+			parser/mark_handlers.c \
+			parser/proc_line.c \
+			parser/prompt.c \
+			parser/signals.c
 OBJSFILES = $(SRCSFILES:.c=.o)
 SRCS = $(addprefix $(SRCSDIR)/, $(SRCSFILES))
 OBJS = $(addprefix $(OBJSDIR)/, $(OBJSFILES))

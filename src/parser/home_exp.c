@@ -6,11 +6,11 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:35:14 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/19 23:18:01 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:20:47 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parser.h"
+#include "../../inc/parser.h"
 
 /*Receives str with marker pointing to ~ sign (i). 
 Finds home in envp and returns new string copying home in the right place*/
