@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 12:07:12 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:59:00 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ char		**ft_split_adv(const char *s, const char c);
 void		ft_signal(void);
 void		ft_free_nodes(t_list *lst);
 int			ft_markfind_single(char *str);
-char		*ft_prompt(char **env);
 
 #endif
