@@ -6,11 +6,42 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/30 08:36:22 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:12:34 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
+
+void	ft_strctrim(char **str)
+{
+	size_t	size;
+	char	*aux;
+
+	size = ft_strlen(*str);
+	if ((str[0][0] == '\"' && str[0][size - 1] == '\"')
+		|| (str[0][0] == '\'' && str[0][size - 1] == '\''))
+	{
+		aux = ft_substr(*str, 1, size - 2);
+		if (!aux)
+			return ;
+		free (*str);
+		*str = aux;
+	}
+}
+
+void	ft_trim(char **split)
+{
+	int	i;
+
+	i = 0;
+	if (!split || !*split)
+		return ;
+	while (split[i])
+	{
+		ft_strctrim(&split[i]);
+		i++;
+	}
+}
 
 /*Receives str and pointer to cmd. Iterates over str 
 looking for key chars outside "" or ''.
@@ -42,6 +73,7 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 	}
 	ft_ptend(&str);
 	cmd->split = ft_split_adv(cmd->full, ' ');
+	ft_trim(cmd->split);
 }
 
 /*Funcion recieves first node and substring "str", 
