@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 16:36:56 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:20:18 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	ex_loop(t_msh *msh, t_data *data)
 	{
 		cmd = ((t_cmd *) aux_lst->content);
 		if (aux_lst->next)
-			data->doors->output_door = unlock;
+			data->doors->output_door = UNLOCK;
 		else
-			data->doors->output_door = lock;
+			data->doors->output_door = LOCK;
 		if (cmd->input || cmd->output || cmd->del || cmd->append)
 			file_redirection(data, cmd);
 		if (cmd->built)
 			ex_built(cmd, data, msh);
 		else
 			ex_native(data, msh, cmd);
-		data->doors->input_door = unlock;
+		data->doors->input_door = UNLOCK;
 		aux_lst = aux_lst->next;
 		if (data->fd_input)
 			close(data->fd_input);

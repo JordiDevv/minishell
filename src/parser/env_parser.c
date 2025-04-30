@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 19:05:34 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:10:50 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ char	*ft_expand_vars(char **envp, char *str)
 				str = ft_subst_exit(str, i);
 			else
 			{
-				while (str[i + j] != ' ' && str[i + j] != '\'' \
-						&& str[i + j] != '\"' && str[i + j])
+				while (str[i + j] != ' ' && str[i + j] != '\''
+					&& str[i + j] != '\"' && str[i + j])
 					j++;
 				str = ft_subst_dolar(envp, str, i, j);
 				i = i + j - 1;
@@ -138,16 +138,3 @@ char	*ft_expand_vars(char **envp, char *str)
 	}
 	return (str);
 }
-
-/*for testing purposes*/
-/*int	main(int argc, char **argv, char **envp)
-{
-	int		i;
-	char	**envpms;
-	char	*str;
-
-	envpms = ft_env_parser(envp);
-	str = ft_expand_vars(envpms, "this is path = $(PATH)");
-	printf("%s\n", str);
-	return (0);
-}*/

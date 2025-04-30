@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:36:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 11:51:03 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:14:28 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ static long	ft_atol_safe(const char *str, bool *long_range)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		if (str[i] == '-')
+		if (str[i++] == '-')
 			sign = -1;
-		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{

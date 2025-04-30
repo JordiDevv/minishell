@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/30 08:28:02 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:17:38 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdbool.h>
 # include <signal.h>
 
-extern volatile sig_atomic_t g_exit_status;
+extern volatile sig_atomic_t	g_exit_status;
 
 typedef struct s_cmd
 {
@@ -55,7 +55,6 @@ char		*ft_expand_home(char **env, char *str);
 char		*ft_subst_home(char **envp, char *str, int i);
 char		*ft_prompt(char **env);
 void		ft_print_list(t_msh *msh);
-void		ft_draw(void);
 void		ft_cmd_fill(char *str, t_cmd *cmd);
 t_list		*ft_new_node(char *str, t_list *first);
 void		ft_ptend(char **str);
