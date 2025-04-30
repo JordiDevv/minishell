@@ -6,42 +6,50 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/30 01:30:52 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/30 01:58:18 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
+static int	ft_isspace(char c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return (0);
+}
+
 static char	*delete_newline(char *src)
 {
 	char	*dst;
+	int		len;
 	int		i;
-	int		j;
 
-	dst = malloc(ft_strlen(src) * sizeof(char));
+	len = 0;
+	while (src[len])
+	{
+		if (ft_isspace(src[len]))
+			break ;
+		len++;
+	}
+	dst = malloc((len + 1) * sizeof(char));
 	if (!dst)
 		return (NULL);
 	i = 0;
-	j = 0;
 	while (src[i])
 	{
-		if (src[i] == '\n')
-		{
-			i++;
-			continue ;
-		}
-		dst[j] = src[i];
+		if (ft_isspace(src[i]))
+			break ;
+		dst[i] = src[i];
 		i++;
-		j++;
 	}
 	return (dst);
 }
 
-static char	*valid_program(t_cmd *cmd, t_data *data)
+static char	*valid_program(t_cmd *cmd)
 {
 	char *full_rute = delete_newline(cmd->full);
-	//Debe limpiar todo lo que haya después de la ruta
 	if (!access(full_rute, X_OK))
 		return (full_rute);
 	return (NULL);
