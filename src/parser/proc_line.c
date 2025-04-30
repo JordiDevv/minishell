@@ -1,0 +1,137 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   proc_line.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
+/*   Updated: 2025/04/30 11:12:34 by rhernand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/parser.h"
+
+void	ft_strctrim(char **str)
+{
+	size_t	size;
+	char	*aux;
+
+	size = ft_strlen(*str);
+	if ((str[0][0] == '\"' && str[0][size - 1] == '\"')
+		|| (str[0][0] == '\'' && str[0][size - 1] == '\''))
+	{
+		aux = ft_substr(*str, 1, size - 2);
+		if (!aux)
+			return ;
+		free (*str);
+		*str = aux;
+	}
+}
+
+void	ft_trim(char **split)
+{
+	int	i;
+
+	i = 0;
+	if (!split || !*split)
+		return ;
+	while (split[i])
+	{
+		ft_strctrim(&split[i]);
+		i++;
+	}
+}
+
+/*Receives str and pointer to cmd. Iterates over str 
+looking for key chars outside "" or ''.
+Calls functions located in fill_cmd.c to fill the cmd struct. 
+Calls ft_ptend() to end pointers. */
+
+void	ft_cmd_fill(char *str, t_cmd *cmd)
+{
+	int		i;
+	int		m[2];
+
+	m[0] = 0;
+	m[1] = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+			m[0] = (m[0] + 1) % 2;
+		if (str[i] == '\'')
+			m[1] = (m[1] + 1) % 2;
+		if (str[i] == '<' && !m[0] && !m[1] && cmd->input == NULL)
+			i = ft_redir_in(&str, cmd, i);
+		else if (str[i] == '>' && !m[0] && !m[1] && cmd->output == NULL)
+			i = ft_redir_out(&str, cmd, i);
+		else if (cmd->full == NULL && str[i] != ' ' && str[i] != '<'
+			&& str[i] != '>')
+			i = ft_full(&str, cmd, i);
+		i++;
+	}
+	ft_ptend(&str);
+	cmd->split = ft_split_adv(cmd->full, ' ');
+	ft_trim(cmd->split);
+}
+
+/*Funcion recieves first node and substring "str", 
+if first node does not exist, finds input and fills first node.
+Otherwise, creates a new node, calls ft_cmd_fill to fill node->content
+Adds node to the end of the list with ft_lstadd_back()*/
+
+t_list	*ft_new_node(char *str, t_list *first)
+{
+	t_cmd	*cmd;
+	t_list	*node;
+
+	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	cmd->input = NULL;
+	cmd->output = NULL;
+	cmd->built = NULL;
+	cmd->full = NULL;
+	cmd->split = NULL;
+	cmd->del = NULL;
+	cmd->append = NULL;
+	ft_cmd_fill(str, cmd);
+	node->content = (void *) cmd;
+	node->next = NULL;
+	ft_lstadd_back(&first, node);
+	return (first);
+}
+
+/*function finds pipes "|" in str, chops them,
+creates first node and sends the chopped strs to function to fill
+and place the rest of the nodes within the linked list*/
+
+t_list	*ft_proc_str(char *str)
+{
+	int			j;
+	t_list		*first;
+	char		*aux;
+
+	j = 0;
+	first = NULL;
+	aux = str;
+	while (aux[j])
+	{
+		j += ft_markfind(aux + j);
+		if (aux[j] == '|')
+		{
+			aux[j] = '\0';
+			first = ft_new_node(aux, first);
+			aux += (j + 1);
+			j = -1;
+		}
+		j++;
+	}
+	if (aux[0])
+		first = ft_new_node(aux, first);
+	return (first);
+}
