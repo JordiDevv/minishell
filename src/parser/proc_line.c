@@ -6,11 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-<<<<<<< HEAD:src/proc_line.c
-/*   Updated: 2025/04/26 13:24:37 by rhernand         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 18:44:33 by rhernand         ###   ########.fr       */
->>>>>>> rhernand:src/parser/proc_line.c
+/*   Updated: 2025/04/30 08:36:22 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
