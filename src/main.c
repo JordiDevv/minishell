@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 17:15:48 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 08:41:26 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	ft_init_data(data);
 	if (isatty(STDIN_FILENO))
 	{
-		msh->input = readline(msh->prompt);
+		ft_prompt_marks(msh);
 		if (!msh->input)
 			return (1);
 		if (*(msh->input) == '\0')

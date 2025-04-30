@@ -6,32 +6,62 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/30 08:35:38 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 09:33:58 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
+int	ft_markfind_double(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] && str[i] == '\"')
+	{
+		i++;
+		while (str[i] && str[i] != '\"')
+			i++;
+		if (str[i] && str[i + 1])
+			return (i + 1);
+		return (i);
+	}
+	return (0);
+}
+
+int	ft_markfind_single(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] && str[i] == '\'')
+	{
+		i++;
+		while (str[i] && str[i] != '\'')
+			i++;
+		if (str[i] && str[i + 1])
+			return (i + 1);
+		return (i);
+	}
+	return (0);
+}
+
 int	ft_count_marks(char *str)
 {
 	int		i;
-	int		sgl;
-	int		dbl;
 
 	i = 0;
-	sgl = 0;
-	dbl = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
-			sgl++;
-		if (str[i++] == '\"')
-			dbl++;
+		i += ft_markfind_double(str + i);
+		if (!str[i])
+			return (1);
+		i += ft_markfind_single(str + i);
+		if (!str[i])
+			return (1);
+		i++;
 	}
-	if (((sgl % 2 == 0 && sgl != 0) || (dbl % 2 == 0 && dbl != 0))
-		|| (sgl == 0 && dbl == 0))
-		return (0);
-	return (1);
+	return (0);
 }
 
 void	ft_prompt_marks(t_msh *msh)
@@ -52,23 +82,6 @@ void	ft_prompt_marks(t_msh *msh)
 	}
 }
 
-int	ft_markfind_single(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] && str[i] == '\'')
-	{
-		i++;
-		while (str[i] && str[i] != '\'')
-			i++;
-		if (str[i])
-			return (i + 1);
-		return (i);
-	}
-	return (0);
-}
-
 int	ft_markfind(char *str)
 {
 	int	i;
@@ -79,7 +92,7 @@ int	ft_markfind(char *str)
 		i++;
 		while (str[i] && str[i] != '\"')
 			i++;
-		if (str[i])
+		if (str[i] && str[i + 1])
 			return (i + 1);
 		return (i);
 	}
@@ -88,7 +101,7 @@ int	ft_markfind(char *str)
 		i++;
 		while (str[i] && str[i] != '\'')
 			i++;
-		if (str[i])
+		if (str[i] && str[i + 1])
 			return (i + 1);
 		return (i);
 	}
