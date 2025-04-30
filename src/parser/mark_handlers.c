@@ -6,11 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-<<<<<<< HEAD:src/mark_handlers.c
-/*   Updated: 2025/04/26 13:46:11 by rhernand         ###   ########.fr       */
-=======
-/*   Updated: 2025/04/29 14:22:43 by rhernand         ###   ########.fr       */
->>>>>>> rhernand:src/parser/mark_handlers.c
+/*   Updated: 2025/04/30 08:35:38 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
