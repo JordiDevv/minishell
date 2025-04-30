@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:24:54 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/22 23:38:13 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:34:18 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-int	ex_pwd(char **envp)
+int	ex_pwd(void)
 {
 	char	*pwd_value;
 
-	pwd_value = ft_find_var(envp, "PWD");
+	pwd_value = getcwd(NULL, 0);
 	if (!pwd_value)
 	{
 		write(2, "Error: pwd is corrupted\n", 24);
@@ -25,5 +25,6 @@ int	ex_pwd(char **envp)
 	}
 	write(1, pwd_value, ft_strlen(pwd_value));
 	write(1, "\n", 1);
+	free(pwd_value);
 	return (0);
 }

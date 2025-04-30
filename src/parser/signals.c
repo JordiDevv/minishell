@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 10:36:34 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/23 00:29:02 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:17:44 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/executor.h"
-#include "../inc/parser.h"
+#include "../../inc/executor.h"
+#include "../../inc/parser.h"
 #include <signal.h>
 
 volatile sig_atomic_t	g_exit_status = 0;
@@ -20,9 +20,12 @@ void	sigint_handler(int signo)
 {
 	g_exit_status = 128 + signo;
 	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (isatty(STDIN_FILENO))
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 void	ft_signal(void)

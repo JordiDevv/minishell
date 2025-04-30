@@ -6,11 +6,11 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 11:35:14 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/19 23:18:01 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:47:23 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/parser.h"
+#include "../../inc/parser.h"
 
 /*Receives str with marker pointing to ~ sign (i). 
 Finds home in envp and returns new string copying home in the right place*/
@@ -27,8 +27,8 @@ char	*ft_subst_home(char **envp, char *str, int i)
 	tmp = malloc ((length + 1) * sizeof(char));
 	if (!tmp)
 		return (NULL);
-	if (!ft_strlcpy(tmp, str, i + 1) || !ft_strlcat(tmp, home, length) \
-			|| !ft_strlcat(tmp, (str + (i + 1)), length))
+	if (!ft_strlcpy(tmp, str, i + 1) || !ft_strlcat(tmp, home, length)
+		|| !ft_strlcat(tmp, (str + (i + 1)), length))
 		return (NULL);
 	tmp[length] = '\0';
 	return (tmp);
@@ -43,7 +43,7 @@ char	*ft_expand_home(char **envp, char *str)
 
 	if (!str)
 		return (NULL);
-	if (str == "\0")
+	if (!*str)
 		return (str);
 	i = 0;
 	m[0] = 0;
