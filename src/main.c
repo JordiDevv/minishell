@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/03 14:12:40 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/03 20:01:47 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,3 @@ int	main(int argc, char **argv, char **envp)
 	write(1, "exit\n", 5);
 	return (g_exit_status);
 }
-
-//Reservamos memoria para data->doors
-//En "create_pipes" reservamos memoria para pipes_fds
