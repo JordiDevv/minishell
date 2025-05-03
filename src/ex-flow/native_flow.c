@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/30 01:58:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:19:02 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ static char	*valid_program(t_cmd *cmd)
 static char	*valid_cmd(t_cmd *cmd, t_data *data)
 {
 	int		i;
-	char    *full_rute;
+	char	*full_rute;
 
 	i = 0;
 	while (data->split_path[i] && cmd->split)
 	{
-	full_rute = NULL;
+		full_rute = NULL;
 		full_rute = strmcat(3, 0, data->split_path[i], "/", cmd->split[0]);
 		if (!full_rute)
 		{

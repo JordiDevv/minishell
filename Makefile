@@ -21,7 +21,6 @@ SRCSFILES = main.c \
 			utils/export_utils.c \
 			utils/ft_realloc.c \
 			utils/get_path.c \
-			utils/main_utils.c \
 			utils/mat_utils.c \
 			utils/strccmp.c \
 			utils/strmcat.c \

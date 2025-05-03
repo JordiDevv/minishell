@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 13:23:42 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:03:28 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ static int	*create_pipe(void)
 	if (!pipe_fd)
 	{
 		perror(R "Error allocating a pipe\n" RE);
-		//free_exit(program_data);
 	}
 	if (pipe(pipe_fd) < 0)
 	{
 		perror(R "Error creating a pipe\n" RE);
-		//free "return (NULL);"
 	}
 	return (pipe_fd);
 }
@@ -58,7 +56,6 @@ int	**prepare_pipes(t_list *lst)
 	if (!pipe_fds)
 	{
 		perror(R "Error allocating the pipes array\n" RE);
-		//free "return (NULL);"
 	}
 	pipe_fds[n_pipes] = NULL;
 	i = n_pipes;

@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 17:15:48 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:18:22 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 {
 	size_t	env_size;
 
-	ft_draw();
 	msh->env = ft_env_parser(envp);
 	env_size = (mat_len(msh->env) + 1) * sizeof(char *);
 	data->exported_vars = malloc(env_size);
@@ -36,8 +35,8 @@ static void	ft_init_data(t_data *data)
 	data->fd_stdin = 0;
 	data->fd_stdout = 0;
 	data->should_exit = 0;
-	data->doors->input_door = lock;
-	data->doors->output_door = lock;
+	data->doors->input_door = LOCK;
+	data->doors->output_door = LOCK;
 }
 
 static int	init_dynamic_data(t_msh *msh, t_data *data)
@@ -46,7 +45,7 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	ft_init_data(data);
 	if (isatty(STDIN_FILENO))
 	{
-		msh->input = readline(msh->prompt);
+		ft_prompt_marks(msh);
 		if (!msh->input)
 			return (1);
 		if (*(msh->input) == '\0')

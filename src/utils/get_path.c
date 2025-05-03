@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:53:14 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 13:22:31 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:03:56 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	get_path(t_data *data, t_msh *msh)
 			if (!path)
 			{
 				perror(R "Error allocating path\n" RE);
-				//free_exit(program_data);
 			}
 			ft_strlcpy(path, msh->env[i] + 5,
 				ft_strlen(msh->env[i]) - 4);
@@ -37,7 +36,6 @@ void	get_path(t_data *data, t_msh *msh)
 	if (!path)
 	{
 		printf(R "Error: Path wasn't found\n" RE);
-		//free_exit(msh);
 	}
 	data->split_path = ft_split(path, ':');
 	free(path);
