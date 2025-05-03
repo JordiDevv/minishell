@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:45:33 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 11:55:28 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:34:23 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,10 @@ int	ex_export(t_msh *msh, t_data *data, t_cmd *cmd)
 	}
 	return (error_flag);
 }
-/*mat_len(envp); mat_realloc(envp, mat_len(envp));
 
-Deberíamos utilizar esa función para modificar envp y 
-añadir al final la nueva variable
+/*export VAR crea una variable exportada sin inicializar, pero no en el entorno. export VAR=
+crea un variable exportada inicializada pero vacía y también en el entorno VAR=""*/
 
-Muestra export si solo se ejecuta el comando y valida si un formato es bueno.
-ahora falta que compruebe si la variable existe en el entorno, y si existe 
-que la modifique, y si no existe que la cree
-
-Solo se modifica si el formato es MYVAR=value, MYVAR la crea si no existe 
-y MYVAR=value, en caso de no existir, la crea y le asigna ese valor
-
-Si haces export MYVAR, el formato con el que se verá después será: 
-MYVAR=. Así se debe guardar, el manejo del valor vacío es cosa del parser*/
+/*Vamos a intentar crear un hash-table con una matriz triple para las variable exportadas.
+Cada matriz se compondrá de 3 strings: Key '=' Value. Utiliza '=' para comprobar si la variable
+está inicializada, y escribirá el value entre "", que siempre tendrá el espacio reservado.*/
