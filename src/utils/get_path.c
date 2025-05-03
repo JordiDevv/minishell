@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:53:14 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/30 10:03:56 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:10:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@ void	get_path(t_data *data, t_msh *msh)
 			path = malloc(ft_strlen(msh->env[i]) - 4);
 			if (!path)
 			{
-				perror(R "Error allocating path\n" RE);
+				write(2, "Error allocating path\n", 22);
+				return ;
 			}
-			ft_strlcpy(path, msh->env[i] + 5,
-				ft_strlen(msh->env[i]) - 4);
+			ft_strlcpy(path, msh->env[i] + 5, ft_strlen(msh->env[i]) - 4);
+			break ;
 		}
 	}
-	if (!path)
+	if (path)
 	{
-		printf(R "Error: Path wasn't found\n" RE);
+		data->split_path = ft_split(path, ':');
+		free(path);
 	}
-	data->split_path = ft_split(path, ':');
-	free(path);
+	else
+		write(2, "Advert: Path wasn't found\n", 26);
 }

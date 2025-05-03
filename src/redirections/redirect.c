@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 12:09:29 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:01:59 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	native_redirect(int input, int output, t_data *data)
 {
 	if (!data->pipe_fds[data->pipe_index])
 	{
-		printf(R "No pipe was received in a redirection.\n" RE);
+		write(2, "No pipe was received in a redirection.\n", 39);
 		return (-1);
 	}
 	if (input)

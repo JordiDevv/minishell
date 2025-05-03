@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/30 10:18:22 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/03 14:12:40 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 	env_size = (mat_len(msh->env) + 1) * sizeof(char *);
 	data->exported_vars = malloc(env_size);
 	matlcpy(data->exported_vars, msh->env, env_size);
-	get_path(data, msh);
 	data->doors = malloc(sizeof(t_doors));
 }
 
-static void	ft_init_data(t_data *data)
+static void	ft_init_data(t_data *data, t_msh *msh)
 {
+	data->split_path = NULL;
+	get_path(data, msh);
 	data->full_rute = NULL;
 	data->pipe_fds = NULL;
 	data->pipe_index = 0;
@@ -42,7 +43,7 @@ static void	ft_init_data(t_data *data)
 static int	init_dynamic_data(t_msh *msh, t_data *data)
 {
 	msh->prompt = ft_prompt(msh->env);
-	ft_init_data(data);
+	ft_init_data(data, msh);
 	if (isatty(STDIN_FILENO))
 	{
 		ft_prompt_marks(msh);
@@ -78,6 +79,8 @@ static void	main_loop(t_msh *msh, t_data *data)
 	}
 	if (*msh->prompt)
 		free(msh->prompt);
+	if (data->split_path)
+		free_mat(data->split_path);
 }
 
 int	main(int argc, char **argv, char **envp)

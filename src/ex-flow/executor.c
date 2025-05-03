@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/30 10:20:18 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/03 13:50:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	execute_cmd(t_data *data, t_msh *msh, char **split_cmd)
 	pid = fork();
 	if (pid < 0)
 	{
-		printf(R "Error forking for executing a comand.\n" RE);
+		write(2, "Error forking for executing a comand\n", 37);
 		return (-1);
 	}
 	if (pid == 0)
