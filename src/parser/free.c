@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 12:33:37 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 16:45:30 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/04 03:03:19 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	ft_free_ex(t_data *data)
 	if (data->pipe_fds)
 	{
 		while (data->pipe_fds[i])
-			free (data->pipe_fds[i++]);
+			free(data->pipe_fds[i++]);
+		free(data->pipe_fds);
 	}
-	free (data->pipe_fds);
 	return ;
 }
 
@@ -85,10 +85,9 @@ void	ft_free_all(t_data *data, t_msh *msh)
 	ft_free_ex(data);
 	if (data->doors)
 		free(data->doors);
-	ft_free_matrix(data->split_path);
-	if (msh->input && !data->should_exit)
-		free (msh->input);
 	ft_free_env(msh->env);
+	if (msh->input && !data->should_exit)
+		free(msh->input);
 	if (data->exported_vars)
 		ft_free_matrix(data->exported_vars);
 	return ;
