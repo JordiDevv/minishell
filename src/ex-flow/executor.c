@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 02:37:34 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 03:34:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ex_loop(t_msh *msh, t_data *data)
 	while (aux_lst)
 	{
 		cmd = ((t_cmd *) aux_lst->content);
-		if (aux_lst->next)
+		if (aux_lst->next || cmd->output)
 			data->doors->output_door = UNLOCK;
 		else
 			data->doors->output_door = LOCK;
