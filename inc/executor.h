@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 00:50:41 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:09:12 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_data
 	int		fd_stdin;
 	int		fd_stdout;
 	int		should_exit;
+	pid_t	*pids;
 	char	**exported_vars;
 }			t_data;
 
@@ -74,6 +75,7 @@ void	modify_var(char **mat, char *var, int i);
 void	add_var(char ***mat, char *var);
 
 void	open_file(t_data *data, t_cmd *cmd);
+pid_t	*prepare_pids(t_list *lst);
 int		**prepare_pipes(t_list *lst);
 int		redirect(int input, int output, t_data *data);
 void	file_redirection(t_data *data, t_cmd *cmd);
@@ -87,7 +89,7 @@ void	ex_native(t_data *program_data, t_msh *msh, t_cmd *cmd);
 
 void	get_path(t_data *data, t_msh *msh);
 char	*strmcat(int n, int i, ...);
-int		wait_childs(void);
+int		wait_childs(t_data *data);
 char	*ft_realloc(char *old_str, size_t size);
 char	**mat_realloc(char **old_mat, size_t size, char *unset);
 void	free_mat(char **mat);

@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 03:34:44 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:45:04 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	execute_cmd(t_data *data, t_msh *msh, char **split_cmd)
 	pid_t	pid;
 
 	pid = fork();
+	data->pids[data->pipe_index] = pid;
 	if (pid < 0)
 	{
 		write(2, "Error forking for executing a comand\n", 37);

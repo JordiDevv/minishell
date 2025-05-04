@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_pipes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/30 10:03:28 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:45:24 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ static int	*create_pipe(void)
 	pipe_fd = malloc(sizeof(int) * 2);
 	if (!pipe_fd)
 	{
-		perror(R "Error allocating a pipe\n" RE);
+		write(2, "Error allocating a pipe\n", 24);
+		return (NULL);
 	}
 	if (pipe(pipe_fd) < 0)
 	{
-		perror(R "Error creating a pipe\n" RE);
+		write(2, "Error creating a pipe\n", 22);
+		return (NULL);
 	}
 	return (pipe_fd);
 }
@@ -46,7 +48,6 @@ static int	*create_pipe(void)
 int	**prepare_pipes(t_list *lst)
 {
 	int	**pipe_fds;
-	int	i;
 	int	n_pipes;
 
 	n_pipes = count_pipes(lst);
@@ -55,11 +56,32 @@ int	**prepare_pipes(t_list *lst)
 	pipe_fds = malloc(sizeof(int *) * (n_pipes + 1));
 	if (!pipe_fds)
 	{
-		perror(R "Error allocating the pipes array\n" RE);
+		write(2, "Error allocating the pipes array\n", 33);
+		return (NULL);
 	}
 	pipe_fds[n_pipes] = NULL;
-	i = n_pipes;
-	while (--i > -1)
-		pipe_fds[i] = create_pipe();
+	while (--n_pipes > -1)
+		pipe_fds[n_pipes] = create_pipe();
 	return (pipe_fds);
+}
+
+pid_t	*prepare_pids(t_list *lst)
+{
+	int		n_pids;
+	pid_t	*pids;
+
+	n_pids = count_pipes(lst);
+	if (!((t_cmd *)lst->content)->built)
+		n_pids += 1;
+	if (!n_pids)
+		return (NULL);
+	pids = malloc(sizeof(pid_t) * (n_pids + 1));
+	if (!pids)
+	{
+		write(2, "Error allocating the pids array\n", 32);
+		return (NULL);
+	}
+	while (--n_pids > -1)
+		pids[n_pids] = 0;
+	return (pids);
 }

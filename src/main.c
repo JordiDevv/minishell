@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/04 18:04:14 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:33:18 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	ft_init_data(t_data *data, t_msh *msh)
 	get_path(data, msh);
 	data->full_rute = NULL;
 	data->pipe_fds = NULL;
+	data->pids = NULL;
 	data->pipe_index = 0;
 	data->fd_input = 0;
 	data->fd_output = 0;
@@ -63,6 +64,7 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str);
+	data->pids = prepare_pids(msh->lst);
 	data->pipe_fds = prepare_pipes(msh->lst);
 	return (0);
 }
@@ -73,10 +75,7 @@ static void	main_loop(t_msh *msh, t_data *data)
 	if (!msh->parse_flag)
 	{
 		ex_loop(msh, data);
-		/*Esperando aquí los hijos se acerca más al comportamiento original en cat | cat | ls
-		pero no termina de gestionar correctamente los EOF parece. Vamos a probar con el bucle
-		de waitpid y a partir de ahí seguimos probando*/
-		wait_childs();
+		wait_childs(data);
 		free(msh->str);
 		ft_free_ex(data);
 		ft_free_nodes(msh->lst);

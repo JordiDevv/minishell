@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 18:00:48 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 21:33:53 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ex_built(t_cmd *cmd, t_data *data, t_msh *msh)
 		exit_status = ex_env(msh->env, cmd);
 	else if (!ft_strncmp(cmd->built, "exit", ft_strlen(cmd->built)))
 		ex_exit(data, cmd);
+	g_exit_status = exit_status;
 	return (exit_status);
 }
 
@@ -42,6 +43,7 @@ int	fork_built(t_cmd *cmd, t_data *data, t_msh *msh)
 	int		status;
 
 	pid = fork();
+	data->pids[data->pipe_index] = pid;
 	if (pid < 0)
 	{
 		write(2, "Error forking for executing a comand\n", 37);
