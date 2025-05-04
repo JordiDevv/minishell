@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 01:00:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 12:47:36 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	redirect(int input, int output, t_data *data)
 		write(2, "No pipe was received in a redirection.\n", 39);
 		return (-1);
 	}
-	if (input)
+	if (input && !data->fd_input)
 	{
 		dup2(data->pipe_fds[data->pipe_index][0], STDIN_FILENO);
 		close(data->pipe_fds[data->pipe_index][0]);
 		close(data->pipe_fds[data->pipe_index][1]);
 		data->pipe_index++;
 	}
-	if (output)
+	if (output && !data->fd_output)
 	{
 		dup2(data->pipe_fds[data->pipe_index][1], STDOUT_FILENO);
 		close(data->pipe_fds[data->pipe_index][1]);
