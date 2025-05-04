@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 21:33:53 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 21:58:25 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ex_built(t_cmd *cmd, t_data *data, t_msh *msh)
 {
 	int	exit_status;
 
+	exit_status = 0;
 	if (data->pipe_fds && (data->doors->input_door
 			|| data->doors->output_door))
 		redirect(data->doors->input_door, data->doors->output_door, data);
@@ -33,7 +34,6 @@ int	ex_built(t_cmd *cmd, t_data *data, t_msh *msh)
 		exit_status = ex_env(msh->env, cmd);
 	else if (!ft_strncmp(cmd->built, "exit", ft_strlen(cmd->built)))
 		ex_exit(data, cmd);
-	g_exit_status = exit_status;
 	return (exit_status);
 }
 
