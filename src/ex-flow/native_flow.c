@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 18:00:35 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/05 00:44:21 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static char	*valid_cmd(t_cmd *cmd, t_data *data)
 
 void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 {
+	if (!cmd->full)
+		return ;
 	data->full_rute = valid_program(cmd);
 	if (!data->full_rute)
 		data->full_rute = valid_cmd(cmd, data);
