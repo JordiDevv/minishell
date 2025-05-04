@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 02:26:40 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:00:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ int	fork_built(t_cmd *cmd, t_data *data, t_msh *msh)
 		exit(status);
 	}
 	else
-	{
-		wait_childs();
 		end_process(data);
-	}
 	return (0);
 }

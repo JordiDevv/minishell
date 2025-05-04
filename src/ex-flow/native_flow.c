@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/03 20:03:40 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:00:35 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,10 @@ void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 	if (data->full_rute)
 	{
 		execute_cmd(data, msh, cmd->split);
-		wait_childs();
+		end_process(data);
 	}
 	else
 		g_exit_status = 127;
 	if (data->full_rute)
 		free(data->full_rute);
-	end_process(data);
 }

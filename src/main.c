@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/04 12:13:17 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:04:14 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ static void	main_loop(t_msh *msh, t_data *data)
 	if (!msh->parse_flag)
 	{
 		ex_loop(msh, data);
+		/*Esperando aquí los hijos se acerca más al comportamiento original en cat | cat | ls
+		pero no termina de gestionar correctamente los EOF parece. Vamos a probar con el bucle
+		de waitpid y a partir de ahí seguimos probando*/
+		wait_childs();
 		free(msh->str);
 		ft_free_ex(data);
 		ft_free_nodes(msh->lst);
