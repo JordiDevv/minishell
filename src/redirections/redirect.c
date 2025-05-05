@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 12:47:36 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:20:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,60 @@ int	redirect(int input, int output, t_data *data)
 static void	input_heredoc(t_data *data, t_cmd *cmd)
 {
 	char	*line;
+	int		status;
 
-	while (1)
+	data->pids[data->pipe_index] = fork();
+	if (data->pids[data->pipe_index] < 0)
 	{
-		write(1, "> ", 2);
-		line = ft_get_next_line(0);
-		if (!ft_strncmp(line, cmd->del, ft_strlen(cmd->del)))
-		{
-			if (line)
-				free(line);
-			break ;
-		}
-		write(data->pipe_fds[0][1], line, ft_strlen(line));
-		free(line);
+		write(2, "Error forking for executing a comand\n", 37);
+		return ;
 	}
-	close(data->pipe_fds[0][1]);
-	data->fd_stdin = dup(STDIN_FILENO);
-	dup2(data->pipe_fds[0][0], STDIN_FILENO);
-	close(data->pipe_fds[0][0]);
-	data->pipe_index++;
+	else if (data->pids[data->pipe_index] == 0)
+	{
+		close(data->pipe_fds[data->pipe_index][0]);
+		while (1)
+		{
+			write(1, "> ", 2);
+			line = ft_get_next_line(0);
+			if (!ft_strncmp(line, cmd->del, ft_strlen(cmd->del)))
+			{
+				if (line)
+					free(line);
+				break ;
+			}
+			write(data->pipe_fds[data->pipe_index][1], line, ft_strlen(line));
+			free(line);
+		}
+		close(data->pipe_fds[data->pipe_index][1]);
+		exit(0);
+	}
+	else
+	{
+		close(data->pipe_fds[data->pipe_index][1]);
+		data->fd_stdin = dup(STDIN_FILENO);
+		dup2(data->pipe_fds[data->pipe_index][0], STDIN_FILENO);
+		close(data->pipe_fds[data->pipe_index][0]);
+		waitpid(data->pids[data->pipe_index], &status, 0);
+		if (WIFSIGNALED(status))
+			g_exit_status = (128 + WTERMSIG(status));
+		else if ((WIFEXITED (status)))
+			g_exit_status = WEXITSTATUS(status);
+		data->hd_flag = 1;
+		data->pipe_index++;
+	}
 }
 
 void	file_redirection(t_data *data, t_cmd *cmd)
 {
 	open_file(data, cmd);
+	if (cmd->del)
+		input_heredoc(data, cmd);
 	if (cmd->input)
 	{
 		data->fd_stdin = dup(STDIN_FILENO);
 		dup2(data->fd_input, STDIN_FILENO);
 		close(data->fd_input);
 	}
-	if (cmd->del)
-		input_heredoc(data, cmd);
 	if (cmd->output || cmd->append)
 	{
 		data->fd_stdout = dup(STDOUT_FILENO);

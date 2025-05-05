@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 20:45:04 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:25:58 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,15 @@ void	end_process(t_data *data)
 		close(data->pipe_fds[data->pipe_index][1]);
 	}
 	if (data->fd_stdin)
+	{
 		dup2(data->fd_stdin, STDIN_FILENO);
+		close(data->fd_stdin);
+	}
 	if (data->fd_stdout)
+	{
 		dup2(data->fd_stdout, STDOUT_FILENO);
+		close(data->fd_stdout);
+	}
 	if (data->doors->input_door)
 		data->pipe_index++;
 }

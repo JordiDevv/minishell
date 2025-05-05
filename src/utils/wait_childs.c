@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:42:37 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 21:48:25 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/06 00:13:28 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	wait_childs(t_data *data)
 	int	sign;
 
 	i = 0;
+	if (data->hd_flag)
+		i = 1;
 	sign = 0;
 	if (data->pids)
 	{
