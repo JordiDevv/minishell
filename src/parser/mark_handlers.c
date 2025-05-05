@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/30 09:33:58 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:23:08 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	ft_markfind_double(char *str)
 		i++;
 		while (str[i] && str[i] != '\"')
 			i++;
-		if (str[i] && str[i + 1])
-			return (i + 1);
 		return (i);
 	}
 	return (0);
@@ -39,8 +37,6 @@ int	ft_markfind_single(char *str)
 		i++;
 		while (str[i] && str[i] != '\'')
 			i++;
-		if (str[i] && str[i + 1])
-			return (i + 1);
 		return (i);
 	}
 	return (0);
@@ -92,8 +88,6 @@ int	ft_markfind(char *str)
 		i++;
 		while (str[i] && str[i] != '\"')
 			i++;
-		if (str[i] && str[i + 1])
-			return (i + 1);
 		return (i);
 	}
 	else if (str[i] == '\'')
@@ -101,8 +95,6 @@ int	ft_markfind(char *str)
 		i++;
 		while (str[i] && str[i] != '\'')
 			i++;
-		if (str[i] && str[i + 1])
-			return (i + 1);
 		return (i);
 	}
 	return (0);

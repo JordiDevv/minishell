@@ -6,39 +6,57 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/30 11:12:34 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:04:52 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
-void	ft_strctrim(char **str)
+void	ft_strctrim(char **str, int sgl, int dbl)
 {
-	size_t	size;
-	char	*aux;
+	int		i;
+	int		j;
 
-	size = ft_strlen(*str);
-	if ((str[0][0] == '\"' && str[0][size - 1] == '\"')
-		|| (str[0][0] == '\'' && str[0][size - 1] == '\''))
+	i = 0;
+	while (str[0][i])
 	{
-		aux = ft_substr(*str, 1, size - 2);
-		if (!aux)
-			return ;
-		free (*str);
-		*str = aux;
+		j = i;
+		if ((str[0][i] == '\'' && sgl % 2 == 0)
+			|| (str[0][i] == '\"' && dbl % 2 == 0))
+		{
+			while (str[0][j++])
+				str[0][j - 1] = str[0][j];
+		}
+		else
+			i++;
 	}
 }
 
 void	ft_trim(char **split)
 {
 	int	i;
+	int	j;
+	int	sgl;
+	int	dbl;
 
 	i = 0;
+	j = 0;
 	if (!split || !*split)
 		return ;
 	while (split[i])
 	{
-		ft_strctrim(&split[i]);
+		j = 0;
+		sgl = 0;
+		dbl = 0;
+		while (split[i][j])
+		{
+			if (split[i][j] == '\'')
+				sgl++;
+			if (split[i][j] == '\"')
+				dbl++;
+			j++;
+		}
+		ft_strctrim(&split[i], sgl, dbl);
 		i++;
 	}
 }

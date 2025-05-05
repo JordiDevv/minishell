@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/30 10:10:50 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:35:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	*ft_expand_vars(char **envp, char *str)
 	int		j;
 
 	i = 0;
-	while (str[i + 1])
+	while (str[i])
 	{
 		i += ft_markfind_single(str + i);
 		if (str[i] == '$')
