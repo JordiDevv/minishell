@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:47:39 by rhernand          #+#    #+#             */
-/*   Updated: 2024/11/01 12:53:26 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:25:30 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*ft_get_next_line(int fd)
 		return (NULL);
 	read_bytes = 1;
 	tmp = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!tmp)
+		return (NULL);
 	while (read_bytes > 0 && !(ft_strchr(stack[fd], '\n')))
 	{
 		read_bytes = read(fd, tmp, BUFFER_SIZE);

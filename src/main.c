@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/04 20:33:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:28:30 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@ static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 	msh->env = ft_env_parser(envp);
 	env_size = (mat_len(msh->env) + 1) * sizeof(char *);
 	data->exported_vars = malloc(env_size);
+	if (!data->exported_vars)
+		return ;
 	matlcpy(data->exported_vars, msh->env, env_size);
 	data->doors = malloc(sizeof(t_doors));
+	if (!data->doors)
+	{
+		free (data->exported_vars);
+		return ;
+	}
 }
 
 static void	ft_init_data(t_data *data, t_msh *msh)
