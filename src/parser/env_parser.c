@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/05 22:35:05 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:20:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,7 @@ char	*ft_expand_vars(char **envp, char *str)
 				str = ft_subst_exit(str, i);
 			else
 			{
-				while (str[i + j] != ' ' && str[i + j] != '\''
-					&& str[i + j] != '\"' && str[i + j])
+				while (ft_isalnum(str[i + j]))
 					j++;
 				str = ft_subst_dolar(envp, str, i, j);
 				i = i + j - 1;
