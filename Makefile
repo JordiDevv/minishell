@@ -1,6 +1,6 @@
 NAME = minishell
 GCC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -MMD -MP
 LDFLAGS = -lreadline -lncurses -lhistory
 SRCSDIR = src
 OBJSDIR = obj
@@ -41,14 +41,14 @@ HEAD = -I inc
 
 all: $(NAME)
 
-$(NAME): libft $(OBJS)
+$(NAME): inc/libft/libft.a $(OBJS)
 	$(GCC) $(CFLAGS) $(OBJS) inc/libft/libft.a $(LDFLAGS) -o $(NAME)
 
-libft:
+inc/libft/libft.a:
 	make -C inc/libft
 
 $(OBJSDIR)/%.o: $(SRCSDIR)/%.c | obj
-	$(GCC) $(CFLAGS) -c $< -o $@ $(HEAD) 
+	$(GCC) $(CFLAGS) $(HEAD) -c $< -o $@ 
 
 obj:
 	mkdir -p $(OBJSDIR)
@@ -72,3 +72,5 @@ debug:
 	gcc $(filter-out main.c, src/*.c src/*/*.c) -Wall -Wextra -g -lreadline inc/libft/libft.a -o minishell
 
 .PHONY: clean fclean re debug
+
+-include $(OBJS:.o=.d)
