@@ -1,37 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_childs.c                                      :+:      :+:    :+:   */
+/*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:42:37 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 21:48:25 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:46:06 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 
-int	wait_childs(t_data *data)
+static void	wait_loop(t_data *data, int *sign, int *last_exit)
 {
-	int	status;
 	int	i;
+	int	status;
+
+	i = 0;
+	if (data->hd_flag)
+		i = 1;
+	while (data->pids[i])
+	{
+		waitpid(data->pids[i], &status, 0);
+		if (WIFSIGNALED(status))
+			*sign = (128 + WTERMSIG(status));
+		else if ((WIFEXITED(status)))
+			*last_exit = WEXITSTATUS(status);
+		i++;
+	}
+}
+
+int	wait_children(t_data *data)
+{
 	int	last_exit;
 	int	sign;
 
-	i = 0;
+	last_exit = 0;
 	sign = 0;
 	if (data->pids)
 	{
-		while (data->pids[i])
-		{
-			waitpid(data->pids[i], &status, 0);
-			if (WIFSIGNALED(status))
-				sign = (128 + WTERMSIG(status));
-			else if ((WIFEXITED (status)))
-				last_exit = WEXITSTATUS(status);
-			i++;
-		}
+		wait_loop(data, &sign, &last_exit);
 		free(data->pids);
 	}
 	if (sign)

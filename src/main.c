@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/06 14:28:30 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:00:44 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	main_loop(t_msh *msh, t_data *data)
 	if (!msh->parse_flag)
 	{
 		ex_loop(msh, data);
-		wait_childs(data);
+		wait_children(data);
 		free(msh->str);
 		ft_free_ex(data);
 		ft_free_nodes(msh->lst);
