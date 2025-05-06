@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/04 20:33:18 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:38:51 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	main_loop(t_msh *msh, t_data *data)
 	if (!msh->parse_flag)
 	{
 		ex_loop(msh, data);
-		wait_childs(data);
+		wait_children(data);
 		free(msh->str);
 		ft_free_ex(data);
 		ft_free_nodes(msh->lst);
