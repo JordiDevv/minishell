@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/05 22:04:52 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:43:28 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,14 @@ Calls ft_ptend() to end pointers. */
 void	ft_cmd_fill(char *str, t_cmd *cmd)
 {
 	int		i;
-	int		m[2];
 
-	m[0] = 0;
-	m[1] = 0;
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\"')
-			m[0] = (m[0] + 1) % 2;
-		if (str[i] == '\'')
-			m[1] = (m[1] + 1) % 2;
-		if (str[i] == '<' && !m[0] && !m[1] && cmd->input == NULL)
+		i += ft_markfind(str + i);
+		if (str[i] == '<' && cmd->input == NULL)
 			i = ft_redir_in(&str, cmd, i);
-		else if (str[i] == '>' && !m[0] && !m[1] && cmd->output == NULL)
+		else if (str[i] == '>' && cmd->output == NULL)
 			i = ft_redir_out(&str, cmd, i);
 		else if (cmd->full == NULL && str[i] != ' ' && str[i] != '<'
 			&& str[i] != '>')
@@ -92,6 +86,10 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 	ft_ptend(&str);
 	cmd->split = ft_split_adv(cmd->full, ' ');
 	ft_trim(cmd->split);
+	ft_trim(&cmd->append);
+	ft_trim(&cmd->del);
+	ft_trim(&cmd->input);
+	ft_trim(&cmd->output);
 }
 
 /*Funcion recieves first node and substring "str", 
