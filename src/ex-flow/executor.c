@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/07 20:56:47 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/08 00:32:58 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ex_loop(t_msh *msh, t_data *data)
 		if (cmd->split && !is_built(cmd, data, msh))
 			ex_native(data, msh, cmd);
 		else
-			end_process(data); //Esto entiendo que lo podríamos quitar de los ejecutores y hacerlo siempre aquí
+			end_process(data);
 		data->doors->input_door = UNLOCK;
 		aux_lst = aux_lst->next;
 		if (data->fd_input)
@@ -92,6 +92,7 @@ int	execute_cmd(t_data *data, t_msh *msh, char **split_cmd)
 	}
 	if (pid == 0)
 	{
+		g_exit_status = -1;
 		if (data->pipe_fds && (data->doors->input_door
 				|| data->doors->output_door))
 			redirect(data->doors->input_door, data->doors->output_door, data);

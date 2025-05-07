@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/07 20:59:29 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/08 00:33:32 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static void	input_heredoc(t_data *data, t_cmd *cmd)
 	}
 	else if (data->pids[data->pipe_index] == 0)
 	{
+		g_exit_status = -1;
 		close(data->pipe_fds[data->pipe_index][0]);
 		heredoc_loop(data, cmd);
 		close(data->pipe_fds[data->pipe_index][1]);

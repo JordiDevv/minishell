@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/04 21:58:25 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/08 00:32:07 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	fork_built(t_cmd *cmd, t_data *data, t_msh *msh)
 	}
 	if (pid == 0)
 	{
+		g_exit_status = -1;
 		status = ex_built(cmd, data, msh);
 		exit(status);
 	}
