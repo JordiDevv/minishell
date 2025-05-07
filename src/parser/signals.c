@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 10:36:34 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 19:17:44 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:42:15 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	sigint_handler(int signo)
 {
 	g_exit_status = 128 + signo;
 	write(STDOUT_FILENO, "\n", 1);
-	if (isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO) && getpid() == tcgetpgrp(STDIN_FILENO))
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
