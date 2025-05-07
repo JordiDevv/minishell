@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/06 14:19:45 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:59:29 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	redirect(int input, int output, t_data *data)
 {
-	if (!data->pipe_fds[data->pipe_index])
+	if (!data->pipe_fds[data->pipe_index] && !data->hd_flag)
 	{
 		write(2, "No pipe was received in a redirection.\n", 39);
 		return (-1);

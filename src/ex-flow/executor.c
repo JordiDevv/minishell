@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/06 00:25:58 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:56:47 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ex_loop(t_msh *msh, t_data *data)
 	aux_lst = msh->lst;
 	while (aux_lst)
 	{
+		write(1, "ENTRA\n", 6);
 		cmd = ((t_cmd *) aux_lst->content);
 		if (aux_lst->next || cmd->output)
 			data->doors->output_door = UNLOCK;
@@ -43,8 +44,10 @@ void	ex_loop(t_msh *msh, t_data *data)
 			data->doors->output_door = LOCK;
 		if (cmd->input || cmd->output || cmd->del || cmd->append)
 			file_redirection(data, cmd);
-		if (!is_built(cmd, data, msh))
+		if (cmd->split && !is_built(cmd, data, msh))
 			ex_native(data, msh, cmd);
+		else
+			end_process(data); //Esto entiendo que lo podríamos quitar de los ejecutores y hacerlo siempre aquí
 		data->doors->input_door = UNLOCK;
 		aux_lst = aux_lst->next;
 		if (data->fd_input)
