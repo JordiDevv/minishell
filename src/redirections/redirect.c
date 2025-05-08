@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/08 00:33:32 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/08 18:53:22 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,14 @@ static void	close_heredoc(t_data *data)
 		g_exit_status = (128 + WTERMSIG(status));
 	else if ((WIFEXITED(status)))
 		g_exit_status = WEXITSTATUS(status);
+	signal(SIGINT, sigint_handler);
 	data->hd_flag = 1;
 	data->pipe_index++;
 }
 
 static void	input_heredoc(t_data *data, t_cmd *cmd)
 {
+	signal(SIGINT, SIG_IGN);
 	data->pids[data->pipe_index] = fork();
 	if (data->pids[data->pipe_index] < 0)
 	{
@@ -81,6 +83,7 @@ static void	input_heredoc(t_data *data, t_cmd *cmd)
 	}
 	else if (data->pids[data->pipe_index] == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		g_exit_status = -1;
 		close(data->pipe_fds[data->pipe_index][0]);
 		heredoc_loop(data, cmd);

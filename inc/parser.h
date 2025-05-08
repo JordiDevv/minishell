@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/03 13:18:20 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:15:18 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void		ft_free_nodes(t_list *lst);
 int			ft_markfind_single(char *str);
 void		ft_prompt_marks(t_msh *msh);
 char		*ft_prompt(char **env);
+void		sigint_handler(int signo);
+void		ft_signal_flags(void);
 
 #endif

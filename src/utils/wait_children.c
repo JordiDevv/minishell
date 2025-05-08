@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_children.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:42:37 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/06 13:46:06 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/08 18:52:10 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	wait_loop(t_data *data, int *sign, int *last_exit)
 		else if ((WIFEXITED(status)))
 			*last_exit = WEXITSTATUS(status);
 		i++;
+		signal(SIGINT, sigint_handler);
 	}
 }
 

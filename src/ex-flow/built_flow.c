@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   built_flow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/08 00:32:07 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:23:40 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
+#include "../../inc/parser.h"
 
 int	ex_built(t_cmd *cmd, t_data *data, t_msh *msh)
 {
@@ -42,6 +43,7 @@ int	fork_built(t_cmd *cmd, t_data *data, t_msh *msh)
 	pid_t	pid;
 	int		status;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	data->pids[data->pipe_index] = pid;
 	if (pid < 0)
@@ -51,6 +53,7 @@ int	fork_built(t_cmd *cmd, t_data *data, t_msh *msh)
 	}
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		g_exit_status = -1;
 		status = ex_built(cmd, data, msh);
 		exit(status);
