@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/09 16:06:53 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:56:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	ft_init_data(t_data *data, t_msh *msh)
 	data->full_rute = NULL;
 	data->pipe_fds = NULL;
 	data->pids = NULL;
+	data->hd_flag = 0;
 	data->pipe_index = 0;
 	data->fd_input = 0;
 	data->fd_output = 0;
