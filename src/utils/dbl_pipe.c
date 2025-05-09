@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:35:54 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/09 16:18:36 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:27:33 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int	ft_dbl_pipe(char *str)
 				i++;
 			if (str[i] == '|' || str[0] == '|')
 			{
-				write (STDOUT_FILENO, "minishell: syntax error near unexpected token `|'\n", 50);
+				write (STDOUT_FILENO,
+					"minishell: syntax error near unexpected token `|'\n",
+					50);
 				return (1);
 			}
 		}
