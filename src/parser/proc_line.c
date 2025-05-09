@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/06 13:43:28 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:18:09 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,24 @@ void	ft_strctrim(char **str, int sgl, int dbl)
 {
 	int		i;
 	int		j;
+	int		mark_dbl;
+	int		mark_sgl;
 
 	i = 0;
+	mark_dbl = 0;
+	mark_sgl = 0;
 	while (str[0][i])
 	{
 		j = i;
-		if ((str[0][i] == '\'' && sgl % 2 == 0)
-			|| (str[0][i] == '\"' && dbl % 2 == 0))
+		if (str[0][i] == '\'' && sgl % 2 == 0 && mark_dbl % 2 == 0)
 		{
+			mark_sgl++;
+			while (str[0][j++])
+				str[0][j - 1] = str[0][j];
+		}
+		else if (str[0][i] == '\"' && dbl % 2 == 0 && mark_sgl % 2 == 0)
+		{
+			mark_dbl++;
 			while (str[0][j++])
 				str[0][j - 1] = str[0][j];
 		}
@@ -73,14 +83,14 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 	i = 0;
 	while (str[i])
 	{
+		if (cmd->full == NULL && str[i] != ' ' && str[i] != '<'
+			&& str[i] != '>')
+			i = ft_full(&str, cmd, i);
 		i += ft_markfind(str + i);
 		if (str[i] == '<' && cmd->input == NULL)
 			i = ft_redir_in(&str, cmd, i);
 		else if (str[i] == '>' && cmd->output == NULL)
 			i = ft_redir_out(&str, cmd, i);
-		else if (cmd->full == NULL && str[i] != ' ' && str[i] != '<'
-			&& str[i] != '>')
-			i = ft_full(&str, cmd, i);
 		i++;
 	}
 	ft_ptend(&str);
