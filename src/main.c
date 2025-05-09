@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/08 20:40:54 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:06:53 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static int	init_dynamic_data(t_msh *msh, t_data *data)
 			return (1);
 	}
 	add_history(msh->input);
+	if (ft_dbl_pipe(msh->input))
+		return (3);
 	msh->str = ft_expand_vars(msh->env, msh->input);
 	msh->str = ft_expand_home(msh->env, msh->str);
 	msh->lst = ft_proc_str(msh->str);
