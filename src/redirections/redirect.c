@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/08 18:53:22 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:59:16 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ static void	input_heredoc(t_data *data, t_cmd *cmd)
 	else if (data->pids[data->pipe_index] == 0)
 	{
 		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		g_exit_status = -1;
 		close(data->pipe_fds[data->pipe_index][0]);
 		heredoc_loop(data, cmd);

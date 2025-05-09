@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/08 20:24:41 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:51:53 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	execute_cmd(t_data *data, t_msh *msh, char **split_cmd)
 	pid_t	pid;
 
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
 	data->pids[data->pipe_index] = pid;
 	if (pid < 0)
@@ -94,6 +95,7 @@ int	execute_cmd(t_data *data, t_msh *msh, char **split_cmd)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		g_exit_status = -1;
 		if (data->pipe_fds && (data->doors->input_door
 				|| data->doors->output_door))
