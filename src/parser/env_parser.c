@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/06 14:20:05 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:36:26 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,15 @@ char	*ft_expand_vars(char **envp, char *str)
 		i += ft_markfind_single(str + i);
 		if (str[i] == '$')
 		{
-			i++;
 			j = 0;
-			if (str[i] == '?')
+			if (str[i++ + 1] == '?')
 				str = ft_subst_exit(str, i);
 			else
 			{
 				while (ft_isalnum(str[i + j]))
 					j++;
+				if (!j)
+					continue ;
 				str = ft_subst_dolar(envp, str, i, j);
 				i = i + j - 1;
 			}
