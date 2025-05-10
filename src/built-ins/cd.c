@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:54:22 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/10 21:51:34 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/11 01:23:07 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,8 @@ static int	go_home(t_cmd *cmd, t_msh *msh, t_data *data, char *oldpwd)
 			perror(home);
 			return (1);
 		}
-		else
-		{
-			update(oldpwd, msh, data);
-			return (2);
-		}
+		update(oldpwd, msh, data);
+		return (2);
 	}
 	return (0);
 }
@@ -94,23 +91,16 @@ int	ex_cd(t_cmd *cmd, t_msh *msh, t_data *data)
 
 	if (checkout(cmd))
 		return (1);
-	oldpwd = NULL;
-	if (locate_var(msh->env, "OLDPWD") >= 0)
-		oldpwd = getcwd(NULL, 0);
+	oldpwd = getcwd(NULL, 0);
 	home_flag = go_home(cmd, msh, data, oldpwd);
 	if (home_flag == 1)
 		return (1);
 	else if (home_flag == 2)
 		return (0);
-	else
+	if (!relative_args(cmd, msh) && chdir(cmd->split[1]) < 0)
 	{
-		if (relative_args(cmd, msh, data, oldpwd))
-			return (0);
-		if (chdir(cmd->split[1]) < 0)
-		{
-			perror(cmd->split[1]);
-			return (1);
-		}
+		perror(cmd->split[1]);
+		return (1);
 	}
 	update(oldpwd, msh, data);
 	return (0);
