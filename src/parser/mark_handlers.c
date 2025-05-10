@@ -6,11 +6,12 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/08 19:48:03 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/10 12:52:07 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
+#include "../../inc/executor.h"
 
 int	ft_markfind_double(char *str)
 {
@@ -60,29 +61,66 @@ int	ft_count_marks(char *str)
 	return (0);
 }
 
-void	ft_prompt_marks(t_msh *msh)
+void	ft_sub_line(t_msh *msh, int *pipe_fd)
 {
-	char	*tmp;
-	char	*aux;
 	char	*next_line;
+	char	*aux;
 
+	signal(SIGINT, SIG_DFL);
+	close (pipe_fd[0]);
 	msh->input = readline(msh->prompt);
 	if (!msh->input)
-		return ;
+		exit (EXIT_FAILURE);
 	while (ft_count_marks(msh->input))
 	{
-		aux = ft_strjoin(msh->input, "\n");
 		next_line = readline("<");
 		if (!next_line)
 		{
-			free (aux);
+			free (msh->input);
 			msh->input = NULL;
-			return ;
+			exit (EXIT_FAILURE);
 		}
-		tmp = ft_strjoin(aux, next_line);
+		aux = ft_strjoin(msh->input, next_line);
 		free (msh->input);
-		free (aux);
-		msh->input = tmp;
+		free (next_line);
+		msh->input = aux;
+	}
+	write(pipe_fd[1], msh->input, ft_strlen(msh->input));
+	close (pipe_fd[1]);
+	free(msh->input);
+	exit (EXIT_SUCCESS);
+}
+
+void	ft_prompt_marks(t_msh *msh)
+{
+	pid_t	pid;
+	int		pipe_fd[2];
+	char	*aux;
+	char	*tmp;
+
+	msh->input = NULL;
+	tmp = NULL;
+	pipe(pipe_fd);
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (pid == 0)
+		ft_sub_line(msh, pipe_fd);
+	else
+	{
+		signal(SIGINT, sigint_handler);
+		waitpid(pid, NULL, 0);
+		close(pipe_fd[1]);
+		while (1)
+		{
+			aux = ft_get_next_line(pipe_fd[0]);
+			if (!aux)
+				break ;
+			tmp = ft_strjoin(msh->input, aux);
+			free (aux);
+			free (msh->input);
+			msh->input = tmp;
+		}
+		close(pipe_fd[0]);
 	}
 }
 
