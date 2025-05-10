@@ -6,17 +6,12 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:25:01 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/06 13:38:57 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/10 21:52:52 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
-
-# define G "\033[32m"
-# define R "\033[31m"
-# define Y "\033[33m"
-# define RE "\033[0m"
 
 # define UNLOCK 1
 # define LOCK 0
@@ -74,6 +69,7 @@ int		valid_var(char *var);
 int		locate_var(char **mat, char *var);
 void	modify_var(char **mat, char *var, int i);
 void	add_var(char ***mat, char *var);
+int		relative_args(t_cmd *cmd, t_msh *msh, t_data *data, char *oldpwd);
 
 void	open_file(t_data *data, t_cmd *cmd);
 pid_t	*prepare_pids(t_list *lst);
