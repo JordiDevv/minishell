@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/11 13:33:12 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:01:54 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_strctrim(char **str, int sgl, int dbl)
 {
 	int		i;
-	int		j;
 	int		mark_dbl;
 	int		mark_sgl;
 
@@ -24,18 +23,15 @@ void	ft_strctrim(char **str, int sgl, int dbl)
 	mark_sgl = 0;
 	while (str[0][i])
 	{
-		j = i;
 		if (str[0][i] == '\'' && sgl % 2 == 0 && mark_dbl % 2 == 0)
 		{
 			mark_sgl++;
-			while (str[0][j++])
-				str[0][j - 1] = str[0][j];
+			ft_del_char(str, i);
 		}
 		else if (str[0][i] == '\"' && dbl % 2 == 0 && mark_sgl % 2 == 0)
 		{
 			mark_dbl++;
-			while (str[0][j++])
-				str[0][j - 1] = str[0][j];
+			ft_del_char(str, i);
 		}
 		else
 			i++;
