@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:32:22 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/09 15:39:27 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:35:56 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int			ft_markfind_single(char *str);
 void		ft_prompt_marks(t_msh *msh);
 char		*ft_prompt(char **env);
 void		sigint_handler(int signo);
-void		ft_signal_flags(void);
 int			ft_dbl_pipe(char *str);
 
 #endif

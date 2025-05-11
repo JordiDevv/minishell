@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/09 15:28:14 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:33:12 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 			i = ft_redir_in(&str, cmd, i);
 		else if (str[i] == '>' && cmd->output == NULL)
 			i = ft_redir_out(&str, cmd, i);
-		i++;
+		if (str[i])
+			i++;
 	}
 	ft_ptend(&str);
 	cmd->split = ft_split_adv(cmd->full, ' ');

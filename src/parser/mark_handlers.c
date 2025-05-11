@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/08 19:48:03 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:26:08 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_prompt_marks(t_msh *msh)
 	msh->input = readline(msh->prompt);
 	if (!msh->input)
 		return ;
+	signal(SIGINT, SIG_IGN);
 	while (ft_count_marks(msh->input))
 	{
 		aux = ft_strjoin(msh->input, "\n");
@@ -76,14 +77,17 @@ void	ft_prompt_marks(t_msh *msh)
 		if (!next_line)
 		{
 			free (aux);
+			free (msh->input);
 			msh->input = NULL;
 			return ;
 		}
 		tmp = ft_strjoin(aux, next_line);
 		free (msh->input);
+		free (next_line);
 		free (aux);
 		msh->input = tmp;
 	}
+	signal(SIGINT, sigint_handler);
 }
 
 int	ft_markfind(char *str)
