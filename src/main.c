@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/11 13:41:11 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:44:29 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@
 static void	init_minishell(t_data *data, t_msh *msh, char **envp)
 {
 	size_t	env_size;
+	int		i;
 
 	msh->env = ft_env_parser(envp);
+	i = locate_var(msh->env, "OLDPWD");
+	if (i < 0)
+		add_var(&(msh->env), "OLDPWD");
+	else
+		modify_var(msh->env, "OLDPWD", i);
 	env_size = (mat_len(msh->env) + 1) * sizeof(char *);
 	data->exported_vars = malloc(env_size);
 	if (!data->exported_vars)
