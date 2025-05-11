@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/05 01:40:28 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:35:21 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static char	*valid_program(t_cmd *cmd)
 {
 	char	*full_rute;
-	
+
 	full_rute = ft_strtrim(cmd->full, " \n\t\v\f\r");
 	if (!access(full_rute, X_OK))
 		return (full_rute);

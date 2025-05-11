@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 00:45:33 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/03 13:34:23 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:33:59 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,3 @@ int	ex_export(t_msh *msh, t_data *data, t_cmd *cmd)
 	}
 	return (error_flag);
 }
-
-/*export VAR crea una variable exportada sin inicializar, pero no en el entorno. export VAR=
-crea un variable exportada inicializada pero vacía y también en el entorno VAR=""*/
-
-/*Vamos a intentar crear un hash-table con una matriz triple para las variable exportadas.
-Cada matriz se compondrá de 3 strings: Key '=' Value. Utiliza '=' para comprobar si la variable
-está inicializada, y escribirá el value entre "", que siempre tendrá el espacio reservado.*/
