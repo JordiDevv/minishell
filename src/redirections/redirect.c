@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/09 16:59:16 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:42:37 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	redirect(int input, int output, t_data *data)
 	return (0);
 }
 
-static void	heredoc_loop(t_data* data, t_cmd *cmd)
+static void	heredoc_loop(t_data *data, t_cmd *cmd)
 {
 	char	*line;
 
