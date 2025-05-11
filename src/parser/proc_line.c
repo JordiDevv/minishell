@@ -6,63 +6,47 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:48 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/11 14:01:54 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 19:40:57 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/parser.h"
 
-void	ft_strctrim(char **str, int sgl, int dbl)
+void	ft_str_trim(char **str)
 {
 	int		i;
 	int		mark_dbl;
 	int		mark_sgl;
+	int		marks[2];
 
+	if (!str || !(*str))
+		return ;
 	i = 0;
 	mark_dbl = 0;
 	mark_sgl = 0;
+	marks[0] = ft_count_char(*str, '\'');
+	marks[1] = ft_count_char(*str, '\"');
 	while (str[0][i])
 	{
-		if (str[0][i] == '\'' && sgl % 2 == 0 && mark_dbl % 2 == 0)
-		{
-			mark_sgl++;
-			ft_del_char(str, i);
-		}
-		else if (str[0][i] == '\"' && dbl % 2 == 0 && mark_sgl % 2 == 0)
-		{
-			mark_dbl++;
-			ft_del_char(str, i);
-		}
+		if (str[0][i] == '\'' && marks[0] % 2 == 0 && mark_dbl % 2 == 0)
+			mark_sgl = mark_sgl + ft_del_char(str, i);
+		else if (str[0][i] == '\"' && marks[1] % 2 == 0 && mark_sgl % 2 == 0)
+			mark_dbl = mark_dbl + ft_del_char(str, i);
 		else
 			i++;
 	}
 }
 
-void	ft_trim(char **split)
+void	ft_mat_trim(char **split)
 {
 	int	i;
-	int	j;
-	int	sgl;
-	int	dbl;
 
 	i = 0;
-	j = 0;
 	if (!split || !*split)
 		return ;
 	while (split[i])
 	{
-		j = 0;
-		sgl = 0;
-		dbl = 0;
-		while (split[i][j])
-		{
-			if (split[i][j] == '\'')
-				sgl++;
-			if (split[i][j] == '\"')
-				dbl++;
-			j++;
-		}
-		ft_strctrim(&split[i], sgl, dbl);
+		ft_str_trim(&split[i]);
 		i++;
 	}
 }
@@ -92,11 +76,11 @@ void	ft_cmd_fill(char *str, t_cmd *cmd)
 	}
 	ft_ptend(&str);
 	cmd->split = ft_split_adv(cmd->full, ' ');
-	ft_trim(cmd->split);
-	ft_trim(&cmd->append);
-	ft_trim(&cmd->del);
-	ft_trim(&cmd->input);
-	ft_trim(&cmd->output);
+	ft_mat_trim(cmd->split);
+	ft_str_trim(&cmd->append);
+	ft_str_trim(&cmd->del);
+	ft_str_trim(&cmd->input);
+	ft_str_trim(&cmd->output);
 }
 
 /*Funcion recieves first node and substring "str", 
