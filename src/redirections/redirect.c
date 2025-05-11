@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/11 20:01:23 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:07:01 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	heredoc_loop(t_data *data, t_cmd *cmd)
 	{
 		write(1, "> ", 2);
 		line = ft_get_next_line(0);
+		if (!line)
+			break ;
 		if (!ft_strncmp(line, cmd->del, ft_strlen(cmd->del)))
 		{
 			if (line)
