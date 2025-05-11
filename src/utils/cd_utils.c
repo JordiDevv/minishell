@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 21:48:10 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/11 01:20:51 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:26:18 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,26 @@ static void last_dir(t_msh *msh)
 
 static void father_dir()
 {
-    return ;
+    char    *newpwd;
+    char    *pwd;
+    char    *last_slash;
+    int     len;
+
+    pwd = getcwd(NULL, 0);
+    last_slash = ft_strrchr(pwd, '/');
+    len = last_slash - pwd;
+    newpwd = malloc((len + 1) * sizeof(char));
+    if (!newpwd)
+        return ;
+    ft_strlcpy(newpwd, pwd, len + 1);
+    if (!newpwd)
+        return ;
+    if (chdir(newpwd) < 0)
+        perror(newpwd);
+    if (pwd)
+        free(pwd);
+    if (newpwd)
+        free(newpwd);
 }
 
 int relative_args(t_cmd *cmd, t_msh *msh)
