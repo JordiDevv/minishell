@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/11 12:59:09 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/11 21:03:52 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	ft_prompt_marks(t_msh *msh)
 			close(pipe_fd[0]);
 		}
 	}
+	signal(SIGINT, sigint_handler);
 }
 
 int	ft_markfind(char *str)

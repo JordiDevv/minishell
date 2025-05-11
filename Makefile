@@ -25,7 +25,8 @@ SRCSFILES = main.c \
 			utils/strccmp.c \
 			utils/strmcat.c \
 			utils/wait_children.c \
-			utils/dbl_pipe.c \
+			utils/parser_utils.c \
+			utils/cd_utils.c \
 			parser/env_parser.c \
 			parser/fill_cmd.c \
 			parser/free.c \
