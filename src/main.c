@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:38:57 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/09 17:56:48 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:41:11 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void	ft_init_data(t_data *data, t_msh *msh)
 	data->should_exit = 0;
 	data->doors->input_door = LOCK;
 	data->doors->output_door = LOCK;
+	msh->prompt = ft_prompt(msh->env);
 }
 
 static int	init_dynamic_data(t_msh *msh, t_data *data)
 {
-	msh->prompt = ft_prompt(msh->env);
 	ft_init_data(data, msh);
 	if (isatty(STDIN_FILENO))
 	{
