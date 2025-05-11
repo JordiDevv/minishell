@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 12:54:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/10 12:52:07 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/10 13:02:05 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ void	ft_sub_line(t_msh *msh, int *pipe_fd)
 
 	signal(SIGINT, SIG_DFL);
 	close (pipe_fd[0]);
-	msh->input = readline(msh->prompt);
-	if (!msh->input)
-		exit (EXIT_FAILURE);
 	while (ft_count_marks(msh->input))
 	{
 		next_line = readline("<");
@@ -97,8 +94,11 @@ void	ft_prompt_marks(t_msh *msh)
 	int		pipe_fd[2];
 	char	*aux;
 	char	*tmp;
+	int		status;
 
-	msh->input = NULL;
+	msh->input = readline(msh->prompt);
+	if (!msh->input)
+		return ;
 	tmp = NULL;
 	pipe(pipe_fd);
 	signal(SIGINT, SIG_IGN);
@@ -108,7 +108,7 @@ void	ft_prompt_marks(t_msh *msh)
 	else
 	{
 		signal(SIGINT, sigint_handler);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 		close(pipe_fd[1]);
 		while (1)
 		{
@@ -121,6 +121,8 @@ void	ft_prompt_marks(t_msh *msh)
 			msh->input = tmp;
 		}
 		close(pipe_fd[0]);
+		if (WIFSIGNALED (status))
+			msh->input = NULL;
 	}
 }
 
