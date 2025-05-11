@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/11 20:42:37 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/11 20:58:33 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ static void	heredoc_loop(t_data *data, t_cmd *cmd)
 	{
 		write(1, "> ", 2);
 		line = ft_get_next_line(0);
+		if (!line)
+		{
+			write (1,
+				"MSH: warning: here-document delimited by end-of-file\n",
+				54);
+			break ;
+		}
 		if (!ft_strncmp(line, cmd->del, ft_strlen(cmd->del)))
 		{
 			if (line)
@@ -64,7 +71,10 @@ static void	close_heredoc(t_data *data)
 	close(data->pipe_fds[data->pipe_index][0]);
 	waitpid(data->pids[data->pipe_index], &status, 0);
 	if (WIFSIGNALED(status))
+	{
 		g_exit_status = (128 + WTERMSIG(status));
+		write(STDOUT_FILENO, "\n", 1);
+	}
 	else if ((WIFEXITED(status)))
 		g_exit_status = WEXITSTATUS(status);
 	signal(SIGINT, sigint_handler);
