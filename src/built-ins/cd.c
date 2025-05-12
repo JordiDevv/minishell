@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:54:22 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/11 20:43:06 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:18:48 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static int	checkout(t_cmd *cmd)
 		write (2, "bash: cd: too many arguments\n", 29);
 		return (1);
 	}
-	if (!ft_strncmp(cmd->split[1], "-", ft_strlen(cmd->split[1]))
-		|| !ft_strncmp(cmd->split[1], "..", ft_strlen(cmd->split[1])))
+	if (!ft_strncmp(cmd->split[1], "-", ft_strlen("-"))
+		|| !ft_strncmp(cmd->split[1], "..", ft_strlen("..")))
 		return (0);
 	if (cmd->split[1])
 		dir = opendir(cmd->split[1]);
@@ -91,6 +91,8 @@ int	ex_cd(t_cmd *cmd, t_msh *msh, t_data *data)
 
 	if (checkout(cmd))
 		return (1);
+	if (cmd->split[1] && cmd->split[1][0] == '.' && !cmd->split[1][1])
+		return (0);
 	oldpwd = getcwd(NULL, 0);
 	home_flag = go_home(cmd, msh, data, oldpwd);
 	if (home_flag == 1)

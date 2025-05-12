@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:57:27 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/29 16:31:33 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:07:10 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static int	check_flags(t_cmd *cmd, int *i)
 	has_newline = 1;
 	while (cmd->split[*i])
 	{
-		if (cmd->split[*i][0] != '-')
+		if (cmd->split[*i][0] != '-' || (cmd->split[*i][0] == '-'
+				&& cmd->split[*i][1] != 'n'))
 			break ;
 		j = 1;
 		while (cmd->split[*i][j])
