@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/12 23:43:56 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:37:03 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 		end_process(data);
 	}
 	else
-		g_exit_status = 127;
+		g_exit_status = 127; //aqui no actualiza
 	if (data->full_rute)
 		free(data->full_rute);
 }

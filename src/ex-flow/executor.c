@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:11 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/11 20:34:34 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:51:50 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	is_built(t_cmd *cmd, t_data *data, t_msh *msh)
 {
 	if (cmd->built && (data->doors->input_door == UNLOCK
-			|| data->doors->output_door == UNLOCK))
+			|| data->doors->output_door == UNLOCK) && data->pids)
 	{
 		fork_built(cmd, data, msh);
 		return (1);
