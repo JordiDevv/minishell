@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:01:08 by rhernand          #+#    #+#             */
-/*   Updated: 2025/05/09 14:36:26 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/13 08:49:58 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,14 @@ char	*ft_subst_exit(char *str, int i)
 
 	exit = ft_itoa(g_exit_status);
 	length = ft_strlen(str) + ft_strlen(exit) - 1;
-	tmp = malloc (length * sizeof(char));
+	tmp = malloc (length * sizeof(char) + 1);
 	if (!tmp)
 		return (NULL);
 	if (!ft_strlcpy(tmp, str, i) || !ft_strlcat(tmp, exit, length)
 		|| !ft_strlcat(tmp, (str + (i + 1)), length))
 		return (NULL);
 	tmp[length] = '\0';
+	free(exit);
 	return (tmp);
 }
 
