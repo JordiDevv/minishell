@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_flow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/09 17:00:01 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:23:02 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ex_built(t_cmd *cmd, t_data *data, t_msh *msh)
 	else if (!ft_strncmp(cmd->built, "env", ft_strlen(cmd->built)))
 		exit_status = ex_env(msh->env, cmd);
 	else if (!ft_strncmp(cmd->built, "exit", ft_strlen(cmd->built)))
-		ex_exit(data, cmd);
+		exit_status = ex_exit(data, cmd);
 	return (exit_status);
 }
 

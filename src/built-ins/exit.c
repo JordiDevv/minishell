@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:36:50 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/04/30 10:14:28 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:28:20 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static bool	valid_number(char *string)
 	return (true);
 }
 
-void	ex_exit(t_data *data, t_cmd *cmd)
+int	ex_exit(t_data *data, t_cmd *cmd)
 {
 	bool	is_number;
 	long	n;
@@ -73,16 +73,15 @@ void	ex_exit(t_data *data, t_cmd *cmd)
 		if (is_number && cmd->split[2])
 		{
 			write(2, "bash: exit: too many arguments\n", 31);
-			return ;
+			return (1);
 		}
 		else if (!is_number || !long_range)
 		{
 			write(2, "exit: bash: numeric argument required\n", 38);
-			g_exit_status = 2;
+			return (2);
 		}
-		else if (is_number)
-			g_exit_status = n;
 	}
-	g_exit_status = (unsigned char)g_exit_status;
+	n = (unsigned char)n;
 	data->should_exit = 1;
+	return (n);
 }
