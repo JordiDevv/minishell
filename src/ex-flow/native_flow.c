@@ -6,20 +6,23 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/13 15:37:03 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:10:40 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/executor.h"
 #include "../../inc/parser.h"
 
-static char	*valid_program(t_cmd *cmd)
+static char	*valid_program(t_cmd *cmd, t_data *data)
 {
 	char	*full_rute;
 
 	full_rute = ft_strtrim(cmd->split[0], " \n\t\v\f\r");
 	if (!access(full_rute, X_OK))
+    {
+        data->abs_flag = 1;
 		return (full_rute);
+    }
 	if (full_rute)
 		free(full_rute);
 	return (NULL);
@@ -57,7 +60,7 @@ void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 {
 	if (!cmd->full)
 		return ;
-	data->full_rute = valid_program(cmd);
+	data->full_rute = valid_program(cmd, data);
 	if (!data->full_rute)
 		data->full_rute = valid_cmd(cmd, data);
 	if (data->full_rute)
@@ -66,7 +69,7 @@ void	ex_native(t_data *data, t_msh *msh, t_cmd *cmd)
 		end_process(data);
 	}
 	else
-		g_exit_status = 127; //aqui no actualiza
+		g_exit_status = 127;
 	if (data->full_rute)
 		free(data->full_rute);
 }

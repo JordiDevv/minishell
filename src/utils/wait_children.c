@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 17:42:37 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/13 10:18:01 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:09:06 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	wait_children(t_data *data)
 		g_exit_status = sign;
 	else if (last_exit)
 		g_exit_status = last_exit;
-	else
+	
+    else if (data->abs_flag)
 		g_exit_status = 0;
 	return (1);
 }
