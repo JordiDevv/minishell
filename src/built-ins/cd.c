@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 11:54:22 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/13 10:43:31 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:15:54 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	checkout(t_cmd *cmd)
 		return (1);
 	}
 	if (cmd->split[1] && (!ft_strncmp(cmd->split[1], "-", ft_strlen("-"))
-		|| !ft_strncmp(cmd->split[1], "..", ft_strlen(".."))))
+			|| !ft_strncmp(cmd->split[1], "..", ft_strlen(".."))))
 		return (0);
 	if (cmd->split[1])
 		dir = opendir(cmd->split[1]);

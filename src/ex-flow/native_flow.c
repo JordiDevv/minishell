@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   native_flow.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:54:00 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/13 16:10:40 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:17:00 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static char	*valid_program(t_cmd *cmd, t_data *data)
 
 	full_rute = ft_strtrim(cmd->split[0], " \n\t\v\f\r");
 	if (!access(full_rute, X_OK))
-    {
-        data->abs_flag = 1;
+	{
+		data->abs_flag = 1;
 		return (full_rute);
-    }
+	}
 	if (full_rute)
 		free(full_rute);
 	return (NULL);

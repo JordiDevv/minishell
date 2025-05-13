@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_flow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:53:57 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/13 15:49:33 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:16:19 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	fork_built(t_cmd *cmd, t_data *data, t_msh *msh)
 
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
-    if (data->pids)
-	    data->pids[data->pipe_index] = pid;
+	if (data->pids)
+		data->pids[data->pipe_index] = pid;
 	if (pid < 0)
 	{
 		write(2, "Error forking for executing a comand\n", 37);
