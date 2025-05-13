@@ -6,7 +6,7 @@
 /*   By: rhernand <rhernand@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:09:44 by rhernand          #+#    #+#             */
-/*   Updated: 2025/04/29 16:41:08 by rhernand         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:35:18 by rhernand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ iterates untill if finds key char*/
 int	ft_full(char **str, t_cmd *cmd, int i)
 {
 	cmd->full = (*str) + i;
-	if (ft_strnstr((*str) + i, "echo", 4) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "echo ", 5) && cmd->built == NULL)
 		cmd->built = ft_strdup("echo");
-	if (ft_strnstr((*str) + i, "pwd", 3) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "pwd ", 4) && cmd->built == NULL)
 		cmd->built = ft_strdup("pwd");
-	if (ft_strnstr((*str) + i, "cd", 2) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "cd ", 3) && cmd->built == NULL)
 		cmd->built = ft_strdup("cd");
-	if (ft_strnstr((*str) + i, "export", 6) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "export ", 7) && cmd->built == NULL)
 		cmd->built = ft_strdup("export");
-	if (ft_strnstr((*str) + i, "unset", 5) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "unset ", 6) && cmd->built == NULL)
 		cmd->built = ft_strdup("unset");
-	if (ft_strnstr((*str) + i, "env", 3) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "env ", 4) && cmd->built == NULL)
 		cmd->built = ft_strdup("env");
-	if (ft_strnstr((*str) + i, "exit", 4) && cmd->built == NULL)
+	if (ft_strnstr((*str) + i, "exit ", 5) && cmd->built == NULL)
 		cmd->built = ft_strdup("exit");
 	while ((*str)[i] != '<' && (*str)[i] != '>' && (*str)[i])
 	{
