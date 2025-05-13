@@ -6,7 +6,7 @@
 /*   By: jsanz-bo <jsanz-bo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:47:42 by jsanz-bo          #+#    #+#             */
-/*   Updated: 2025/05/05 00:19:24 by jsanz-bo         ###   ########.fr       */
+/*   Updated: 2025/05/13 10:03:27 by jsanz-bo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ pid_t	*prepare_pids(t_list *lst)
 		write(2, "Error allocating the pids array\n", 32);
 		return (NULL);
 	}
+	pids[n_pids] = 0;
 	while (--n_pids > -1)
 		pids[n_pids] = 0;
 	return (pids);
