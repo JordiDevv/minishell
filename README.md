@@ -41,7 +41,7 @@ Recrear una versión simplificada de un shell de Unix, siguiendo estrictamente l
 
 ## 📸 Ejemplo de uso
 
-(GIF)
+![Minishell en acción](./minishell.svg)
 
 ---
 
