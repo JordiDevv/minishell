@@ -30,12 +30,12 @@ Recrear una versión simplificada de un shell de Unix, siguiendo estrictamente l
 ## 🚀 Instalación y uso
 1. Clonar el repositorio:  
    git clone https://github.com/JordiDevv/minishell.git
-2. Entrar al directorio y compilar el proyecto
-   cd minishell
+2. Entrar al directorio y compilar el proyecto:  
+   cd minishell  
    make
-3. Ejecutar el programa
+4. Ejecutar el programa:  
    ./minishell
-4. ¡Prueba sus límites!
+5. ¡Prueba sus límites!
 
 ---
 
